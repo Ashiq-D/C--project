@@ -1,13 +1,14 @@
 import React from "react";
+import { Button } from "@/components/ui/button";
 
-const Home =() =>{
-    return(
-        <div className="p-10 bg-shop-light-pink">
-          <h2 className="text-xl font-semibold">Home</h2>
-          <h2>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos, error perferendis saepe ducimus voluptate necessitatibus consequuntur magnam architecto accusantium magni officiis, ea sapiente nostrum blanditiis, corrupti quo omnis repellat. Veniam aliquam ex voluptatem alias quidem ratione dolore est libero reprehenderit, non, totam asperiores, atque labore dignissimos quo eius excepturi similique.</h2>
-        
-        </div>
-    )
+const Home = () => {
+  return (
+    <div className="p-10 bg-shop-light-pink">
+      <h2 className="text-xl font-semibold">Home</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <Button>Click Me</Button>
+    </div>
+  );
 };
 
-export default Home
+export default Home;
