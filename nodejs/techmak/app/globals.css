@@ -7,6 +7,8 @@
 @theme{
   --font-poppins: Poppins, sans-serif;
   --color-shop-light-pink:#fcf0e4;
+  --color-techmak-dark-blue: #0f172a;
+  --color-shop-light-blue: #38bdf8;
 }
 
 @theme inline {

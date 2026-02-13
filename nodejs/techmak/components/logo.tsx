@@ -1,14 +1,23 @@
-import React from 'react'
-import Link from "next/link"
-import { cn } from "@/lib/utils"
-const logo = ({className}:{className?:string;}) => {
-  return (
-    <Link href={"/"}>
-        <h2 className={cn("text-2xl text-techmak_dark_blue font-black tracking-wider",className)}>
-            Techmak <span>t</span>
-        </h2>
-    </Link>
-  )
-}
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-export default logo
+const Logo = ({ className }: { className?: string }) => {
+  return (
+    <Link
+      href="/"
+      className={cn(
+        "inline-block text-2xl font-black tracking-wider font-sans group",
+        className
+      )}
+    >
+      <span className="uppercase text-blue-800 transition-colors duration-300 group-hover:text-blue-400">
+        Techmak
+      </span>
+      <span className="lowercase text-blue-400 transition-colors duration-300 group-hover:text-blue-700">
+        ai
+      </span>
+    </Link>
+  );
+};
+
+export default Logo;
