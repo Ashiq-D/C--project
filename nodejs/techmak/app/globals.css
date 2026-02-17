@@ -11,6 +11,14 @@
   --color-shop-light-blue: #38bdf8;
   --color-brand-teal: #006666;
   --color-brand-light-gray: #d3d6db;
+  
+  --color-brand-primary: #0F3D3E;
+  --color-brand-dark: #092C2D;
+  --color-brand-accent: #1FA89A;
+  --color-brand-hover: #52B788;
+  --color-brand-light-text: #EAF4F4;
+  --color-brand-muted: #B7C9C9;
+
 }
 
 @theme inline {
@@ -87,6 +95,10 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  --brand-primary: #0F3D3E;
+  --brand-accent: #1FA89A;
+  --brand-hover: #52B788;
 }
 
 .dark {

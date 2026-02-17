@@ -10,10 +10,10 @@ const Logo = ({ className }: { className?: string }) => {
         className
       )}
     >
-      <span className="uppercase text-blue-800 transition-colors duration-300 group-hover:text-blue-400">
+      <span className="uppercase text-white transition-colors duration-300 group-hover:text-brand-hover">
         Techmak
       </span>
-      <span className="lowercase text-blue-400 transition-colors duration-300 group-hover:text-blue-700">
+      <span className="lowercase text-brand-accent transition-colors duration-300 group-hover:text-brand-hover">
         ai
       </span>
     </Link>
