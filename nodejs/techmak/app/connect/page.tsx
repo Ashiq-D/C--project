@@ -4,9 +4,8 @@ import { motion } from "framer-motion";
 
 const ConnectPage = () => {
   return (
-    <section className="py-28 bg-gradient-to-br from-[#071A1A] via-[#0F3D3E] to-[#052626] text-white">
-
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+    <section className="flex-1 bg-gradient-to-br from-[#071A1A] via-[#0F3D3E] to-[#052626] text-white ">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-2 gap-18 items-center">
 
         {/* LEFT SIDE */}
         <motion.div

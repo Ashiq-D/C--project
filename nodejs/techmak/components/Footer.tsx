@@ -12,7 +12,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-brand-primary text-white mt-16">
+    <footer className="bg-brand-primary text-white ">
       <Container>
 
         {/* ================= TOP CONTACT STRIP ================= */}
