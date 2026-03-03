@@ -26,7 +26,7 @@ const Footer = () => {
                 Visit Us
               </h3>
               <p className="text-xs text-white/70">
-                4th floor, Bashundhara R/A
+                4th floor, 36/E, Road-2, Block-D, Bashundhara R/A
               </p>
             </div>
           </div>

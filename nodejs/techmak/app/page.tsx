@@ -1,33 +1,35 @@
-import { Button } from "@/components/ui/button";
-import LogoMarquee from "@/components/LogoMarquee";
+"use client";
+
+import CinematicScroll from "@/components/CinematicScroll";
 
 export default function Home() {
   return (
-    <>
-      {/* Hero Section */}
-      <section className="bg-brand-light-bg flex items-center justify-center min-h-[80vh]">
-        <div className="text-center px-6">
+    <main className="bg-black text-white overflow-x-hidden">
 
-          <h1 className="text-4xl md:text-5xl font-bold text-brand-dark-text">
-            Welcome to <span className="text-brand-accent">Techmakai</span>
-          </h1>
-
-          <p className="mt-4 text-gray-600 max-w-xl mx-auto">
-            Discover innovative tech solutions designed to elevate your digital
-            experience and empower your business.
-          </p>
-
-          <div className="mt-8">
-            <Button className="bg-brand-primary hover:bg-brand-hover text-white px-6 py-3 text-sm rounded-md transition-all duration-300 shadow-md hover:shadow-lg">
-              Explore Now
-            </Button>
+      {/* HERO */}
+      <section className="min-h-screen flex items-center justify-center px-6">
+        <div className="text-center">
+          <div className="w-28 h-28 border border-white/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            TM
           </div>
 
+          <h1 className="text-4xl md:text-5xl font-bold">
+            Elevate Your{" "}
+            <span className="text-teal-400">Digital Future</span>
+          </h1>
+
+          <p className="mt-4 text-gray-400 max-w-xl mx-auto">
+            Smart automation. AI intelligence. Industrial innovation.
+          </p>
         </div>
       </section>
 
-      {/* Logo Marquee Section */}
-      <LogoMarquee />
-    </>
+      {/* CINEMATIC SERVICES */}
+      <CinematicScroll />
+
+      {/* Extra space below */}
+      <div className="h-screen bg-black" />
+
+    </main>
   );
 }
