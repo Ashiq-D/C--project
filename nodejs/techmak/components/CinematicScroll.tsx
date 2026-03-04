@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -23,72 +24,101 @@ export default function CinematicScroll() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    if (!sectionRef.current) return;
 
+    // 🔥 LENIS SETUP
+    const lenis = new Lenis({
+      lerp: 0.07,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.lagSmoothing(0);
+
+    // 🔥 GSAP CONTEXT
+    const ctx = gsap.context(() => {
       const rows = gsap.utils.toArray<HTMLElement>(".row");
 
       rows.forEach((row, index) => {
         const cardLeft = row.querySelector<HTMLElement>(".card-left");
         const cardRight = row.querySelector<HTMLElement>(".card-right");
 
-        if (!cardLeft && !cardRight) return;
+        if (!cardLeft || !cardRight) return;
 
-        // Dynamic values based on index
-        const leftX = -600 - index * 120;
-        const rightX = 600 + index * 120;
+        // Initial cinematic position
+        gsap.set([cardLeft, cardRight], {
+          transformPerspective: 2000,
+          transformStyle: "preserve-3d",
+        });
 
-        const leftRotate = -10 - index * 5;
-        const rightRotate = 10 + index * 5;
-
-        const yMove = -150 - index * 80;
-
-        ScrollTrigger.create({
-          trigger: sectionRef.current,
-          start: "top center",
-          end: "bottom top",
-          scrub: 1.5,
-
-          onUpdate: (self) => {
-            const progress = self.progress;
-
-            if (cardLeft) {
-              cardLeft.style.transform = `
-                translateX(${progress * leftX}px)
-                translateY(${progress * yMove}px)
-                rotate(${progress * leftRotate}deg)
-              `;
-            }
-
-            if (cardRight) {
-              cardRight.style.transform = `
-                translateX(${progress * rightX}px)
-                translateY(${progress * yMove}px)
-                rotate(${progress * rightRotate}deg)
-              `;
-            }
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: row,
+            start: "top 85%",
+            end: "bottom 15%",
+            scrub: true,
           },
         });
-      });
 
+        // LEFT CARD
+        tl.to(
+          cardLeft,
+          {
+            x: -900 - index * 150,
+            y: -250 - index * 120,
+            rotateZ: -8 - index * 4,
+            rotateY: -25,
+            z: -300,
+            scale: 0.9,
+            ease: "none",
+          },
+          0
+        )
+
+        // RIGHT CARD
+        .to(
+          cardRight,
+          {
+            x: 900 + index * 150,
+            y: -250 - index * 120,
+            rotateZ: 8 + index * 4,
+            rotateY: 25,
+            z: -300,
+            scale: 0.9,
+            ease: "none",
+          },
+          0
+        );
+      });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      lenis.destroy();
+    };
   }, []);
 
   return (
     <section
       ref={sectionRef}
       className="relative bg-black py-40 overflow-hidden"
-      style={{ perspective: "1500px" }}
+      style={{
+        perspective: "2000px",
+        transformStyle: "preserve-3d",
+      }}
     >
       <div className="max-w-7xl mx-auto px-10">
-
         <h2 className="text-4xl font-semibold text-center text-white mb-32">
           Our Core Capabilities
         </h2>
 
-        <div className="space-y-32">
-
+        <div className="space-y-1">
           {Array.from({
             length: Math.ceil(services.length / 2),
           }).map((_, rowIndex) => {
@@ -98,19 +128,17 @@ export default function CinematicScroll() {
             return (
               <div
                 key={rowIndex}
-                className="row flex justify-center gap-20"
+                className="row flex justify-center gap-24 relative"
               >
                 {leftService && (
                   <Link
                     href={`/services/${leftService.slug}`}
-                    className="card card-left w-[40%] h-[350px]
+                    className="card card-left w-[55%] h-[520px]
                                bg-gradient-to-br from-[#0F3D3E] via-[#145959] to-[#1E7A7A]
                                rounded-3xl flex items-center justify-center
                                text-white text-xl font-semibold text-center
-                               shadow-2xl transition duration-500
-                               hover:scale-105
-                               hover:shadow-[0_0_60px_rgba(30,122,122,0.6)]
-                               will-change-transform"
+                               shadow-2xl will-change-transform"
+                    style={{ transformStyle: "preserve-3d" }}
                   >
                     {leftService.title}
                   </Link>
@@ -119,14 +147,12 @@ export default function CinematicScroll() {
                 {rightService && (
                   <Link
                     href={`/services/${rightService.slug}`}
-                    className="card card-right w-[40%] h-[350px]
+                    className="card card-right w-[55%] h-[520px]
                                bg-gradient-to-br from-[#0F3D3E] via-[#145959] to-[#1E7A7A]
                                rounded-3xl flex items-center justify-center
                                text-white text-xl font-semibold text-center
-                               shadow-2xl transition duration-500
-                               hover:scale-105
-                               hover:shadow-[0_0_60px_rgba(30,122,122,0.6)]
-                               will-change-transform"
+                               shadow-2xl will-change-transform"
+                    style={{ transformStyle: "preserve-3d" }}
                   >
                     {rightService.title}
                   </Link>
@@ -134,9 +160,7 @@ export default function CinematicScroll() {
               </div>
             );
           })}
-
         </div>
-
       </div>
     </section>
   );

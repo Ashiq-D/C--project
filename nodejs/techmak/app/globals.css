@@ -156,3 +156,10 @@
   animation: marquee 40s linear infinite;
   will-change: transform;
 }
+html, body {
+  height: auto;
+}
+
+body {
+  overflow: hidden;
+}
