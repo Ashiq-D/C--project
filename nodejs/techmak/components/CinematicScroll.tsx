@@ -9,15 +9,15 @@ import Link from "next/link";
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
-  { title: "CCTV & IP Surveillance Systems", slug: "cctv" },
-  { title: "Under Vehicle Surveillance Systems (UVSS)", slug: "uvss" },
-  { title: "X-ray Baggage Scanners & Screening", slug: "xray" },
-  { title: "Archway & Handheld Metal Detectors", slug: "metal-detectors" },
-  { title: "Access Control & Time Attendance Systems", slug: "access-control" },
-  { title: "Building & Industrial Automation", slug: "automation" },
-  { title: "EAS Anti-Theft Systems for Retail", slug: "eas" },
-  { title: "Advanced Traffic & Transportation Solutions", slug: "traffic" },
-  { title: "Structured Networking & Communication Systems", slug: "networking" },
+  { title: "CCTV & IP Surveillance Systems", slug: "cctv", image: "/images/cctv.jpg" },
+  { title: "Under Vehicle Surveillance Systems (UVSS)", slug: "uvss", image: "/images/uvss.jpeg" },
+  { title: "X-ray Baggage Scanners & Screening", slug: "xray", image: "/images/xray.jpg" },
+  { title: "Archway & Handheld Metal Detectors", slug: "metal-detectors", image: "/images/metal.png" },
+  { title: "Access Control & Time Attendance Systems", slug: "access-control", image: "/images/access.jpg" },
+  { title: "Building & Industrial Automation", slug: "automation", image: "/images/automation.jpg" },
+  { title: "EAS Anti-Theft Systems for Retail", slug: "eas", image: "/images/retail.jpg" },
+  { title: "Advanced Traffic & Transportation Solutions", slug: "traffic", image: "/images/traffic.png" },
+  { title: "Structured Networking & Communication Systems", slug: "networking", image: "/images/network.jpg" },
 ];
 
 export default function CinematicScroll() {
@@ -60,8 +60,8 @@ export default function CinematicScroll() {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: row,
-            start: "top 85%",
-            end: "bottom 15%",
+            start: "top 40%",
+            end: "bottom 20%",
             scrub: true,
           },
         });
@@ -128,33 +128,53 @@ export default function CinematicScroll() {
             return (
               <div
                 key={rowIndex}
-                className="row flex justify-center gap-24 relative"
+                className="row flex justify-center gap-[6vw] relative"
               >
                 {leftService && (
                   <Link
                     href={`/services/${leftService.slug}`}
-                    className="card card-left w-[55%] h-[520px]
-                               bg-gradient-to-br from-[#0F3D3E] via-[#145959] to-[#1E7A7A]
-                               rounded-3xl flex items-center justify-center
-                               text-white text-xl font-semibold text-center
-                               shadow-2xl will-change-transform"
+                    className="card card-left
+                    w-[45vw] h-[28vw] max-w-[700px] max-h-[520px]
+                    bg-gradient-to-br from-[#0F3D3E] via-[#145959] to-[#1E7A7A]
+                    rounded-3xl flex items-center justify-center
+                    text-white text-[1.2vw] min-text-lg font-semibold text-center
+                    shadow-2xl will-change-transform"
                     style={{ transformStyle: "preserve-3d" }}
                   >
-                    {leftService.title}
+                  <img
+                      src={leftService.image}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+
+                    <div className="absolute inset-0 bg-black/40"></div>
+
+                    <div className="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold text-center px-6">
+                      {leftService.title}
+                    </div>
                   </Link>
                 )}
 
                 {rightService && (
                   <Link
-                    href={`/services/${rightService.slug}`}
-                    className="card card-right w-[55%] h-[520px]
-                               bg-gradient-to-br from-[#0F3D3E] via-[#145959] to-[#1E7A7A]
-                               rounded-3xl flex items-center justify-center
-                               text-white text-xl font-semibold text-center
-                               shadow-2xl will-change-transform"
+                    href={`/services/${leftService.slug}`}
+                    className="card card-right
+                    w-[45vw] h-[28vw] max-w-[700px] max-h-[520px]
+                    bg-gradient-to-br from-[#0F3D3E] via-[#145959] to-[#1E7A7A]
+                    rounded-3xl flex items-center justify-center
+                    text-white text-xl font-semibold text-center
+                    shadow-2xl will-change-transform"
                     style={{ transformStyle: "preserve-3d" }}
                   >
-                    {rightService.title}
+                  <img
+                      src={rightService.image}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+
+                    <div className="absolute inset-0 bg-black/40"></div>
+
+                    <div className="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold text-center px-6">
+                      {leftService.title}
+                    </div>
                   </Link>
                 )}
               </div>
