@@ -6,10 +6,10 @@ import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s - Techmakai",
-    default: "Techmakai",
+    template: "%s - Techmak Technology Ltd.",
+    default: "Techmak Technology Ltd.",
   },
-  description: "Techmak ai, all types of tech solution here",
+  description: "Techmak Technology Ltd. — A leading provider of surveillance, security, automation, and networking solutions.",
 };
 
 export default function RootLayout({

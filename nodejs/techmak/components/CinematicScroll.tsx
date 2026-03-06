@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import Link from "next/link";
+import TiltCard from "./TiltCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,7 +52,7 @@ export default function CinematicScroll() {
 
         if (!cardLeft || !cardRight) return;
 
-        // Initial cinematic position
+        // Initial state
         gsap.set([cardLeft, cardRight], {
           transformPerspective: 2000,
           transformStyle: "preserve-3d",
@@ -60,41 +61,42 @@ export default function CinematicScroll() {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: row,
-            start: "top 40%",
-            end: "bottom 20%",
-            scrub: true,
+            start: "top 85%",
+            end: "bottom top",
+            scrub: 0.8,
           },
         });
 
-        // LEFT CARD
+        // LEFT CARD — flies left with rotation
         tl.to(
           cardLeft,
           {
-            x: -900 - index * 150,
-            y: -250 - index * 120,
-            rotateZ: -8 - index * 4,
-            rotateY: -25,
-            z: -300,
-            scale: 0.9,
-            ease: "none",
+            x: -600 - index * 100,
+            y: -150 - index * 60,
+            rotateZ: -6 - index * 2,
+            rotateY: -15,
+            z: -200,
+            scale: 0.85,
+            opacity: 0,
+            ease: "power2.inOut",
           },
           0
         )
-
-        // RIGHT CARD
-        .to(
-          cardRight,
-          {
-            x: 900 + index * 150,
-            y: -250 - index * 120,
-            rotateZ: 8 + index * 4,
-            rotateY: 25,
-            z: -300,
-            scale: 0.9,
-            ease: "none",
-          },
-          0
-        );
+          // RIGHT CARD — flies right with rotation
+          .to(
+            cardRight,
+            {
+              x: 600 + index * 100,
+              y: -150 - index * 60,
+              rotateZ: 6 + index * 2,
+              rotateY: 15,
+              z: -200,
+              scale: 0.85,
+              opacity: 0,
+              ease: "power2.inOut",
+            },
+            0
+          );
       });
     }, sectionRef);
 
@@ -107,18 +109,36 @@ export default function CinematicScroll() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-black py-40 overflow-hidden"
+      className="relative bg-gradient-to-b from-[#071A1A] via-[#0A2E2E] to-[#052626] py-40 overflow-hidden"
       style={{
         perspective: "2000px",
         transformStyle: "preserve-3d",
       }}
     >
       <div className="max-w-7xl mx-auto px-10">
-        <h2 className="text-4xl font-semibold text-center text-white mb-32">
+        <h2
+          className="text-4xl md:text-5xl font-bold text-center mb-6 select-none"
+          style={{
+            background: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            animation: "fadeInUp 1s ease-out 0.2s both",
+          }}
+        >
           Our Core Capabilities
         </h2>
+        <div
+          className="mx-auto mb-32 rounded-full"
+          style={{
+            width: "120px",
+            height: "3px",
+            background: "linear-gradient(90deg, #ffffff, #0ea5c9)",
+            animation: "fadeInUp 1s ease-out 0.4s both",
+          }}
+        />
 
-        <div className="space-y-1">
+        <div className="space-y-8">
           {Array.from({
             length: Math.ceil(services.length / 2),
           }).map((_, rowIndex) => {
@@ -135,22 +155,23 @@ export default function CinematicScroll() {
                     href={`/services/${leftService.slug}`}
                     className="card card-left
                     w-[45vw] h-[28vw] max-w-[700px] max-h-[520px]
-                    bg-gradient-to-br from-[#0F3D3E] via-[#145959] to-[#1E7A7A]
                     rounded-3xl flex items-center justify-center
                     text-white text-[1.2vw] min-text-lg font-semibold text-center
                     shadow-2xl will-change-transform"
                     style={{ transformStyle: "preserve-3d" }}
                   >
-                  <img
-                      src={leftService.image}
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
+                    <TiltCard className="w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-[#0F3D3E] via-[#145959] to-[#1E7A7A]">
+                      <img
+                        src={leftService.image}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
 
-                    <div className="absolute inset-0 bg-black/40"></div>
+                      <div className="absolute inset-0 bg-black/40"></div>
 
-                    <div className="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold text-center px-6">
-                      {leftService.title}
-                    </div>
+                      <div className="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold text-center px-6" style={{ transform: "translateZ(30px)" }}>
+                        {leftService.title}
+                      </div>
+                    </TiltCard>
                   </Link>
                 )}
 
@@ -159,22 +180,23 @@ export default function CinematicScroll() {
                     href={`/services/${leftService.slug}`}
                     className="card card-right
                     w-[45vw] h-[28vw] max-w-[700px] max-h-[520px]
-                    bg-gradient-to-br from-[#0F3D3E] via-[#145959] to-[#1E7A7A]
                     rounded-3xl flex items-center justify-center
                     text-white text-xl font-semibold text-center
                     shadow-2xl will-change-transform"
                     style={{ transformStyle: "preserve-3d" }}
                   >
-                  <img
-                      src={rightService.image}
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
+                    <TiltCard className="w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-[#0F3D3E] via-[#145959] to-[#1E7A7A]">
+                      <img
+                        src={rightService.image}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
 
-                    <div className="absolute inset-0 bg-black/40"></div>
+                      <div className="absolute inset-0 bg-black/40"></div>
 
-                    <div className="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold text-center px-6">
-                      {leftService.title}
-                    </div>
+                      <div className="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold text-center px-6" style={{ transform: "translateZ(30px)" }}>
+                        {rightService.title}
+                      </div>
+                    </TiltCard>
                   </Link>
                 )}
               </div>

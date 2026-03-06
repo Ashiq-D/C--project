@@ -16,7 +16,7 @@ const HeaderMenu = () => {
             key={item.title}
             href={item.href}
             className={`
-              relative px-2 py-1 text-sm font-medium
+              relative px-2 py-1 text-sm font-medium whitespace-nowrap
               transition-colors duration-300
               ${isActive ? "text-brand-hover" : "text-white"}
               hover:text-brand-hover
