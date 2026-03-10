@@ -17,7 +17,7 @@ const Footer = () => {
 
         {/* ================= TOP CONTACT STRIP ================= */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 border-b border-white/10 py-10">
-          
+
           {/* Item */}
           <div className="flex items-center gap-4 group cursor-pointer">
             <MapPin className="w-6 h-6 text-brand-accent group-hover:text-brand-hover transition-colors duration-300" />
@@ -74,9 +74,14 @@ const Footer = () => {
 
           {/* Column 1 */}
           <div>
-            <h2 className="text-2xl font-bold text-brand-accent">
-              TECHMAKAI
-            </h2>
+            <div className="inline-block transition-transform hover:-translate-y-1 duration-300">
+              <h2 className="text-2xl font-black text-white tracking-[0.2em] text-3d">
+                TECHMAK
+              </h2>
+              <p className="text-[0.55rem] font-medium tracking-[0.35em] uppercase text-brand-accent/80 mt-0.5">
+                Technology Ltd.
+              </p>
+            </div>
 
             <p className="mt-4 text-sm text-white/70 leading-relaxed">
               Discover curated tech collections with innovation and
@@ -85,17 +90,25 @@ const Footer = () => {
 
             {/* Social Icons */}
             <div className="flex gap-5 mt-6 text-brand-accent">
-              <a href="#" className="hover:text-brand-hover transition-colors duration-300">
-                <Facebook className="w-5 h-5" />
+              <a href="#" className="flip-icon-container hover:text-brand-hover transition-colors duration-300">
+                <div className="flip-icon text-brand-accent">
+                  <Facebook className="w-6 h-6" />
+                </div>
               </a>
-              <a href="#" className="hover:text-brand-hover transition-colors duration-300">
-                <Linkedin className="w-5 h-5" />
+              <a href="#" className="flip-icon-container hover:text-brand-hover transition-colors duration-300">
+                <div className="flip-icon text-brand-accent">
+                  <Linkedin className="w-6 h-6" />
+                </div>
               </a>
-              <a href="#" className="hover:text-brand-hover transition-colors duration-300">
-                <Youtube className="w-5 h-5" />
+              <a href="#" className="flip-icon-container hover:text-brand-hover transition-colors duration-300">
+                <div className="flip-icon text-brand-accent">
+                  <Youtube className="w-6 h-6" />
+                </div>
               </a>
-              <a href="#" className="hover:text-brand-hover transition-colors duration-300">
-                <Instagram className="w-5 h-5" />
+              <a href="#" className="flip-icon-container hover:text-brand-hover transition-colors duration-300">
+                <div className="flip-icon text-brand-accent">
+                  <Instagram className="w-6 h-6" />
+                </div>
               </a>
             </div>
           </div>
@@ -158,7 +171,7 @@ const Footer = () => {
         <div className="border-t border-white/10 py-6 text-center text-sm text-white/60">
           © 2026{" "}
           <span className="font-semibold text-brand-accent">
-            TECHMAKAI
+            Techmak Technology Ltd.
           </span>
           . All rights reserved.
         </div>
