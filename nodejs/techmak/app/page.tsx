@@ -64,7 +64,7 @@ export default function Home() {
 
           {/* Subtitle */}
           <p className="hero-text text-[#8ab8c8] max-w-2xl mx-auto text-base md:text-lg font-medium leading-relaxed">
-            Comprehensive security infrastructure for modern businesses
+            Bangladesh's most trusted partner for intelligent security infrastructure
           </p>
           <p className="hero-text text-[#8ab8c8]/60 max-w-2xl mx-auto text-sm md:text-base font-light leading-relaxed"
             style={{ animation: "fadeInUp 1s ease-out 0.3s both" }}>
