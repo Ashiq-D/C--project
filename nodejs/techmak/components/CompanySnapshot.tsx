@@ -115,7 +115,7 @@ export default function CompanySnapshot() {
           initial={{ opacity: 0, y: -30 }}
           animate={headingInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20 max-w-4xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 border border-white/5 shadow-2xl"
+          className="text-center mb-20 max-w-4xl mx-auto backdrop-blur-3xl bg-black/60 rounded-3xl p-8 border border-white/5 shadow-2xl"
         >
           <p className="text-xs md:text-sm font-semibold tracking-[0.35em] uppercase text-[#78d4e8]/70 mb-4">
             Established 2009 · Dhaka, Bangladesh
@@ -162,7 +162,7 @@ export default function CompanySnapshot() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12 max-w-xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl md:rounded-full p-6 border border-white/5 shadow-2xl"
+            className="text-center mb-12 max-w-xl mx-auto backdrop-blur-3xl bg-black/60 rounded-3xl md:rounded-full p-6 border border-white/5 shadow-2xl"
           >
             <h3 className="text-2xl md:text-3xl font-bold"
               style={{
@@ -184,7 +184,7 @@ export default function CompanySnapshot() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.03, y: -4 }}
-                className="group p-7 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-sm
+                className="group p-7 rounded-2xl bg-black/50 border border-white/10 backdrop-blur-2xl
                            hover:border-[#38c5e0]/40 hover:bg-[#38c5e0]/[0.06] transition-all duration-500 cursor-default"
               >
                 <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-[#38c5e0] mb-5 group-hover:bg-[#38c5e0]/10 group-hover:border-[#38c5e0]/30 transition-colors duration-500 shadow-inner overflow-hidden">
@@ -205,9 +205,9 @@ export default function CompanySnapshot() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="rounded-3xl bg-white/[0.04] border border-white/10 backdrop-blur-sm p-10"
+          className="rounded-3xl bg-black/50 border border-white/10 backdrop-blur-2xl p-10"
         >
-          <div className="text-center mb-10 max-w-2xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl md:rounded-full p-6 border border-white/5 shadow-2xl">
+          <div className="text-center mb-10 max-w-2xl mx-auto backdrop-blur-3xl bg-black/60 rounded-3xl md:rounded-full p-6 border border-white/5 shadow-2xl">
             <h3 className="text-xl md:text-2xl font-bold"
               style={{
                 backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",

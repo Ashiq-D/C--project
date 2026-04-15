@@ -27,15 +27,15 @@ const cardVariant: Variants = {
 export default function ServicesPage() {
   return (
     <main className="relative min-h-screen text-white pt-32 pb-24 overflow-hidden">
-      
+
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        
+
         {/* Header Section */}
         <div className="text-center mb-20 relative z-20 backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-12 border border-white/5 shadow-2xl max-w-4xl mx-auto">
           <p className="text-xs md:text-sm font-semibold tracking-[0.35em] uppercase text-[#78d4e8]/70 mb-4">
             Our Expertise
           </p>
-          <h1 
+          <h1
             className="text-4xl md:text-6xl font-bold tracking-tight mb-6"
             style={{
               backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
@@ -64,12 +64,12 @@ export default function ServicesPage() {
             <motion.div key={service.slug} variants={cardVariant} className="h-full">
               <Link href={`/services/${service.slug}`} className="block h-full group">
                 <TiltCard className="h-full rounded-2xl overflow-hidden bg-[#0A2E2E] border border-[#1FA89A]/15 group-hover:border-[#1FA89A]/50 transition-all duration-500 shadow-[0_4px_30px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_40px_rgba(31,168,154,0.25)] group-hover:-translate-y-1 relative">
-                  
+
                   {/* Background Image layer */}
                   {service.image && (
-                    <div 
+                    <div
                       className="absolute inset-0 bg-cover bg-center transform group-hover:scale-110 transition-transform duration-1000 ease-out opacity-40 group-hover:opacity-60"
-                      style={{ backgroundImage: `url(${service.image})` }} 
+                      style={{ backgroundImage: `url(${service.image})` }}
                     />
                   )}
                   {/* Dark Gradient Overlay */}

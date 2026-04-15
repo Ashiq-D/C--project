@@ -279,8 +279,8 @@ export default function TechPartners() {
           <div
             ref={trackRef}
             className="flex gap-5 overflow-x-auto pb-6 scrollbar-hide py-2 px-10"
-            style={{ 
-              scrollbarWidth: "none", 
+            style={{
+              scrollbarWidth: "none",
               msOverflowStyle: "none",
               maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
               WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)"

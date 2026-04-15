@@ -299,8 +299,8 @@ export default function Brands() {
                 style={{ backgroundImage: "linear-gradient(90deg, transparent, #38c5e0, transparent)" }}
               />
 
-               {/* Badge & Icon */}
-               <div className="flex justify-between items-start mb-6">
+              {/* Badge & Icon */}
+              <div className="flex justify-between items-start mb-6">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(56,197,224,0.1)", border: "1px solid rgba(56,197,224,0.2)" }}>
                   {company.icon}
                 </div>
@@ -329,7 +329,7 @@ export default function Brands() {
                   {company.capabilities.map((cap, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-[#8ab8c8] text-xs">
                       <span className="w-1 h-3 flex items-center justify-center shrink-0 pt-0.5">
-                        <svg width="6" height="6" viewBox="0 0 24 24" fill="#38c5e0"><path d="M12 2l10 10-10 10L2 12z"/></svg>
+                        <svg width="6" height="6" viewBox="0 0 24 24" fill="#38c5e0"><path d="M12 2l10 10-10 10L2 12z" /></svg>
                       </span>
                       <span>{cap}</span>
                     </li>

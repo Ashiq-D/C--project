@@ -1,49 +1,66 @@
 "use client";
 
 import { useRef, useMemo } from "react";
+
+import { Shield } from "lucide-react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { PerspectiveCamera } from "@react-three/drei";
+import { PerspectiveCamera, Html } from "@react-three/drei";
 import * as THREE from "three";
 
-/* ─── flowing arc curve ribbon ─── */
-function FlowingArc({
-    points,
-    color,
+function ApertureRing({
+    radius,
+    count,
     speed,
-    opacity,
-    width,
+    color,
+    depth,
+    zSpread,
+    segments,
 }: {
-    points: THREE.Vector3[];
-    color: string;
+    radius: number;
+    count: number;
     speed: number;
-    opacity: number;
-    width: number;
+    color: string;
+    depth: number;
+    zSpread: number;
+    segments: number;
 }) {
     const ref = useRef<THREE.Points>(null);
-    const count = 300;
 
-    const { positions, offsets } = useMemo(() => {
-        const curve = new THREE.CatmullRomCurve3(points, false, "catmullrom", 0.5);
-        const pos = new Float32Array(count * 3);
-        const off = new Float32Array(count);
+    const { positions, opacities } = useMemo(() => {
+        const pos = [];
+        const opc = [];
+        const segmentAngle = (Math.PI * 2) / segments;
+        const gap = 0.08; // gap between shutter blades
+
         for (let i = 0; i < count; i++) {
-            const t = i / count;
-            const pt = curve.getPoint(t);
-            pos[i * 3] = pt.x + (Math.random() - 0.5) * width;
-            pos[i * 3 + 1] = pt.y + (Math.random() - 0.5) * width;
-            pos[i * 3 + 2] = pt.z + (Math.random() - 0.5) * 0.2;
-            off[i] = Math.random();
+            const angle = Math.random() * Math.PI * 2;
+            
+            // Create "shutter blades" by knocking out gaps
+            const localAngle = angle % segmentAngle;
+            if (localAngle < gap || localAngle > segmentAngle - gap) continue;
+
+            const rOffset = Math.random();
+            const r = radius + rOffset * 2.5;
+            
+            const x = Math.cos(angle) * r;
+            const y = Math.sin(angle) * r;
+            const z = depth + (Math.random() - 0.5) * zSpread + (rOffset * 2.0);
+
+            pos.push(x, y, z);
+            opc.push(1.0 - rOffset * 0.8);
         }
-        return { positions: pos, offsets: off };
-    }, [points, width]);
+
+        return {
+            positions: new Float32Array(pos),
+            opacities: new Float32Array(opc),
+        };
+    }, [radius, count, depth, zSpread, segments]);
 
     useFrame((state) => {
         if (ref.current) {
-            const mat = ref.current.material as THREE.PointsMaterial;
-            const t = state.clock.elapsedTime * speed;
-            // Shift particle along curve by animating opacity in wave
-            mat.opacity = opacity * (0.7 + Math.sin(t) * 0.3);
-            ref.current.rotation.z += 0.0003 * speed;
+            ref.current.rotation.z = state.clock.elapsedTime * speed;
+            const scale = 1.0 + Math.sin(state.clock.elapsedTime * 0.5 + depth) * 0.02;
+            ref.current.scale.set(scale, scale, scale);
         }
     });
 
@@ -51,105 +68,98 @@ function FlowingArc({
         <points ref={ref}>
             <bufferGeometry>
                 <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+                <bufferAttribute attach="attributes-alpha" args={[opacities, 1]} />
             </bufferGeometry>
             <pointsMaterial
-                color={color}
-                size={0.09}
+                color={new THREE.Color(color)}
+                size={0.12}
                 transparent
-                opacity={opacity}
-                sizeAttenuation
+                opacity={0.8}
                 depthWrite={false}
+                blending={THREE.AdditiveBlending}
             />
         </points>
     );
 }
 
-/* ─── scene ─── */
-function Scene() {
-    // Left large arc — sweeps from bottom-left to top-right
-    const leftArc = useMemo(
-        () => [
-            new THREE.Vector3(-18, -10, -5),
-            new THREE.Vector3(-14, -4, -2),
-            new THREE.Vector3(-8, 2, 0),
-            new THREE.Vector3(-2, 6, 1),
-            new THREE.Vector3(4, 8, -1),
-            new THREE.Vector3(10, 6, -3),
-        ],
-        []
-    );
+function CyberneticAperture() {
+    const groupRef = useRef<THREE.Group>(null);
 
-    // Right large arc — sweeps from top-left to bottom-right
-    const rightArc = useMemo(
-        () => [
-            new THREE.Vector3(18, 10, -5),
-            new THREE.Vector3(14, 4, -2),
-            new THREE.Vector3(8, -2, 0),
-            new THREE.Vector3(2, -6, 1),
-            new THREE.Vector3(-4, -8, -1),
-            new THREE.Vector3(-10, -6, -3),
-        ],
-        []
-    );
-
-    // Inner glow arc — tight center loop
-    const innerArc = useMemo(
-        () => [
-            new THREE.Vector3(-8, -6, 2),
-            new THREE.Vector3(-4, 0, 3),
-            new THREE.Vector3(0, 4, 2),
-            new THREE.Vector3(5, 2, 1),
-            new THREE.Vector3(8, -3, 2),
-            new THREE.Vector3(4, -7, 1),
-            new THREE.Vector3(-2, -6, 2),
-        ],
-        []
-    );
-
-    // Accent arc — bottom sweep
-    const bottomArc = useMemo(
-        () => [
-            new THREE.Vector3(-16, -12, -6),
-            new THREE.Vector3(-6, -9, -4),
-            new THREE.Vector3(0, -8, -3),
-            new THREE.Vector3(8, -9, -4),
-            new THREE.Vector3(16, -12, -6),
-        ],
-        []
-    );
+    useFrame((state) => {
+        if (groupRef.current) {
+            const mx = (state.pointer.x * Math.PI) / 10;
+            const my = (state.pointer.y * Math.PI) / 10;
+            
+            groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, -my, 0.05);
+            groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, mx, 0.05);
+        }
+    });
 
     return (
-        <group>
-            {/* Primary arcs — teal/cyan gradient feel */}
-            <FlowingArc points={leftArc} color="#2ad4ff" speed={0.8} opacity={0.55} width={0.3} />
-            <FlowingArc points={leftArc} color="#1ab8d4" speed={0.5} opacity={0.3} width={0.8} />
+        <group ref={groupRef}>
+            <ApertureRing radius={28} count={8000} speed={0.02} color="#052626" depth={-20} zSpread={6} segments={24} />
+            <ApertureRing radius={22} count={6000} speed={-0.04} color="#0ea5c9" depth={-12} zSpread={4} segments={12} />
+            <ApertureRing radius={15} count={5000} speed={0.06} color="#38c5e0" depth={-6} zSpread={2} segments={8} />
+            <ApertureRing radius={8} count={3500} speed={-0.10} color="#9ff6ff" depth={0} zSpread={1} segments={6} />
+            <ApertureRing radius={3} count={1500} speed={0.25} color="#ffffff" depth={2} zSpread={0.5} segments={3} />
+            
+            <pointLight position={[0, 0, 5]} color="#9ff6ff" intensity={2} distance={30} />
 
-            <FlowingArc points={rightArc} color="#1ec8e0" speed={0.7} opacity={0.5} width={0.3} />
-            <FlowingArc points={rightArc} color="#0ea5c9" speed={0.4} opacity={0.25} width={0.9} />
-
-            {/* Inner accent */}
-            <FlowingArc points={innerArc} color="#38d8f5" speed={1.2} opacity={0.35} width={0.2} />
-
-            {/* Bottom sweep */}
-            <FlowingArc points={bottomArc} color="#1682a0" speed={0.6} opacity={0.2} width={0.5} />
+            {/* Shield with Layered Custom Thunder Logo positioned in the center */}
+            <Html position={[0, 0, 2]} center transform zIndexRange={[100, 0]}>
+                <div className="relative flex items-center justify-center w-32 h-32 group">
+                    {/* Glowing Futuristic Shield Outline */}
+                    <Shield 
+                        className="absolute inset-0 w-full h-full text-[#38c5e0]/60 drop-shadow-[0_0_20px_rgba(56,197,224,0.6)] backdrop-blur-sm" 
+                        strokeWidth={1} 
+                        fill="rgba(5,38,38,0.7)" 
+                    />
+                    
+                    {/* Layered Custom Thunder Logo matching user reference */}
+                    <svg 
+                        viewBox="0 0 24 24" 
+                        className="relative z-10 w-14 h-14 ml-[2px] mt-[2px] drop-shadow-[0_4px_10px_rgba(250,204,21,0.4)]"
+                        style={{ animation: 'pulse 0.15s infinite alternate' }}
+                    >
+                        {/* Base Dark Shape / Border Outline */}
+                        <path 
+                            d="M13.5 2 L3.5 14 H12.5 L11.5 22 L21.5 10 H12.5 L13.5 2 Z" 
+                            fill="#FACC15" /* Vibrant Yellow Core */
+                            stroke="#1F2937" /* Dark Charcoal Outline */
+                            strokeWidth="1.5" 
+                            strokeLinejoin="round" 
+                        />
+                        {/* White Highlight on left-facing edges, exactly like the image */}
+                        <path 
+                            d="M13.5 2 L3.5 14 H12.5" 
+                            fill="none" 
+                            stroke="#FFFFFF" 
+                            strokeWidth="1" 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round" 
+                        />
+                    </svg>
+                </div>
+            </Html>
         </group>
     );
 }
 
 export default function Hero3D() {
     return (
-        <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 z-0 pointer-events-none bg-[#020a0a]">
+            {/* Radial vignette mask embedded in DOM over canvas */}
+            <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_center,transparent_0%,#020a0a_80%)]" />
+            
             <Canvas
                 gl={{
                     antialias: true,
                     alpha: true,
-                    toneMapping: THREE.ACESFilmicToneMapping,
-                    toneMappingExposure: 1.1,
                 }}
             >
-                <PerspectiveCamera makeDefault position={[0, 0, 22]} fov={55} />
-                <ambientLight intensity={0.1} />
-                <Scene />
+                <PerspectiveCamera makeDefault position={[0, 0, 25]} fov={55} />
+                <ambientLight intensity={0.5} />
+                <CyberneticAperture />
             </Canvas>
         </div>
     );
