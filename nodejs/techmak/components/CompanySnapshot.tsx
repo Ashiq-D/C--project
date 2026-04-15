@@ -65,7 +65,7 @@ const cardVariants: Variants = {
   }),
 };
 
-function CounterStat({ value, label, icon }: { value: string; label: string; icon: string }) {
+function CounterStat({ value, label }: { value: string; label: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
   return (
@@ -76,7 +76,6 @@ function CounterStat({ value, label, icon }: { value: string; label: string; ico
       transition={{ duration: 0.7, ease: "easeOut" }}
       className="flex flex-col items-center gap-2 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-[#38c5e0]/40 hover:bg-white/10 transition-all duration-500"
     >
-      <span className="text-3xl">{icon}</span>
       <span
         className="text-4xl md:text-5xl font-extrabold"
         style={{
@@ -151,39 +150,7 @@ export default function CompanySnapshot() {
           ))}
         </div>
 
-        {/* ── Core Services grid ── */}
-        <div className="mb-24">
-          <motion.h3
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center text-2xl md:text-3xl font-bold text-white/90 mb-12"
-          >
-            What We Do
-          </motion.h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {coreServices.map((service, i) => (
-              <motion.div
-                key={service.title}
-                custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.03, y: -4 }}
-                className="group p-7 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-sm
-                           hover:border-[#38c5e0]/40 hover:bg-[#38c5e0]/[0.06] transition-all duration-500 cursor-default"
-              >
-                <span className="text-3xl mb-4 block">{service.icon}</span>
-                <h4 className="text-white font-semibold text-base mb-2 group-hover:text-[#9ff6ff] transition-colors">
-                  {service.title}
-                </h4>
-                <p className="text-[#8ab8c8]/80 text-sm leading-relaxed">{service.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+
 
         {/* ── Notable Clients ── */}
         <motion.div
