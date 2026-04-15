@@ -27,7 +27,7 @@ const HeaderMenu = () => {
             `}
           >
             <span style={{
-              background: isActive 
+              backgroundImage: isActive 
                 ? "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)" 
                 : "linear-gradient(135deg, #ffffff 0%, #e0faff 100%)",
               WebkitBackgroundClip: "text",

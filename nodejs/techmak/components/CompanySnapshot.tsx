@@ -80,7 +80,7 @@ function CounterStat({ value, label, icon }: { value: string; label: string; ico
       <span
         className="text-4xl md:text-5xl font-extrabold"
         style={{
-          background: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 40%, #38c5e0 100%)",
+          backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 40%, #38c5e0 100%)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           backgroundClip: "text",
@@ -120,7 +120,7 @@ export default function CompanySnapshot() {
             className="font-bold leading-tight mb-6"
             style={{
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              background: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+              backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -139,7 +139,7 @@ export default function CompanySnapshot() {
             style={{
               width: "100px",
               height: "3px",
-              background: "linear-gradient(90deg, #ffffff, #0ea5c9)",
+              backgroundImage: "linear-gradient(90deg, #ffffff, #0ea5c9)",
             }}
           />
         </motion.div>

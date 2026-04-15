@@ -243,7 +243,7 @@ export default function Brands() {
             className="font-bold leading-tight mb-6"
             style={{
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              background: gradient,
+              backgroundImage: gradient,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -261,7 +261,7 @@ export default function Brands() {
             style={{
               width: "100px",
               height: "3px",
-              background: "linear-gradient(90deg, #ffffff, #0ea5c9)",
+              backgroundImage: "linear-gradient(90deg, #ffffff, #0ea5c9)",
             }}
           />
         </motion.div>
@@ -296,7 +296,7 @@ export default function Brands() {
               {/* Hover glow line */}
               <div
                 className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ background: "linear-gradient(90deg, transparent, #38c5e0, transparent)" }}
+                style={{ backgroundImage: "linear-gradient(90deg, transparent, #38c5e0, transparent)" }}
               />
 
                {/* Badge & Icon */}

@@ -93,7 +93,7 @@ export default function CinematicScroll() {
         <h2
           className="text-4xl md:text-5xl font-bold text-center mb-6 select-none"
           style={{
-            background: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+            backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -107,7 +107,7 @@ export default function CinematicScroll() {
           style={{
             width: "120px",
             height: "3px",
-            background: "linear-gradient(90deg, #ffffff, #0ea5c9)",
+            backgroundImage: "linear-gradient(90deg, #ffffff, #0ea5c9)",
             animation: "fadeInUp 1s ease-out 0.4s both",
           }}
         />

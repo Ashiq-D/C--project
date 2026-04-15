@@ -49,7 +49,7 @@ export default function Home() {
           <h1 className="hero-text font-bold leading-[1.1] tracking-tight"
             style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)", animation: "fadeInUp 1s ease-out 0.2s both" }}>
             <span style={{
-              background: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+              backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",

@@ -190,7 +190,7 @@ export default function TechPartners() {
       ref={sectionRef}
       className="relative py-32 overflow-hidden"
       style={{
-        background: "linear-gradient(180deg, #0A2E2E 0%, #071A1A 50%, #052626 100%)",
+        backgroundImage: "linear-gradient(180deg, #0A2E2E 0%, #071A1A 50%, #052626 100%)",
       }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -217,7 +217,7 @@ export default function TechPartners() {
             className="font-bold leading-tight mb-5"
             style={{
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              background: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+              backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -231,7 +231,7 @@ export default function TechPartners() {
           </p>
           <div
             className="mx-auto mt-6 rounded-full"
-            style={{ width: "100px", height: "3px", background: "linear-gradient(90deg, #ffffff, #0ea5c9)" }}
+            style={{ width: "100px", height: "3px", backgroundImage: "linear-gradient(90deg, #ffffff, #0ea5c9)" }}
           />
         </motion.div>
 
@@ -277,9 +277,9 @@ export default function TechPartners() {
         <div className="relative">
           {/* Fade masks */}
           <div className="pointer-events-none absolute left-0 top-0 h-full w-20 z-10"
-            style={{ background: "linear-gradient(to right, #071A1A, transparent)" }} />
+            style={{ backgroundImage: "linear-gradient(to right, #071A1A, transparent)" }} />
           <div className="pointer-events-none absolute right-0 top-0 h-full w-20 z-10"
-            style={{ background: "linear-gradient(to left, #071A1A, transparent)" }} />
+            style={{ backgroundImage: "linear-gradient(to left, #071A1A, transparent)" }} />
 
           {/* Scrollable track */}
           <div
