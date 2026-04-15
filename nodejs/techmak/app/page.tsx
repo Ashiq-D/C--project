@@ -38,7 +38,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
 
         {/* Foreground Content */}
-        <div ref={textRef} className="relative z-10 text-center max-w-5xl mx-auto flex flex-col items-center gap-5 select-none">
+        <div ref={textRef} className="relative z-10 text-center max-w-5xl mx-auto flex flex-col items-center gap-5 select-none backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-14 border border-white/5 shadow-2xl">
 
           {/* Brand label */}
           <p className="hero-text text-xs md:text-sm font-semibold tracking-[0.35em] uppercase text-[#78d4e8]/70">

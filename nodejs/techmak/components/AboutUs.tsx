@@ -409,7 +409,7 @@ export default function AboutUs() {
           initial={{ opacity: 0, y: -30 }}
           animate={headingInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-24"
+          className="text-center mb-24 max-w-4xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-14 border border-white/5 shadow-2xl"
         >
           <motion.p
             initial={{ opacity: 0, letterSpacing: "0.2em" }}

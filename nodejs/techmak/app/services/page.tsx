@@ -31,7 +31,7 @@ export default function ServicesPage() {
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         
         {/* Header Section */}
-        <div className="text-center mb-20 relative z-20">
+        <div className="text-center mb-20 relative z-20 backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-12 border border-white/5 shadow-2xl max-w-4xl mx-auto">
           <p className="text-xs md:text-sm font-semibold tracking-[0.35em] uppercase text-[#78d4e8]/70 mb-4">
             Our Expertise
           </p>
