@@ -3,42 +3,44 @@
 import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
 
+import { Landmark, Clock, PackageCheck, Building2, Cctv, Cpu, Tag, Waypoints, Network, Flame } from "lucide-react";
+
 /* ── Data from Techmak Technology LTD profile ── */
 const stats = [
-  { value: "2009", label: "Founded", icon: "🏛️" },
-  { value: "15+", label: "Years Experience", icon: "⏱️" },
-  { value: "500+", label: "Projects Delivered", icon: "📦" },
-  { value: "2400", label: "Sq.ft. HQ", icon: "🏢" },
+  { value: "2009", label: "Founded", icon: Landmark },
+  { value: "15+", label: "Years Experience", icon: Clock },
+  { value: "500+", label: "Projects Delivered", icon: PackageCheck },
+  { value: "2400", label: "Sq.ft. HQ", icon: Building2 },
 ];
 
 const coreServices = [
   {
-    icon: "📷",
+    icon: Cctv,
     title: "Industrial Security & Surveillance",
     desc: "Advanced CCTV, IP cameras, perimeter detection and authorized Sensormatic surveillance systems tailored for enterprise and government environments.",
   },
   {
-    icon: "⚙️",
+    icon: Cpu,
     title: "Automation Systems",
     desc: "PLC, HMI, Motor & Servo Drives expertise for precision industrial process automation in manufacturing, utilities and smart buildings.",
   },
   {
-    icon: "🏷️",
+    icon: Tag,
     title: "RFID & EAS Solutions",
     desc: "Electronic Article Surveillance (EAS) and RFID-based asset tracking that dramatically reduces retail shrinkage and improves inventory accuracy.",
   },
   {
-    icon: "🚦",
+    icon: Waypoints,
     title: "Advanced Traffic Solutions",
     desc: "Smart traffic management and transportation intelligence systems engineered for Bangladesh's growing urban infrastructure.",
   },
   {
-    icon: "🌐",
+    icon: Network,
     title: "Networking & Communication",
     desc: "Structured cabling, corporate and industrial networking infrastructure designed for reliability, scalability and high throughput.",
   },
   {
-    icon: "🔥",
+    icon: Flame,
     title: "Safety & Fire Detection",
     desc: "Comprehensive industrial safety systems, fire detection and suppression solutions compliant with international standards.",
   },
@@ -65,7 +67,7 @@ const cardVariants: Variants = {
   }),
 };
 
-function CounterStat({ value, label }: { value: string; label: string }) {
+function CounterStat({ value, label, icon: Icon }: { value: string; label: string; icon: any }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
   return (
@@ -76,10 +78,13 @@ function CounterStat({ value, label }: { value: string; label: string }) {
       transition={{ duration: 0.7, ease: "easeOut" }}
       className="flex flex-col items-center gap-2 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-[#38c5e0]/40 hover:bg-white/10 transition-all duration-500"
     >
+      <div className="text-[#38c5e0] mb-2">
+        <Icon size={32} strokeWidth={1.5} />
+      </div>
       <span
         className="text-4xl md:text-5xl font-extrabold"
         style={{
-          background: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 40%, #38c5e0 100%)",
+          backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 40%, #38c5e0 100%)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           backgroundClip: "text",
@@ -97,7 +102,7 @@ export default function CompanySnapshot() {
   const headingInView = useInView(headingRef, { once: true });
 
   return (
-    <section className="relative bg-gradient-to-b from-[#052626] via-[#071A1A] to-[#0A2E2E] py-32 overflow-hidden">
+    <section className="relative py-32 overflow-hidden z-10">
       {/* Ambient glow blobs */}
       <div className="pointer-events-none absolute -top-40 left-1/4 w-[500px] h-[500px] rounded-full bg-[#38c5e0]/5 blur-[120px]" />
       <div className="pointer-events-none absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-[#0ea5c9]/5 blur-[100px]" />
@@ -110,7 +115,7 @@ export default function CompanySnapshot() {
           initial={{ opacity: 0, y: -30 }}
           animate={headingInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-20 max-w-4xl mx-auto backdrop-blur-3xl bg-black/60 rounded-3xl p-8 border border-white/5 shadow-2xl"
         >
           <p className="text-xs md:text-sm font-semibold tracking-[0.35em] uppercase text-[#78d4e8]/70 mb-4">
             Established 2009 · Dhaka, Bangladesh
@@ -119,7 +124,7 @@ export default function CompanySnapshot() {
             className="font-bold leading-tight mb-6"
             style={{
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              background: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+              backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -138,7 +143,7 @@ export default function CompanySnapshot() {
             style={{
               width: "100px",
               height: "3px",
-              background: "linear-gradient(90deg, #ffffff, #0ea5c9)",
+              backgroundImage: "linear-gradient(90deg, #ffffff, #0ea5c9)",
             }}
           />
         </motion.div>
@@ -150,7 +155,49 @@ export default function CompanySnapshot() {
           ))}
         </div>
 
-
+        {/* ── Core Services grid ── */}
+        <div className="mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12 max-w-xl mx-auto backdrop-blur-3xl bg-black/60 rounded-3xl md:rounded-full p-6 border border-white/5 shadow-2xl"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold"
+              style={{
+                backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}>
+              What We Do
+            </h3>
+          </motion.div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {coreServices.map((service, i) => (
+              <motion.div
+                key={service.title}
+                custom={i}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.03, y: -4 }}
+                className="group p-7 rounded-2xl bg-black/50 border border-white/10 backdrop-blur-2xl
+                           hover:border-[#38c5e0]/40 hover:bg-[#38c5e0]/[0.06] transition-all duration-500 cursor-default"
+              >
+                <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-[#38c5e0] mb-5 group-hover:bg-[#38c5e0]/10 group-hover:border-[#38c5e0]/30 transition-colors duration-500 shadow-inner overflow-hidden">
+                  <service.icon size={26} strokeWidth={1.5} />
+                </div>
+                <h4 className="text-white font-semibold text-base mb-2 group-hover:text-[#9ff6ff] transition-colors">
+                  {service.title}
+                </h4>
+                <p className="text-[#8ab8c8]/80 text-sm leading-relaxed">{service.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
         {/* ── Notable Clients ── */}
         <motion.div
@@ -158,11 +205,19 @@ export default function CompanySnapshot() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="rounded-3xl bg-white/[0.04] border border-white/10 backdrop-blur-sm p-10"
+          className="rounded-3xl bg-black/50 border border-white/10 backdrop-blur-2xl p-10"
         >
-          <h3 className="text-center text-xl md:text-2xl font-bold text-white/90 mb-8">
-            Trusted by Bangladesh's Top Institutions
-          </h3>
+          <div className="text-center mb-10 max-w-2xl mx-auto backdrop-blur-3xl bg-black/60 rounded-3xl md:rounded-full p-6 border border-white/5 shadow-2xl">
+            <h3 className="text-xl md:text-2xl font-bold"
+              style={{
+                backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}>
+              Trusted by Bangladesh's Top Institutions
+            </h3>
+          </div>
           <div className="flex flex-wrap justify-center gap-4">
             {clients.map((client, i) => (
               <motion.span

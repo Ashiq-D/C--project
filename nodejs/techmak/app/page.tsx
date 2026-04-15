@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import CinematicScroll from "@/components/CinematicScroll";
-import Hero3D from "@/components/Hero3D";
 import CompanySnapshot from "@/components/CompanySnapshot";
 import TechPartners from "@/components/TechPartners";
 
@@ -33,18 +32,13 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-gradient-to-br from-[#071A1A] via-[#0A2E2E] to-[#052626] text-white overflow-x-hidden pt-20">
+    <main className="text-white overflow-x-hidden pt-20">
 
       {/* 3D HERO SECTION */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden bg-gradient-to-br from-[#071A1A] via-[#0A2E2E] to-[#052626]">
-
-        {/* 3D particle arcs in background */}
-        <div className="absolute inset-0">
-          <Hero3D />
-        </div>
+      <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
 
         {/* Foreground Content */}
-        <div ref={textRef} className="relative z-10 text-center max-w-5xl mx-auto flex flex-col items-center gap-5 select-none">
+        <div ref={textRef} className="relative z-10 text-center max-w-5xl mx-auto flex flex-col items-center gap-5 select-none backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-14 border border-white/5 shadow-2xl">
 
           {/* Brand label */}
           <p className="hero-text text-xs md:text-sm font-semibold tracking-[0.35em] uppercase text-[#78d4e8]/70">
@@ -52,10 +46,10 @@ export default function Home() {
           </p>
 
           {/* Large gradient heading */}
-          <h1 className="hero-text font-bold leading-[1.1] tracking-tight"
-            style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)", animation: "fadeInUp 1s ease-out 0.2s both" }}>
+          <h1 className="hero-text font-bold leading-[1.1] tracking-tight whitespace-nowrap"
+            style={{ fontSize: "clamp(1.8rem, 5.5vw, 6rem)", animation: "fadeInUp 1s ease-out 0.2s both" }}>
             <span style={{
-              background: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+              backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",

@@ -83,34 +83,36 @@ export default function CinematicScroll() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-gradient-to-b from-[#071A1A] via-[#0A2E2E] to-[#052626] py-40 overflow-hidden"
+      className="relative py-40 overflow-hidden z-10"
       style={{
         perspective: "2000px",
         transformStyle: "preserve-3d",
       }}
     >
       <div className="max-w-7xl mx-auto px-10">
-        <h2
-          className="text-4xl md:text-5xl font-bold text-center mb-6 select-none"
-          style={{
-            background: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-            animation: "fadeInUp 1s ease-out 0.2s both",
-          }}
-        >
-          Our Core Capabilities
-        </h2>
-        <div
-          className="mx-auto mb-32 rounded-full"
-          style={{
-            width: "120px",
-            height: "3px",
-            background: "linear-gradient(90deg, #ffffff, #0ea5c9)",
-            animation: "fadeInUp 1s ease-out 0.4s both",
-          }}
-        />
+        <div className="text-center mb-32 max-w-3xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 border border-white/5 shadow-2xl">
+          <h2
+            className="text-4xl md:text-5xl font-bold mb-6 select-none"
+            style={{
+              backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              animation: "fadeInUp 1s ease-out 0.2s both",
+            }}
+          >
+            Our Core Capabilities
+          </h2>
+          <div
+            className="mx-auto rounded-full"
+            style={{
+              width: "120px",
+              height: "3px",
+              backgroundImage: "linear-gradient(90deg, #ffffff, #0ea5c9)",
+              animation: "fadeInUp 1s ease-out 0.4s both",
+            }}
+          />
+        </div>
 
         <div className="space-y-8">
           {Array.from({

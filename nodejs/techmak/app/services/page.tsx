@@ -4,8 +4,6 @@ import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 import { services } from "@/lib/servicesData";
 import TiltCard from "@/components/TiltCard";
-import Hero3D from "@/components/Hero3D";
-import AnimatedParticles from "@/components/AnimatedParticles";
 
 const container: Variants = {
   hidden: {},
@@ -28,29 +26,19 @@ const cardVariant: Variants = {
 
 export default function ServicesPage() {
   return (
-    <main className="relative min-h-screen bg-gradient-to-br from-[#071A1A] via-[#0A2E2E] to-[#052626] text-white pt-32 pb-24 overflow-hidden">
-      
-      {/* 3D Arc Particle Background & Aesthetic Elements */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-[#1FA89A]/10 blur-[150px] rounded-full mix-blend-screen opacity-50 animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[#0ea5c9]/10 blur-[130px] rounded-full mix-blend-screen opacity-50" />
-        <div className="opacity-[0.25]">
-          <Hero3D />
-        </div>
-        <AnimatedParticles />
-      </div>
+    <main className="relative min-h-screen text-white pt-32 pb-24 overflow-hidden">
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        
+
         {/* Header Section */}
-        <div className="text-center mb-20 relative z-20">
+        <div className="text-center mb-20 relative z-20 backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-12 border border-white/5 shadow-2xl max-w-4xl mx-auto">
           <p className="text-xs md:text-sm font-semibold tracking-[0.35em] uppercase text-[#78d4e8]/70 mb-4">
             Our Expertise
           </p>
-          <h1 
+          <h1
             className="text-4xl md:text-6xl font-bold tracking-tight mb-6"
             style={{
-              background: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+              backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -76,12 +64,12 @@ export default function ServicesPage() {
             <motion.div key={service.slug} variants={cardVariant} className="h-full">
               <Link href={`/services/${service.slug}`} className="block h-full group">
                 <TiltCard className="h-full rounded-2xl overflow-hidden bg-[#0A2E2E] border border-[#1FA89A]/15 group-hover:border-[#1FA89A]/50 transition-all duration-500 shadow-[0_4px_30px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_40px_rgba(31,168,154,0.25)] group-hover:-translate-y-1 relative">
-                  
+
                   {/* Background Image layer */}
                   {service.image && (
-                    <div 
+                    <div
                       className="absolute inset-0 bg-cover bg-center transform group-hover:scale-110 transition-transform duration-1000 ease-out opacity-40 group-hover:opacity-60"
-                      style={{ backgroundImage: `url(${service.image})` }} 
+                      style={{ backgroundImage: `url(${service.image})` }}
                     />
                   )}
                   {/* Dark Gradient Overlay */}

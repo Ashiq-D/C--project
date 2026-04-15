@@ -319,7 +319,7 @@ function TimelineItem({
           <div
             className="w-px flex-1 mt-2"
             style={{
-              background: "linear-gradient(to bottom, rgba(56,197,224,0.25), rgba(56,197,224,0.05))",
+              backgroundImage: "linear-gradient(to bottom, rgba(56,197,224,0.25), rgba(56,197,224,0.05))",
             }}
           />
         )}
@@ -338,7 +338,7 @@ function TimelineItem({
         {/* Hover glow stripe */}
         <div
           className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          style={{ background: "linear-gradient(90deg, transparent, #38c5e0, transparent)" }}
+          style={{ backgroundImage: "linear-gradient(90deg, transparent, #38c5e0, transparent)" }}
         />
 
         {/* Year badge */}
@@ -346,7 +346,7 @@ function TimelineItem({
           <span
             className="text-xs font-semibold tracking-[0.2em] uppercase"
             style={{
-              background: gradient,
+              backgroundImage: gradient,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -395,7 +395,7 @@ export default function AboutUs() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-gradient-to-b from-[#052626] via-[#071A1A] to-[#0A2E2E] py-32"
+      className="relative overflow-hidden py-32 z-10"
     >
       {/* ── Ambient background ── */}
       <FloatingParticles />
@@ -409,7 +409,7 @@ export default function AboutUs() {
           initial={{ opacity: 0, y: -30 }}
           animate={headingInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-24"
+          className="text-center mb-24 max-w-4xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-14 border border-white/5 shadow-2xl"
         >
           <motion.p
             initial={{ opacity: 0, letterSpacing: "0.2em" }}
@@ -424,7 +424,7 @@ export default function AboutUs() {
             className="font-bold leading-tight mb-6"
             style={{
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              background: gradient,
+              backgroundImage: gradient,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -445,7 +445,7 @@ export default function AboutUs() {
             style={{
               width: "100px",
               height: "3px",
-              background: "linear-gradient(90deg, #ffffff, #0ea5c9)",
+              backgroundImage: "linear-gradient(90deg, #ffffff, #0ea5c9)",
             }}
           />
         </motion.div>
@@ -459,11 +459,12 @@ export default function AboutUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
+              className="backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-10 border border-white/5 shadow-2xl"
             >
               <h3
                 className="text-3xl md:text-4xl font-bold mb-8"
                 style={{
-                  background: gradient,
+                  backgroundImage: gradient,
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -511,7 +512,7 @@ export default function AboutUs() {
               }}
             >
               {/* Left accent */}
-              <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-l-2xl" style={{ background: "linear-gradient(to bottom, #38c5e0, #0ea5c9)" }} />
+              <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-l-2xl" style={{ backgroundImage: "linear-gradient(to bottom, #38c5e0, #0ea5c9)" }} />
               {/* Hover glow */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: "inset 0 0 40px rgba(56,197,224,0.06)" }} />
 
@@ -527,7 +528,7 @@ export default function AboutUs() {
                   <span
                     className="text-lg font-bold"
                     style={{
-                      background: gradient,
+                      backgroundImage: gradient,
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                       backgroundClip: "text",
@@ -634,7 +635,7 @@ export default function AboutUs() {
               <span
                 className="text-4xl md:text-5xl font-extrabold"
                 style={{
-                  background: gradient,
+                  backgroundImage: gradient,
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -656,12 +657,12 @@ export default function AboutUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-14"
+            className="text-center mb-14 backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-10 border border-white/5 shadow-2xl max-w-4xl mx-auto"
           >
             <h3
               className="text-2xl md:text-3xl font-bold mb-4"
               style={{
-                background: gradient,
+                backgroundImage: gradient,
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -704,7 +705,7 @@ export default function AboutUs() {
                 {/* Top glow line on hover */}
                 <div
                   className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: "linear-gradient(90deg, transparent, #38c5e0, transparent)" }}
+                  style={{ backgroundImage: "linear-gradient(90deg, transparent, #38c5e0, transparent)" }}
                 />
                 <div className="mb-5 w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: "rgba(56,197,224,0.08)", border: "1px solid rgba(56,197,224,0.15)" }}>
                   {v.icon}
@@ -737,7 +738,7 @@ export default function AboutUs() {
               border: "1px solid rgba(56,197,224,0.15)",
             }}
           >
-            <div className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "linear-gradient(90deg, #38c5e0, transparent)" }} />
+            <div className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ backgroundImage: "linear-gradient(90deg, #38c5e0, transparent)" }} />
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(56,197,224,0.12)", border: "1px solid rgba(56,197,224,0.2)" }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38c5e0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -766,7 +767,7 @@ export default function AboutUs() {
               border: "1px solid rgba(14,165,201,0.15)",
             }}
           >
-            <div className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "linear-gradient(90deg, transparent, #0ea5c9)" }} />
+            <div className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ backgroundImage: "linear-gradient(90deg, transparent, #0ea5c9)" }} />
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(14,165,201,0.12)", border: "1px solid rgba(14,165,201,0.2)" }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0ea5c9" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

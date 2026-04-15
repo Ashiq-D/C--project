@@ -16,19 +16,27 @@ const HeaderMenu = () => {
             key={item.title}
             href={item.href}
             className={`
-              relative px-2 py-1 text-sm font-medium whitespace-nowrap
-              transition-colors duration-300
-              ${isActive ? "text-brand-hover" : "text-white"}
-              hover:text-brand-hover
-              before:absolute before:left-0 before:-bottom-1
-              before:h-0.5 before:w-0
-              before:bg-brand-hover
+              relative px-2 py-1 text-sm font-bold whitespace-nowrap
+              transition-all duration-300 transform hover:-translate-y-0.5
+              before:absolute before:left-0 before:-bottom-1.5
+              before:h-[2px] before:w-0 before:rounded-full
+              before:bg-gradient-to-r before:from-[#9ff6ff] before:to-[#0ea5c9]
               before:transition-all before:duration-300
-              hover:before:w-full
-              ${isActive ? "before:w-full" : ""}
+              hover:before:w-full hover:drop-shadow-[0_0_10px_rgba(56,197,224,0.5)]
+              ${isActive ? "before:w-full drop-shadow-[0_0_8px_rgba(56,197,224,0.4)]" : "opacity-80 hover:opacity-100"}
             `}
           >
-            {item.title}
+            <span style={{
+              backgroundImage: isActive 
+                ? "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)" 
+                : "linear-gradient(135deg, #ffffff 0%, #e0faff 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              display: "inline-block"
+            }}>
+              {item.title}
+            </span>
           </Link>
         );
       })}
