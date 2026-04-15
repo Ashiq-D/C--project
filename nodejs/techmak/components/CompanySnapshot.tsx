@@ -3,42 +3,44 @@
 import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
 
+import { Landmark, Clock, PackageCheck, Building2, Cctv, Cpu, Tag, Waypoints, Network, Flame } from "lucide-react";
+
 /* ── Data from Techmak Technology LTD profile ── */
 const stats = [
-  { value: "2009", label: "Founded", icon: "🏛️" },
-  { value: "15+", label: "Years Experience", icon: "⏱️" },
-  { value: "500+", label: "Projects Delivered", icon: "📦" },
-  { value: "2400", label: "Sq.ft. HQ", icon: "🏢" },
+  { value: "2009", label: "Founded", icon: Landmark },
+  { value: "15+", label: "Years Experience", icon: Clock },
+  { value: "500+", label: "Projects Delivered", icon: PackageCheck },
+  { value: "2400", label: "Sq.ft. HQ", icon: Building2 },
 ];
 
 const coreServices = [
   {
-    icon: "📷",
+    icon: Cctv,
     title: "Industrial Security & Surveillance",
     desc: "Advanced CCTV, IP cameras, perimeter detection and authorized Sensormatic surveillance systems tailored for enterprise and government environments.",
   },
   {
-    icon: "⚙️",
+    icon: Cpu,
     title: "Automation Systems",
     desc: "PLC, HMI, Motor & Servo Drives expertise for precision industrial process automation in manufacturing, utilities and smart buildings.",
   },
   {
-    icon: "🏷️",
+    icon: Tag,
     title: "RFID & EAS Solutions",
     desc: "Electronic Article Surveillance (EAS) and RFID-based asset tracking that dramatically reduces retail shrinkage and improves inventory accuracy.",
   },
   {
-    icon: "🚦",
+    icon: Waypoints,
     title: "Advanced Traffic Solutions",
     desc: "Smart traffic management and transportation intelligence systems engineered for Bangladesh's growing urban infrastructure.",
   },
   {
-    icon: "🌐",
+    icon: Network,
     title: "Networking & Communication",
     desc: "Structured cabling, corporate and industrial networking infrastructure designed for reliability, scalability and high throughput.",
   },
   {
-    icon: "🔥",
+    icon: Flame,
     title: "Safety & Fire Detection",
     desc: "Comprehensive industrial safety systems, fire detection and suppression solutions compliant with international standards.",
   },
@@ -65,7 +67,7 @@ const cardVariants: Variants = {
   }),
 };
 
-function CounterStat({ value, label, icon }: { value: string; label: string; icon: string }) {
+function CounterStat({ value, label, icon: Icon }: { value: string; label: string; icon: any }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
   return (
@@ -76,7 +78,9 @@ function CounterStat({ value, label, icon }: { value: string; label: string; ico
       transition={{ duration: 0.7, ease: "easeOut" }}
       className="flex flex-col items-center gap-2 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-[#38c5e0]/40 hover:bg-white/10 transition-all duration-500"
     >
-      <span className="text-3xl">{icon}</span>
+      <div className="text-[#38c5e0] mb-2">
+        <Icon size={32} strokeWidth={1.5} />
+      </div>
       <span
         className="text-4xl md:text-5xl font-extrabold"
         style={{
@@ -183,7 +187,9 @@ export default function CompanySnapshot() {
                 className="group p-7 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-sm
                            hover:border-[#38c5e0]/40 hover:bg-[#38c5e0]/[0.06] transition-all duration-500 cursor-default"
               >
-                <span className="text-3xl mb-4 block">{service.icon}</span>
+                <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-[#38c5e0] mb-5 group-hover:bg-[#38c5e0]/10 group-hover:border-[#38c5e0]/30 transition-colors duration-500 shadow-inner overflow-hidden">
+                  <service.icon size={26} strokeWidth={1.5} />
+                </div>
                 <h4 className="text-white font-semibold text-base mb-2 group-hover:text-[#9ff6ff] transition-colors">
                   {service.title}
                 </h4>
