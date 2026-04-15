@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import CinematicScroll from "@/components/CinematicScroll";
 import Hero3D from "@/components/Hero3D";
+import CompanySnapshot from "@/components/CompanySnapshot";
+import TechPartners from "@/components/TechPartners";
 
 export default function Home() {
   const textRef = useRef<HTMLDivElement>(null);
@@ -88,6 +90,16 @@ export default function Home() {
       {/* CINEMATIC SERVICES */}
       <div className="relative z-20">
         <CinematicScroll />
+      </div>
+
+      {/* COMPANY SNAPSHOT — Techmak Technology LTD details */}
+      <div className="relative z-20">
+        <CompanySnapshot />
+      </div>
+
+      {/* TECHNOLOGY PARTNERS CAROUSEL */}
+      <div className="relative z-20">
+        <TechPartners />
       </div>
 
     </main>
