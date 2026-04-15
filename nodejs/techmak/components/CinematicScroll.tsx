@@ -83,7 +83,7 @@ export default function CinematicScroll() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-gradient-to-b from-[#071A1A] via-[#0A2E2E] to-[#052626] py-40 overflow-hidden"
+      className="relative py-40 overflow-hidden z-10"
       style={{
         perspective: "2000px",
         transformStyle: "preserve-3d",

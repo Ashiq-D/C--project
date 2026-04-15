@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="flex flex-col min-h-screen font-poppins antialiased bg-[#052626] text-white">
+    <html lang="en" suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true} className="flex flex-col min-h-screen font-poppins antialiased bg-[#052626] text-white">
         
         {/* Global 3D & Particle Background */}
         <div className="fixed inset-0 pointer-events-none z-0 bg-gradient-to-br from-[#071A1A] via-[#0A2E2E] to-[#052626]">

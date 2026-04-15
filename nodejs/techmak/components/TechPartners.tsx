@@ -188,10 +188,7 @@ export default function TechPartners() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-32 overflow-hidden"
-      style={{
-        backgroundImage: "linear-gradient(180deg, #0A2E2E 0%, #071A1A 50%, #052626 100%)",
-      }}
+      className="relative py-32 overflow-hidden z-10"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
