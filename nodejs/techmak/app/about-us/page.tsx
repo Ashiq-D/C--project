@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="bg-[#040a08] text-white overflow-x-hidden pt-20">
+    <main className="bg-gradient-to-br from-[#071A1A] via-[#0A2E2E] to-[#052626] text-white overflow-x-hidden pt-20">
       <AboutUs />
     </main>
   );
