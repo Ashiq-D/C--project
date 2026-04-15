@@ -9,38 +9,13 @@ import TiltCard from "./TiltCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const services = [
-  { title: "CCTV & IP Surveillance Systems", slug: "cctv", image: "/images/cctv.jpg" },
-  { title: "Under Vehicle Surveillance Systems (UVSS)", slug: "uvss", image: "/images/uvss.jpeg" },
-  { title: "X-ray Baggage Scanners & Screening", slug: "xray", image: "/images/xray.jpg" },
-  { title: "Archway & Handheld Metal Detectors", slug: "metal-detectors", image: "/images/metal.png" },
-  { title: "Access Control & Time Attendance Systems", slug: "access-control", image: "/images/access.jpg" },
-  { title: "Building & Industrial Automation", slug: "automation", image: "/images/automation.jpg" },
-  { title: "EAS Anti-Theft Systems for Retail", slug: "eas", image: "/images/retail.jpg" },
-  { title: "Advanced Traffic & Transportation Solutions", slug: "traffic", image: "/images/traffic.png" },
-  { title: "Structured Networking & Communication Systems", slug: "networking", image: "/images/network.jpg" },
-];
+import { services } from "@/lib/servicesData";
 
 export default function CinematicScroll() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
-
-    // 🔥 LENIS SETUP
-    const lenis = new Lenis({
-      lerp: 0.07,
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.lagSmoothing(0);
 
     // 🔥 GSAP CONTEXT
     const ctx = gsap.context(() => {
@@ -102,7 +77,6 @@ export default function CinematicScroll() {
 
     return () => {
       ctx.revert();
-      lenis.destroy();
     };
   }, []);
 
@@ -166,10 +140,16 @@ export default function CinematicScroll() {
                         className="absolute inset-0 w-full h-full object-cover"
                       />
 
-                      <div className="absolute inset-0 bg-black/40"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#071A1A]/90 via-[#071A1A]/20 to-transparent"></div>
 
-                      <div className="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold text-center px-6" style={{ transform: "translateZ(30px)" }}>
-                        {leftService.title}
+                      <div className="absolute inset-0 flex flex-col justify-end p-8" style={{ transform: "translateZ(40px)" }}>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#1FA89A]/30 bg-[#1FA89A]/10 text-[#78d4e8] text-[0.6rem] font-bold tracking-widest uppercase mb-3 backdrop-blur-md w-max">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#38c5e0] animate-pulse" />
+                          Core System
+                        </div>
+                        <h3 className="text-white text-2xl font-bold leading-snug drop-shadow-lg tracking-wide">
+                          {leftService.title}
+                        </h3>
                       </div>
                     </TiltCard>
                   </Link>
@@ -177,7 +157,7 @@ export default function CinematicScroll() {
 
                 {rightService && (
                   <Link
-                    href={`/services/${leftService.slug}`}
+                    href={`/services/${rightService.slug}`}
                     className="card card-right
                     w-[45vw] h-[28vw] max-w-[700px] max-h-[520px]
                     rounded-3xl flex items-center justify-center
@@ -191,10 +171,16 @@ export default function CinematicScroll() {
                         className="absolute inset-0 w-full h-full object-cover"
                       />
 
-                      <div className="absolute inset-0 bg-black/40"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#071A1A]/90 via-[#071A1A]/20 to-transparent"></div>
 
-                      <div className="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold text-center px-6" style={{ transform: "translateZ(30px)" }}>
-                        {rightService.title}
+                      <div className="absolute inset-0 flex flex-col justify-end p-8" style={{ transform: "translateZ(40px)" }}>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#1FA89A]/30 bg-[#1FA89A]/10 text-[#78d4e8] text-[0.6rem] font-bold tracking-widest uppercase mb-3 backdrop-blur-md w-max">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#38c5e0] animate-pulse" />
+                          Core System
+                        </div>
+                        <h3 className="text-white text-2xl font-bold leading-snug drop-shadow-lg tracking-wide">
+                          {rightService.title}
+                        </h3>
                       </div>
                     </TiltCard>
                   </Link>
