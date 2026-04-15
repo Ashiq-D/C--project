@@ -4,8 +4,6 @@ import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 import { services } from "@/lib/servicesData";
 import TiltCard from "@/components/TiltCard";
-import Hero3D from "@/components/Hero3D";
-import AnimatedParticles from "@/components/AnimatedParticles";
 
 const container: Variants = {
   hidden: {},
@@ -28,18 +26,8 @@ const cardVariant: Variants = {
 
 export default function ServicesPage() {
   return (
-    <main className="relative min-h-screen bg-gradient-to-br from-[#071A1A] via-[#0A2E2E] to-[#052626] text-white pt-32 pb-24 overflow-hidden">
+    <main className="relative min-h-screen text-white pt-32 pb-24 overflow-hidden">
       
-      {/* 3D Arc Particle Background & Aesthetic Elements */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-[#1FA89A]/10 blur-[150px] rounded-full mix-blend-screen opacity-50 animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[#0ea5c9]/10 blur-[130px] rounded-full mix-blend-screen opacity-50" />
-        <div className="opacity-[0.25]">
-          <Hero3D />
-        </div>
-        <AnimatedParticles />
-      </div>
-
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         
         {/* Header Section */}

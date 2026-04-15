@@ -395,7 +395,7 @@ export default function AboutUs() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-gradient-to-b from-[#052626] via-[#071A1A] to-[#0A2E2E] py-32"
+      className="relative overflow-hidden py-32 z-10"
     >
       {/* ── Ambient background ── */}
       <FloatingParticles />

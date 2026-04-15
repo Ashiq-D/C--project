@@ -215,7 +215,7 @@ export default function Brands() {
   const headingInView = useInView(headingRef, { once: true });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-gradient-to-b from-[#052626] via-[#071A1A] to-[#0A2E2E] py-32 min-h-screen">
+    <section ref={sectionRef} className="relative overflow-hidden py-32 min-h-screen z-10">
       {/* ── Ambient background ── */}
       <FloatingParticles />
       <div className="pointer-events-none absolute -top-40 left-1/4 w-[600px] h-[600px] rounded-full bg-[#38c5e0]/[0.05] blur-[150px]" />
