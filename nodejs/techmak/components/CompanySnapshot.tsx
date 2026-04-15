@@ -160,7 +160,13 @@ export default function CompanySnapshot() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12 max-w-xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl md:rounded-full p-6 border border-white/5 shadow-2xl"
           >
-            <h3 className="text-2xl md:text-3xl font-bold text-white/90">
+            <h3 className="text-2xl md:text-3xl font-bold"
+              style={{
+                backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}>
               What We Do
             </h3>
           </motion.div>
@@ -196,7 +202,13 @@ export default function CompanySnapshot() {
           className="rounded-3xl bg-white/[0.04] border border-white/10 backdrop-blur-sm p-10"
         >
           <div className="text-center mb-10 max-w-2xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl md:rounded-full p-6 border border-white/5 shadow-2xl">
-            <h3 className="text-xl md:text-2xl font-bold text-white/90">
+            <h3 className="text-xl md:text-2xl font-bold"
+              style={{
+                backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}>
               Trusted by Bangladesh's Top Institutions
             </h3>
           </div>
