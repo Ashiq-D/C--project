@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
-import CustomCursor from "@/components/CustomCursor";
+import CursorWrapper from "@/components/CursorWrapper";
 
 export const metadata: Metadata = {
   title: {
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen font-poppins antialiased">
-        <CustomCursor />
+        <CursorWrapper />
         <SmoothScroll>
           <Header />
 
