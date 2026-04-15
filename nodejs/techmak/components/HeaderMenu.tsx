@@ -25,16 +25,18 @@ const HeaderMenu = () => {
               hover:before:w-full hover:drop-shadow-[0_0_10px_rgba(56,197,224,0.5)]
               ${isActive ? "before:w-full drop-shadow-[0_0_8px_rgba(56,197,224,0.4)]" : "opacity-80 hover:opacity-100"}
             `}
-            style={{
+          >
+            <span style={{
               background: isActive 
                 ? "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)" 
                 : "linear-gradient(135deg, #ffffff 0%, #e0faff 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-            }}
-          >
-            {item.title}
+              display: "inline-block"
+            }}>
+              {item.title}
+            </span>
           </Link>
         );
       })}
