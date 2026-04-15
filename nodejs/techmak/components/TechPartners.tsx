@@ -3,12 +3,14 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
+import { Shield, Lock, Building2, Flame, Cctv, Eye, KeyRound, Cpu, Briefcase, ThermometerSnowflake } from "lucide-react";
+
 /* ── Technology Partners data ── */
 const partners = [
   {
     name: "Sensormatic",
     category: "EAS & Loss Prevention",
-    initials: "SM",
+    icon: Shield,
     color: "#e63946",
     bg: "rgba(230,57,70,0.12)",
     border: "rgba(230,57,70,0.35)",
@@ -17,7 +19,7 @@ const partners = [
   {
     name: "Checkpoint Systems",
     category: "Retail Security",
-    initials: "CP",
+    icon: Lock,
     color: "#2196F3",
     bg: "rgba(33,150,243,0.12)",
     border: "rgba(33,150,243,0.35)",
@@ -26,7 +28,7 @@ const partners = [
   {
     name: "Johnson Controls",
     category: "Building Automation",
-    initials: "JC",
+    icon: Building2,
     color: "#ff6b35",
     bg: "rgba(255,107,53,0.12)",
     border: "rgba(255,107,53,0.35)",
@@ -35,7 +37,7 @@ const partners = [
   {
     name: "Honeywell",
     category: "Industrial Safety",
-    initials: "HW",
+    icon: Flame,
     color: "#e74c3c",
     bg: "rgba(231,76,60,0.12)",
     border: "rgba(231,76,60,0.35)",
@@ -44,7 +46,7 @@ const partners = [
   {
     name: "Axis Communications",
     category: "IP Surveillance",
-    initials: "AX",
+    icon: Cctv,
     color: "#009688",
     bg: "rgba(0,150,136,0.12)",
     border: "rgba(0,150,136,0.35)",
@@ -53,7 +55,7 @@ const partners = [
   {
     name: "Hikvision",
     category: "CCTV & AI",
-    initials: "HK",
+    icon: Eye,
     color: "#c0392b",
     bg: "rgba(192,57,43,0.12)",
     border: "rgba(192,57,43,0.35)",
@@ -62,7 +64,7 @@ const partners = [
   {
     name: "Bosch Security",
     category: "Integrated Solutions",
-    initials: "BS",
+    icon: KeyRound,
     color: "#e74c3c",
     bg: "rgba(231,76,60,0.12)",
     border: "rgba(231,76,60,0.35)",
@@ -71,7 +73,7 @@ const partners = [
   {
     name: "Neo Technology",
     category: "Technology Partner",
-    initials: "NT",
+    icon: Cpu,
     color: "#38c5e0",
     bg: "rgba(56,197,224,0.12)",
     border: "rgba(56,197,224,0.35)",
@@ -80,7 +82,7 @@ const partners = [
   {
     name: "Faith International",
     category: "Business Partner",
-    initials: "FI",
+    icon: Briefcase,
     color: "#9b59b6",
     bg: "rgba(155,89,182,0.12)",
     border: "rgba(155,89,182,0.35)",
@@ -89,7 +91,7 @@ const partners = [
   {
     name: "Omnia",
     category: "Smart HVAC",
-    initials: "OM",
+    icon: ThermometerSnowflake,
     color: "#27ae60",
     bg: "rgba(39,174,96,0.12)",
     border: "rgba(39,174,96,0.35)",
@@ -118,15 +120,15 @@ function PartnerCard({ partner, active, onClick }: PartnerCardProps) {
     >
       {/* Logo badge */}
       <div
-        className="w-14 h-14 rounded-xl mb-4 flex items-center justify-center font-bold text-lg"
+        className="w-12 h-12 rounded-full mb-4 flex items-center justify-center backdrop-blur-md"
         style={{
-          background: partner.bg,
-          border: `1.5px solid ${partner.border}`,
+          background: "rgba(255, 255, 255, 0.05)",
+          border: "1px solid rgba(255, 255, 255, 0.1)",
           color: partner.color,
-          letterSpacing: "0.05em",
+          boxShadow: `0 4px 20px ${partner.color}20`,
         }}
       >
-        {partner.initials}
+        <partner.icon size={22} strokeWidth={2} />
       </div>
 
       <p className="font-semibold text-white text-sm mb-1 leading-tight">{partner.name}</p>
@@ -253,14 +255,15 @@ export default function TechPartners() {
             }}
           >
             <div
-              className="w-20 h-20 rounded-2xl mx-auto mb-5 flex items-center justify-center text-2xl font-extrabold"
+              className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center backdrop-blur-md"
               style={{
-                background: `${activePartner.color}20`,
-                border: `2px solid ${activePartner.border}`,
+                background: "rgba(255, 255, 255, 0.05)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
                 color: activePartner.color,
+                boxShadow: `0 8px 32px ${activePartner.color}20, inset 0 0 10px ${activePartner.color}10`,
               }}
             >
-              {activePartner.initials}
+              <activePartner.icon size={36} strokeWidth={1.5} />
             </div>
             <h3 className="text-white font-bold text-2xl mb-1">{activePartner.name}</h3>
             <p className="text-sm font-semibold mb-3" style={{ color: activePartner.color }}>
@@ -271,18 +274,17 @@ export default function TechPartners() {
         </motion.div>
 
         {/* ── Sliding carousel ── */}
-        <div className="relative">
-          {/* Fade masks */}
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-20 z-10"
-            style={{ backgroundImage: "linear-gradient(to right, #071A1A, transparent)" }} />
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-20 z-10"
-            style={{ backgroundImage: "linear-gradient(to left, #071A1A, transparent)" }} />
-
+        <div className="relative mt-4">
           {/* Scrollable track */}
           <div
             ref={trackRef}
-            className="flex gap-5 overflow-x-auto pb-4 scrollbar-hide"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            className="flex gap-5 overflow-x-auto pb-6 scrollbar-hide py-2 px-10"
+            style={{ 
+              scrollbarWidth: "none", 
+              msOverflowStyle: "none",
+              maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)"
+            }}
           >
             {partners.map((partner, i) => (
               <div key={partner.name} className="partner-card">
