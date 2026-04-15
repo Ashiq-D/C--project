@@ -46,8 +46,8 @@ export default function Home() {
           </p>
 
           {/* Large gradient heading */}
-          <h1 className="hero-text font-bold leading-[1.1] tracking-tight"
-            style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)", animation: "fadeInUp 1s ease-out 0.2s both" }}>
+          <h1 className="hero-text font-bold leading-[1.1] tracking-tight whitespace-nowrap"
+            style={{ fontSize: "clamp(1.8rem, 5.5vw, 6rem)", animation: "fadeInUp 1s ease-out 0.2s both" }}>
             <span style={{
               backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
               WebkitBackgroundClip: "text",
