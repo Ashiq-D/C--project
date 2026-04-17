@@ -459,7 +459,7 @@ export default function AboutUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-10 border border-white/5 shadow-2xl"
+              className="text-left"
             >
               <h3
                 className="text-3xl md:text-4xl font-bold mb-8"
@@ -657,7 +657,7 @@ export default function AboutUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-14 backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-10 border border-white/5 shadow-2xl max-w-4xl mx-auto"
+            className="text-center mb-14 max-w-3xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl md:rounded-full p-6 md:p-8 border border-white/5 shadow-2xl"
           >
             <h3
               className="text-2xl md:text-3xl font-bold mb-4"

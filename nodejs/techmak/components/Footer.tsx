@@ -90,22 +90,22 @@ const Footer = () => {
 
             {/* Social Icons */}
             <div className="flex gap-5 mt-6 text-brand-accent">
-              <a href="#" className="flip-icon-container hover:text-brand-hover transition-colors duration-300">
+              <a href="#" aria-label="Facebook" className="flip-icon-container hover:text-brand-hover transition-colors duration-300">
                 <div className="flip-icon text-brand-accent">
                   <Facebook className="w-6 h-6" />
                 </div>
               </a>
-              <a href="#" className="flip-icon-container hover:text-brand-hover transition-colors duration-300">
+              <a href="#" aria-label="LinkedIn" className="flip-icon-container hover:text-brand-hover transition-colors duration-300">
                 <div className="flip-icon text-brand-accent">
                   <Linkedin className="w-6 h-6" />
                 </div>
               </a>
-              <a href="#" className="flip-icon-container hover:text-brand-hover transition-colors duration-300">
+              <a href="#" aria-label="YouTube" className="flip-icon-container hover:text-brand-hover transition-colors duration-300">
                 <div className="flip-icon text-brand-accent">
                   <Youtube className="w-6 h-6" />
                 </div>
               </a>
-              <a href="#" className="flip-icon-container hover:text-brand-hover transition-colors duration-300">
+              <a href="#" aria-label="Instagram" className="flip-icon-container hover:text-brand-hover transition-colors duration-300">
                 <div className="flip-icon text-brand-accent">
                   <Instagram className="w-6 h-6" />
                 </div>

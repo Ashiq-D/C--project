@@ -90,7 +90,7 @@ export default function CinematicScroll() {
       }}
     >
       <div className="max-w-7xl mx-auto px-10">
-        <div className="text-center mb-32 max-w-3xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 border border-white/5 shadow-2xl">
+        <div className="text-center mb-32 max-w-3xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-12 border border-white/5 shadow-2xl">
           <h2
             className="text-4xl md:text-5xl font-bold mb-6 select-none"
             style={{
