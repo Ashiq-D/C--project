@@ -124,15 +124,15 @@ export default function CinematicScroll() {
             return (
               <div
                 key={rowIndex}
-                className="row flex justify-center gap-[6vw] relative"
+                className="row flex flex-col md:flex-row items-center justify-center gap-6 md:gap-[6vw] relative"
               >
                 {leftService && (
                   <Link
                     href={`/services/${leftService.slug}`}
                     className="card card-left
-                    w-[45vw] h-[28vw] max-w-[700px] max-h-[520px]
+                    w-[90vw] md:w-[45vw] h-[60vw] md:h-[28vw] max-w-[700px] max-h-[520px]
                     rounded-3xl flex items-center justify-center
-                    text-white text-[1.2vw] min-text-lg font-semibold text-center
+                    text-white text-xl md:text-[1.2vw] font-semibold text-center
                     shadow-2xl will-change-transform"
                     style={{ transformStyle: "preserve-3d" }}
                   >
@@ -161,9 +161,9 @@ export default function CinematicScroll() {
                   <Link
                     href={`/services/${rightService.slug}`}
                     className="card card-right
-                    w-[45vw] h-[28vw] max-w-[700px] max-h-[520px]
+                    w-[90vw] md:w-[45vw] h-[60vw] md:h-[28vw] max-w-[700px] max-h-[520px]
                     rounded-3xl flex items-center justify-center
-                    text-white text-xl font-semibold text-center
+                    text-white text-xl md:text-[1.2vw] font-semibold text-center
                     shadow-2xl will-change-transform"
                     style={{ transformStyle: "preserve-3d" }}
                   >
