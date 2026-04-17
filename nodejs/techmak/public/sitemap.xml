@@ -1,33 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://techmakai.com</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://techmakbd.com</loc>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://techmakai.com/about-us</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://techmakbd.com/about-us</loc>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://techmakai.com/services</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://techmakbd.com/services</loc>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://techmakai.com/brands</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://techmakbd.com/brands</loc>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://techmakai.com/connect</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://techmakbd.com/connect</loc>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://techmakbd.com/services/surveillance-system</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://techmakbd.com/services/ai-solutions</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://techmakbd.com/services/automation-systems</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://techmakbd.com/services/safety-solutions</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://techmakbd.com/services/advanced-traffic-solution</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://techmakbd.com/services/networking-solution</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://techmakbd.com/services/industrial-power-system</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
