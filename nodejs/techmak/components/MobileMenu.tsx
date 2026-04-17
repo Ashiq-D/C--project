@@ -87,7 +87,7 @@ const MobileMenu = () => {
               </div>
 
               {/* Nav Links */}
-              <div className="flex-1 px-8 py-8 space-y-2 overflow-y-auto">
+              <div className="flex-1 px-6 py-6 pb-20 flex flex-col gap-3 overflow-y-auto">
                 {headerData.map((item, i) => {
                   const isActive = pathname === item.href;
                   return (
@@ -101,7 +101,7 @@ const MobileMenu = () => {
                         href={item.href}
                         onClick={() => setIsOpen(false)}
                         className={`
-                          group flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300
+                          group flex items-center gap-4 px-5 py-[14px] rounded-2xl transition-all duration-300 w-full shrink-0
                           ${isActive
                             ? "bg-[#38c5e0]/10 border border-[#38c5e0]/20"
                             : "border border-transparent hover:bg-white/[0.03] hover:border-white/5"
@@ -110,7 +110,7 @@ const MobileMenu = () => {
                       >
                         <span
                           className={`
-                            text-lg font-semibold transition-colors duration-300
+                            text-lg font-semibold transition-colors duration-300 py-1
                             ${isActive ? "text-[#9ff6ff]" : "text-white/80 group-hover:text-white"}
                           `}
                         >
