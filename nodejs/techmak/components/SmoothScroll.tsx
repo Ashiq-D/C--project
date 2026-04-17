@@ -39,7 +39,7 @@ export default function SmoothScroll({
       ctx.add(() => {
         // Select heading and text elements, excluding ones that already have custom GSAP/Observer animations
         const textElements = gsap.utils.toArray<HTMLElement>(
-          "h1:not(.hero-text):not(.au-reveal), h2:not(.hero-text):not(.au-reveal), h3:not(.hero-text):not(.au-reveal), p:not(.hero-text):not(.au-reveal)"
+          "h1:not(.hero-text):not(.au-reveal):not(nav *), h2:not(.hero-text):not(.au-reveal):not(nav *), h3:not(.hero-text):not(.au-reveal):not(nav *), p:not(.hero-text):not(.au-reveal):not(nav *):not(header *)"
         );
 
         textElements.forEach((el) => {
