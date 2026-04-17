@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const Logo = ({ className }: { className?: string }) => {
@@ -6,23 +7,25 @@ const Logo = ({ className }: { className?: string }) => {
     <Link
       href="/"
       className={cn(
-        "inline-flex items-center gap-3 group",
+        "inline-flex items-center py-1 group",
         className
       )}
     >
-      {/* Icon Mark */}
-      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-accent to-emerald-400 flex items-center justify-center border border-[rgba(31,168,154,0.4)] backdrop-blur-md shadow-[0_0_15px_rgba(31,168,154,0.3)] group-hover:shadow-[0_0_30px_rgba(31,168,154,0.6)] group-hover:scale-110 transition-all duration-500 animate-glow">
-        <span className="text-sm font-black tracking-wider" style={{ color: "#050B0B" }}>TM</span>
-      </div>
-
-      {/* Text */}
-      <div className="flex flex-col leading-none">
-        <span className="text-lg font-bold tracking-[0.15em] uppercase" style={{ color: "#ffffff" }}>
-          TECHMAK
-        </span>
-        <span className="text-[0.55rem] font-normal tracking-[0.25em] uppercase mt-[2px]" style={{ color: "#1FA89A" }}>
-          Technology Ltd.
-        </span>
+      {/* Render the provided vertical logo. Using advanced CSS mix-blend physics to strip the white background on the fly! */}
+      <div className="relative w-[130px] h-[55px] md:w-[150px] md:h-[65px] transition-transform duration-500 group-hover:scale-[1.03]">
+        <Image
+          src="/images/techmak-logo-vertical.png"
+          alt="Techmak Technology Logo"
+          fill
+          priority
+          sizes="(max-width: 768px) 130px, 150px"
+          className="object-contain"
+          style={{
+            // CSS Magic: Invert white to black (transparent in screen mode). Invert blue to yellow, then hue-shift yellow to cyberpunk cyan.
+            filter: "invert(1) hue-rotate(180deg) brightness(1.5)",
+            mixBlendMode: "screen",
+          }}
+        />
       </div>
     </Link>
   );

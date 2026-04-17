@@ -67,7 +67,7 @@ const clientCategories = [
     items: [
       { name: "Cats Eye", logo: "/images/catsEye.jpg" },
       { name: "Boishakhi Television (Boishakhi TV)", logo: "/images/BoishakTv.jpg" },
-      { name: "ARTISTI", logo: "/images/Artisan.jpg" },
+      { name: "ARTISAN", logo: "/images/Artisan.jpg" },
       { name: "Bashundhara City", logo: "/images/BasundharaCity.jpg" },
     ],
   },
