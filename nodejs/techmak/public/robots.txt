@@ -1,0 +1,7 @@
+# Techmak Technology Ltd. — Robots.txt
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+Sitemap: https://techmakai.com/sitemap.xml

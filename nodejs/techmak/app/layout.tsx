@@ -6,7 +6,6 @@ import SmoothScroll from "@/components/SmoothScroll";
 import CursorWrapper from "@/components/CursorWrapper";
 
 import Hero3D from "@/components/Hero3D";
-import AnimatedParticles from "@/components/AnimatedParticles";
 
 export const metadata: Metadata = {
   title: {
@@ -14,6 +13,44 @@ export const metadata: Metadata = {
     default: "Techmak Technology Ltd.",
   },
   description: "Techmak Technology Ltd. — A leading provider of surveillance, security, automation, and networking solutions.",
+  metadataBase: new URL("https://techmakai.com"),
+  openGraph: {
+    siteName: "Techmak Technology Ltd.",
+    locale: "en_BD",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+// JSON-LD Organization Schema
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Techmak Technology Ltd.",
+  url: "https://techmakai.com",
+  logo: "https://techmakai.com/logo.png",
+  description:
+    "Bangladesh's most trusted partner for intelligent security infrastructure — CCTV surveillance, access control, networking, and automation solutions.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "4th floor, 36/E, Road-2, Block-D, Bashundhara R/A",
+    addressLocality: "Dhaka",
+    addressCountry: "BD",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+880-1611-224433",
+    email: "info@techmakai.com",
+    contactType: "customer service",
+    availableLanguage: ["English", "Bengali"],
+  },
+  sameAs: [],
 };
 
 export default function RootLayout({
@@ -22,30 +59,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
-      <body suppressHydrationWarning={true} className="flex flex-col min-h-screen font-poppins antialiased bg-[#052626] text-white">
-
-        {/* Global 3D & Particle Background */}
-        <div className="fixed inset-0 pointer-events-none z-0 bg-gradient-to-br from-[#071A1A] via-[#0A2E2E] to-[#052626]">
-          <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-[#1FA89A]/10 blur-[150px] rounded-full mix-blend-screen opacity-50 animate-pulse" />
-          <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[#0ea5c9]/10 blur-[130px] rounded-full mix-blend-screen opacity-50" />
-          <div className="absolute inset-0">
-            <Hero3D />
-          </div>
-          <AnimatedParticles />
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body className="flex flex-col min-h-screen font-poppins antialiased bg-gradient-to-br from-[#071A1A] via-[#0A2E2E] to-[#052626] text-white" suppressHydrationWarning>
+        {/* Global 3D Background */}
+        <div className="fixed inset-0 pointer-events-none z-0 opacity-80">
+          <Hero3D />
         </div>
 
         <div className="relative z-10 flex flex-col min-h-screen">
           <CursorWrapper />
-          <SmoothScroll>
-            <Header />
+        <SmoothScroll>
+          <Header />
 
-            <main className="flex-1 flex flex-col">
-              {children}
-            </main>
+          <main className="flex-1 flex flex-col">
+            {children}
+          </main>
 
-            <Footer />
-          </SmoothScroll>
+          <Footer />
+        </SmoothScroll>
         </div>
       </body>
     </html>

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
+import Image from "next/image";
 
 import { Landmark, Clock, PackageCheck, Building2, Cctv, Cpu, Tag, Waypoints, Network, Flame } from "lucide-react";
 
@@ -46,15 +47,30 @@ const coreServices = [
   },
 ];
 
-const clients = [
-  "Bangladesh Army",
-  "Bangladesh Police",
-  "BPDB",
-  "Border Guard Bangladesh",
-  "Bashundhara City",
-  "Boishakhi TV",
-  "Artisti",
-  "Cooper's Bakery",
+const clientCategories = [
+  {
+    category: "Government / Defense / Public Organizations",
+    items: [
+      { name: "Bangladesh Navy", logo: "/images/bdNavy.jpg" },
+      { name: "Bangladesh Army", logo: "/images/Army.jpg" },
+      { name: "Bangladesh Air Force", logo: "/images/Biman.jpg" },
+      { name: "Border Guard Bangladesh (BGB)", logo: "/images/BGB.jpg" },
+      { name: "Bangladesh Ansar & Village Defence Party (Ansar VDP)", logo: "/images/anser.jpg" },
+      { name: "Bangladesh Police", logo: "/images/police.jpg" },
+      { name: "Bangladesh Fire Service & Civil Defence", logo: "/images/fireservice.jpg" },
+      { name: "Dhaka South City Corporation", logo: "/images/SouthCity.jpg" },
+      { name: "Bangladesh Railway", logo: "/images/Railway.jpg" },
+    ],
+  },
+  {
+    category: "Private Companies / Media / Brands",
+    items: [
+      { name: "Cats Eye", logo: "/images/catsEye.jpg" },
+      { name: "Boishakhi Television (Boishakhi TV)", logo: "/images/BoishakTv.jpg" },
+      { name: "ARTISTI", logo: "/images/Artisan.jpg" },
+      { name: "Bashundhara City", logo: "/images/BasundharaCity.jpg" },
+    ],
+  },
 ];
 
 const cardVariants: Variants = {
@@ -115,7 +131,7 @@ export default function CompanySnapshot() {
           initial={{ opacity: 0, y: -30 }}
           animate={headingInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20 max-w-4xl mx-auto backdrop-blur-3xl bg-black/60 rounded-3xl p-8 border border-white/5 shadow-2xl"
+          className="text-center mb-20 max-w-4xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-14 border border-white/5 shadow-2xl"
         >
           <p className="text-xs md:text-sm font-semibold tracking-[0.35em] uppercase text-[#78d4e8]/70 mb-4">
             Established 2009 · Dhaka, Bangladesh
@@ -162,7 +178,7 @@ export default function CompanySnapshot() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12 max-w-xl mx-auto backdrop-blur-3xl bg-black/60 rounded-3xl md:rounded-full p-6 border border-white/5 shadow-2xl"
+            className="text-center mb-12 max-w-xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl md:rounded-full p-6 md:p-8 border border-white/5 shadow-2xl"
           >
             <h3 className="text-2xl md:text-3xl font-bold"
               style={{
@@ -184,7 +200,7 @@ export default function CompanySnapshot() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.03, y: -4 }}
-                className="group p-7 rounded-2xl bg-black/50 border border-white/10 backdrop-blur-2xl
+                className="group p-7 rounded-2xl bg-[#052626]/40 border border-white/5 backdrop-blur-md shadow-2xl
                            hover:border-[#38c5e0]/40 hover:bg-[#38c5e0]/[0.06] transition-all duration-500 cursor-default"
               >
                 <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-[#38c5e0] mb-5 group-hover:bg-[#38c5e0]/10 group-hover:border-[#38c5e0]/30 transition-colors duration-500 shadow-inner overflow-hidden">
@@ -205,9 +221,9 @@ export default function CompanySnapshot() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="rounded-3xl bg-black/50 border border-white/10 backdrop-blur-2xl p-10"
+          className="rounded-3xl bg-[#052626]/40 border border-white/5 backdrop-blur-md shadow-2xl p-10"
         >
-          <div className="text-center mb-10 max-w-2xl mx-auto backdrop-blur-3xl bg-black/60 rounded-3xl md:rounded-full p-6 border border-white/5 shadow-2xl">
+          <div className="text-center mb-10 max-w-2xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl md:rounded-full p-6 md:p-8 border border-white/5 shadow-2xl">
             <h3 className="text-xl md:text-2xl font-bold"
               style={{
                 backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
@@ -218,22 +234,68 @@ export default function CompanySnapshot() {
               Trusted by Bangladesh's Top Institutions
             </h3>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
-            {clients.map((client, i) => (
-              <motion.span
-                key={client}
-                custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="px-5 py-2.5 rounded-full text-sm font-medium text-[#9ff6ff]
-                           bg-[#38c5e0]/10 border border-[#38c5e0]/25
-                           hover:bg-[#38c5e0]/20 hover:border-[#38c5e0]/50
-                           transition-all duration-300 cursor-default"
-              >
-                {client}
-              </motion.span>
+          <div className="flex flex-col gap-12">
+            {clientCategories.map((group, groupIndex) => (
+              <div key={group.category}>
+                <div className="mb-8 flex flex-col items-center">
+                  <h4 className="text-xl font-bold tracking-widest uppercase mb-3" style={{ color: "#9ff6ff" }}>
+                    {group.category.split(' / ')[0]}
+                  </h4>
+                  <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#38c5e0] to-transparent rounded-full" />
+                </div>
+                <div className="relative overflow-hidden py-4 -mx-6 px-6 sm:-mx-10 sm:px-10">
+                  {/* Smooth edge fade out */}
+                  <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#071A1A] to-transparent z-10 pointer-events-none" />
+                  <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#071A1A] to-transparent z-10 pointer-events-none" />
+                  
+                  <motion.div
+                    className="flex gap-4 sm:gap-6 w-max"
+                    animate={{
+                      x: groupIndex === 0 ? ["-50%", "0%"] : ["0%", "-50%"]
+                    }}
+                    transition={{
+                      duration: 40,
+                      ease: "linear",
+                      repeat: Infinity,
+                    }}
+                  >
+                    {[...group.items, ...group.items, ...group.items].map((client, i) => (
+                      <div
+                        key={`${client.name}-${i}`}
+                        className="group relative flex-shrink-0 w-[280px] sm:w-[320px] rounded-[2rem] bg-[#052626]/40 border border-white/5 backdrop-blur-xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5 overflow-hidden transition-all duration-500 hover:bg-[#052626]/80 hover:border-[#38c5e0]/30 hover:shadow-[0_8px_30px_rgba(56,197,224,0.15)] cursor-default"
+                      >
+                            
+                            {/* Cinematic Radial Hover Glow */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[#38c5e0]/0 group-hover:bg-[#38c5e0]/15 blur-[60px] rounded-full transition-all duration-700 pointer-events-none" />
+
+                            {/* Floating Platform Logo */}
+                            <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rounded-2xl bg-gradient-to-tr from-white/5 to-white/10 flex items-center justify-center p-2.5 shadow-2xl border border-white/5 group-hover:border-[#38c5e0]/40 transition-all duration-500 z-10 group-hover:scale-110 group-hover:-rotate-3">
+                              <div className="absolute inset-0 bg-black/20 rounded-2xl" /> {/* Darken layer */}
+                              <div className="relative w-full h-full bg-white/10 rounded-xl flex items-center justify-center p-2 shadow-inner">
+                                {client.logo ? (
+                                  <Image src={client.logo} alt={client.name} fill sizes="80px" className="object-contain p-1.5 drop-shadow-md" />
+                                ) : (
+                                  <span className="text-[#38c5e0] font-black text-3xl tracking-tighter drop-shadow-md">{client.name.charAt(0)}</span>
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Crisp Typography Section */}
+                            <div className="flex-1 z-10">
+                              <div className="overflow-hidden mb-1">
+                                <p className="text-[#38c5e0]/80 text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase transform group-hover:translate-x-1 transition-transform duration-500 ease-out">
+                                  {group.category.split(' / ')[0]}
+                                </p>
+                              </div>
+                              <h3 className="font-extrabold text-white/90 text-[15px] sm:text-[17px] leading-tight group-hover:text-white transition-colors duration-300 drop-shadow-sm">
+                                {client.name}
+                              </h3>
+                            </div>
+                      </div>
+                    ))}
+                  </motion.div>
+                </div>
+              </div>
             ))}
           </div>
 
