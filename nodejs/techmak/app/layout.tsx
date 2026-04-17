@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: "Techmak Technology Ltd.",
   },
   description: "Techmak Technology Ltd. — A leading provider of surveillance, security, automation, and networking solutions.",
-  metadataBase: new URL("https://techmakai.com"),
+  metadataBase: new URL("https://techmakbd.com"),
   openGraph: {
     siteName: "Techmak Technology Ltd.",
     locale: "en_BD",
@@ -33,8 +33,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Techmak Technology Ltd.",
-  url: "https://techmakai.com",
-  logo: "https://techmakai.com/logo.png",
+  url: "https://techmakbd.com",
+  logo: "https://techmakbd.com/logo.png",
   description:
     "Bangladesh's most trusted partner for intelligent security infrastructure — CCTV surveillance, access control, networking, and automation solutions.",
   address: {
