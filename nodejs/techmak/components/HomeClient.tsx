@@ -5,6 +5,7 @@ import gsap from "gsap";
 import CinematicScroll from "@/components/CinematicScroll";
 import CompanySnapshot from "@/components/CompanySnapshot";
 import TechPartners from "@/components/TechPartners";
+import LocationMap from "@/components/LocationMap";
 
 export default function HomeClient() {
   const textRef = useRef<HTMLDivElement>(null);
@@ -96,6 +97,12 @@ export default function HomeClient() {
         <TechPartners />
       </div>
 
+      {/* LOCATION MAP */}
+      <div className="relative z-20">
+        <LocationMap />
+      </div>
+
     </main>
   );
 }
+
