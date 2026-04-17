@@ -71,7 +71,7 @@ const MobileMenu = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 z-[56] h-full w-[80%] max-w-sm flex flex-col"
+              className="fixed inset-y-0 right-0 z-[56] w-[80%] max-w-sm flex flex-col"
               style={{
                 background: "rgba(5, 38, 38, 0.95)",
                 backdropFilter: "blur(30px) saturate(180%)",
@@ -80,28 +80,23 @@ const MobileMenu = () => {
               }}
             >
               {/* Top section with close hint */}
-              <div className="px-8 pt-24 pb-6 border-b border-white/5">
+              <div className="shrink-0 px-8 pt-16 md:pt-24 pb-6 border-b border-white/5">
                 <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#38c5e0]/50">
                   Navigation
                 </p>
               </div>
 
               {/* Nav Links */}
-              <div className="flex-1 px-6 py-6 pb-20 flex flex-col gap-3 overflow-y-auto">
-                {headerData.map((item, i) => {
+              <div className="flex-1 px-6 py-6 pb-4 flex flex-col gap-3 overflow-y-auto w-full">
+                {headerData.map((item) => {
                   const isActive = pathname === item.href;
                   return (
-                    <motion.div
-                      key={item.title}
-                      initial={{ opacity: 0, x: 30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 + i * 0.06 }}
-                    >
+                    <div key={item.title} className="w-full shrink-0">
                       <Link
                         href={item.href}
                         onClick={() => setIsOpen(false)}
                         className={`
-                          group flex items-center gap-4 px-5 py-[14px] rounded-2xl transition-all duration-300 w-full shrink-0
+                          group flex items-center gap-4 px-5 py-[14px] rounded-2xl transition-all duration-300 w-full
                           ${isActive
                             ? "bg-[#38c5e0]/10 border border-[#38c5e0]/20"
                             : "border border-transparent hover:bg-white/[0.03] hover:border-white/5"
@@ -121,13 +116,13 @@ const MobileMenu = () => {
                           <div className="ml-auto w-2 h-2 rounded-full bg-[#38c5e0] shadow-[0_0_8px_rgba(56,197,224,0.6)]" />
                         )}
                       </Link>
-                    </motion.div>
+                    </div>
                   );
                 })}
               </div>
 
               {/* Bottom CTA */}
-              <div className="px-8 py-8 border-t border-white/5">
+              <div className="shrink-0 px-8 py-8 border-t border-white/5 pb-12">
                 <Link
                   href="/connect"
                   onClick={() => setIsOpen(false)}
