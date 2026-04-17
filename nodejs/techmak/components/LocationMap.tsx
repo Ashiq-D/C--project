@@ -118,7 +118,7 @@ export default function LocationMap() {
 
         {/* Massive Full Bleed Container */}
         <div 
-          className="map-container relative w-full min-h-[750px] lg:min-h-[85vh] rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] overflow-hidden border-[1px] border-white/10 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] group"
+          className="map-container relative w-full flex flex-col justify-between lg:min-h-[85vh] rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] overflow-hidden border-[1px] border-white/10 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] group"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           style={{ transformStyle: "preserve-3d" }}
@@ -127,7 +127,7 @@ export default function LocationMap() {
           <div className="absolute inset-0 z-30 pointer-events-none border-[1px] border-white/5 rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] mix-blend-overlay transition-all duration-700 group-hover:border-cyan-400/20 shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]"></div>
 
           {/* Map Layer (Absolute Background) */}
-          <div className="absolute inset-0 z-0 pointer-events-auto" style={{ transform: "translateZ(-20px) scale(1.05)" }}>
+          <div className="absolute inset-0 z-0 pointer-events-none" style={{ transform: "scale(1.05)" }}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.9829577201112!2d90.3965951!3d23.7836212!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7000107ac61%3A0xfe30487facf253a7!2sTechmak%20technology!5e0!3m2!1sbn!2sbd!4v1776461214232!5m2!1sbn!2sbd"
                 width="100%"
@@ -144,37 +144,38 @@ export default function LocationMap() {
           </div>
 
           {/* Atmospheric Gradients for Readability */}
-          <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(3, 15, 15, 0.4) 0%, transparent 40%, rgba(3, 15, 15, 0.95) 100%)" }} />
-          <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: "linear-gradient(to right, rgba(3, 15, 15, 0.9) 0%, rgba(3, 15, 15, 0.4) 40%, transparent 100%)" }} />
+          <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(3, 15, 15, 0.5) 0%, rgba(3, 15, 15, 0.4) 30%, rgba(3, 15, 15, 0.95) 100%)" }} />
+          <div className="absolute inset-0 z-10 pointer-events-none hidden md:block" style={{ background: "linear-gradient(to right, rgba(3, 15, 15, 0.95) 0%, rgba(3, 15, 15, 0.4) 40%, transparent 100%)" }} />
           
           {/* Top Live Indicator */}
-          <div className="absolute top-6 right-8 md:top-10 md:right-12 z-20 flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-white/5 pointer-events-none">
+          <div className="absolute top-6 right-6 md:top-10 md:right-12 z-20 flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-white/5 pointer-events-none">
              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_#34d399]"></span>
-             <span className="text-[10px] uppercase font-bold text-white/70 tracking-widest">Live Map Data</span>
+             <span className="text-[10px] uppercase font-bold text-white/70 tracking-widest hidden sm:inline-block">Live Map Data</span>
+             <span className="text-[10px] uppercase font-bold text-white/70 tracking-widest sm:hidden">Live</span>
           </div>
 
-          {/* Floating UI Grid */}
-          <div className="absolute inset-0 z-20 pointer-events-none p-6 md:p-12 lg:p-16 flex flex-col justify-between">
+          {/* Floating UI Grid - Now `relative` to push the parent height down structurally on mobile */}
+          <div className="relative z-20 pointer-events-none p-6 pt-20 md:p-12 lg:p-16 flex flex-col justify-between flex-grow min-h-[85vh] lg:min-h-0">
             
             {/* Top Left: Typography & Intro */}
             <div className="max-w-xl location-card pointer-events-auto" style={{ transform: "translateZ(30px)" }}>
               <div
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border mb-6 backdrop-blur-md"
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border mb-6 backdrop-blur-md mt-4 md:mt-0"
                 style={{ borderColor: "rgba(34, 211, 238, 0.3)", backgroundColor: "rgba(34, 211, 238, 0.05)" }}
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]" />
                 <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-cyan-300">Global Presence</span>
               </div>
-              <h2 className="text-5xl md:text-7xl font-extrabold mb-4 tracking-tighter drop-shadow-2xl text-white">
+              <h2 className="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 tracking-tighter drop-shadow-2xl text-white">
                 Find Us <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Here.</span>
               </h2>
-              <p className="text-cyan-50/80 text-lg md:text-xl font-medium max-w-md drop-shadow-md">
+              <p className="text-cyan-50/80 text-base md:text-xl font-medium max-w-md drop-shadow-md">
                 Visit our innovation hub in the heart of Bashundhara for a personalized consultation on intelligent automation.
               </p>
             </div>
 
             {/* Bottom Array: Contact HUD */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-end mt-12 w-full max-w-[1200px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 items-end mt-12 w-full max-w-[1200px]">
               
               {/* HUD Panel 1: Location */}
               <div 

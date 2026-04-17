@@ -107,7 +107,6 @@ const MobileMenu = () => {
               backgroundColor: "rgba(255, 255, 255, 0.05)",
               color: "#9ff6ff",
               fontSize: "18px",
-              cursor: "pointer",
             }}
             aria-label="Close menu"
           >
