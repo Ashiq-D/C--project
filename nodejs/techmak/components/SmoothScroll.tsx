@@ -16,18 +16,26 @@ export default function SmoothScroll({
   const pathname = usePathname();
 
   useEffect(() => {
-    // 1. Initialize Lenis for Smooth Scrolling
-    const lenis = new Lenis({
-      duration: 1.2,
-      smoothWheel: true,
-      lerp: 0.1,
-    });
+    // Skip Lenis on touch devices — native mobile scroll is already smooth
+    // and Lenis hijacks touch events causing the page to be unscrollable
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+
+    // 1. Initialize Lenis for Smooth Scrolling (desktop only)
+    const lenis = isTouchDevice
+      ? null
+      : new Lenis({
+          duration: 1.2,
+          smoothWheel: true,
+          lerp: 0.1,
+        });
 
     const raf = (time: number) => {
-      lenis.raf(time * 1000);
+      lenis?.raf(time * 1000);
     };
 
-    lenis.on("scroll", ScrollTrigger.update);
+    if (lenis) {
+      lenis.on("scroll", ScrollTrigger.update);
+    }
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
@@ -87,7 +95,7 @@ export default function SmoothScroll({
     return () => {
       clearTimeout(timeout);
       ctx.revert();
-      lenis.destroy();
+      lenis?.destroy();
       gsap.ticker.remove(raf);
     };
   }, [pathname]);
