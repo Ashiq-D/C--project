@@ -12,6 +12,9 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # ── Handle Next.js Static Routing ──
 
+# Never rewrite _next static assets (JS, CSS, fonts, etc.)
+RewriteRule ^_next/ - [L]
+
 # If request is a real file or folder → serve it
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
@@ -20,7 +23,11 @@ RewriteRule ^ - [L]
 # Handle root explicitly
 RewriteRule ^$ index.html [L]
 
-# Handle clean URLs → /page → /page/index.html
+# Handle clean URLs → /page → /page.html first, then /page/index.html
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+RewriteCond %{REQUEST_FILENAME}/index.html -f
 RewriteRule ^(.+?)/?$ $1/index.html [L]
 
 # ── Security Headers ──
