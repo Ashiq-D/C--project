@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: "/techmak-icon.ico",
+  },
 };
 
 // JSON-LD Organization Schema

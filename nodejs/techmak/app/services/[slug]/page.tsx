@@ -38,7 +38,7 @@ export default async function ServiceDetailsPage({
   }
 
   return (
-    <main className="relative min-h-screen bg-gradient-to-br from-[#071A1A] via-[#0A2E2E] to-[#052626] text-white pt-32 pb-24 overflow-hidden">
+    <main className="relative min-h-screen bg-gradient-to-br from-[#071A1A] via-[#0A2E2E] to-[#052626] text-white pt-24 md:pt-28 pb-24 overflow-hidden">
       
       {/* 3D Arc Particle Background & Aesthetic Elements */}
       <div className="absolute inset-0 pointer-events-none z-0">
