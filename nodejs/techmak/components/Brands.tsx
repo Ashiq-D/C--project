@@ -1,14 +1,14 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 
 /* ═══════════════════════════════════════════════
    DESIGN TOKENS — matching project palette
 ═══════════════════════════════════════════════ */
 const gradient = "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)";
 
-/* ── Our Brands Data from PDF ── */
+/* ── Our Brands Data ── */
 const companies = [
   {
     name: "Techmak Technology Ltd.",
@@ -27,6 +27,7 @@ const companies = [
         <circle cx="12" cy="11" r="3" />
       </svg>
     ),
+    website: "https://techmakai.com/",
   },
   {
     name: "Techmak Power & Energy Ltd.",
@@ -207,28 +208,257 @@ function FloatingParticles() {
 }
 
 /* ═══════════════════════════════════════════════
+   CHEVRON ICON (animated)
+═══════════════════════════════════════════════ */
+function ChevronIcon({ isOpen }: { isOpen: boolean }) {
+  return (
+    <motion.svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#38c5e0"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      animate={{ rotate: isOpen ? 180 : 0 }}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+    >
+      <polyline points="6 9 12 15 18 9" />
+    </motion.svg>
+  );
+}
+
+/* ═══════════════════════════════════════════════
+   ACCORDION ITEM (row-wise)
+═══════════════════════════════════════════════ */
+function AccordionItem({
+  company,
+  index,
+  isOpen,
+  onToggle,
+}: {
+  company: typeof companies[0];
+  index: number;
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.15 + index * 0.1 }}
+      className="relative overflow-hidden rounded-2xl"
+      style={{
+        background: isOpen ? "rgba(56,197,224,0.04)" : "rgba(255,255,255,0.02)",
+        border: `1px solid ${isOpen ? "rgba(56,197,224,0.3)" : "rgba(255,255,255,0.07)"}`,
+        transition: "border-color 0.4s, background 0.4s",
+      }}
+    >
+      {/* ── Top glow line (visible when open) ── */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px transition-opacity duration-500"
+        style={{
+          backgroundImage: "linear-gradient(90deg, transparent, #38c5e0, transparent)",
+          opacity: isOpen ? 1 : 0,
+        }}
+      />
+
+      {/* ═══════════ HEADER ROW (clickable) ═══════════ */}
+      <div
+        onClick={onToggle}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onToggle();
+          }
+        }}
+        role="button"
+        tabIndex={0}
+        className="w-full flex items-center gap-4 md:gap-6 px-6 py-5 md:px-8 md:py-6 text-left cursor-pointer group focus:outline-none"
+        style={{ WebkitTapHighlightColor: "transparent" }}
+        aria-expanded={isOpen}
+        id={`brand-header-${index}`}
+      >
+
+        {/* Icon */}
+        <div
+          className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+          style={{
+            background: isOpen ? "rgba(56,197,224,0.15)" : "rgba(56,197,224,0.08)",
+            border: `1px solid ${isOpen ? "rgba(56,197,224,0.35)" : "rgba(56,197,224,0.15)"}`,
+            transition: "all 0.3s",
+          }}
+        >
+          {company.icon}
+        </div>
+
+        {/* Name + Role */}
+        <div className="flex-1 min-w-0">
+          {company.website ? (
+            <motion.a
+              href={company.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              whileHover={{ 
+                color: "#38c5e0",
+                textShadow: "0 0 12px rgba(56, 197, 224, 0.8)",
+              }}
+              className="inline-block"
+            >
+              <h3
+                className="text-white font-bold text-base md:text-lg leading-snug truncate transition-colors duration-300"
+                style={{ color: isOpen ? "#9ff6ff" : "#ffffff" }}
+              >
+                {company.name}
+              </h3>
+            </motion.a>
+          ) : (
+            <h3
+              className="text-white font-bold text-base md:text-lg leading-snug truncate transition-colors duration-300"
+              style={{ color: isOpen ? "#9ff6ff" : "#ffffff" }}
+            >
+              {company.name}
+            </h3>
+          )}
+          <p className="text-[#78d4e8]/50 text-xs font-medium tracking-wider uppercase mt-0.5">
+            {company.role}
+          </p>
+        </div>
+
+        {/* Category badge / Visit Website Button */}
+        {company.website ? (
+          <motion.a
+            href={company.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            whileHover={{ scale: 1.05, backgroundColor: "rgba(56, 197, 224, 0.2)" }}
+            whileTap={{ scale: 0.95 }}
+            className="hidden sm:inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase text-[#38c5e0] border border-[#38c5e0]/40 bg-[#38c5e0]/15 shrink-0 whitespace-nowrap shadow-[0_0_15px_rgba(56,197,224,0.1)] transition-all duration-300"
+          >
+            Visit Website
+          </motion.a>
+        ) : (
+          <div className="hidden sm:inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase text-[#38c5e0] border border-[#38c5e0]/25 bg-[#38c5e0]/10 shrink-0 whitespace-nowrap">
+            {company.category}
+          </div>
+        )}
+
+        {/* Chevron */}
+        <div className="shrink-0 ml-1">
+          <ChevronIcon isOpen={isOpen} />
+        </div>
+      </div>
+
+      {/* ═══════════ DROPDOWN BODY ═══════════ */}
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="px-6 pb-6 md:px-8 md:pb-8 pt-0">
+              {/* Divider */}
+              <div
+                className="mb-6 rounded-full"
+                style={{
+                  height: "1px",
+                  backgroundImage: "linear-gradient(90deg, transparent, rgba(56,197,224,0.25), transparent)",
+                }}
+              />
+
+              {/* Mobile category badge */}
+              <div className="sm:hidden mb-4">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase text-[#38c5e0] border border-[#38c5e0]/25 bg-[#38c5e0]/10">
+                  {company.category}
+                </span>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+                {/* Description */}
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                >
+                  <p className="text-xs font-semibold uppercase tracking-widest text-[#78d4e8]/60 mb-3">
+                    About
+                  </p>
+                  <p className="text-[#8ab8c8] text-sm leading-relaxed font-light">
+                    {company.desc}
+                  </p>
+                </motion.div>
+
+                {/* Capabilities */}
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                >
+                  <p className="text-xs font-semibold uppercase tracking-widest text-[#78d4e8]/60 mb-3">
+                    Core Capabilities
+                  </p>
+                  <ul className="space-y-2.5">
+                    {company.capabilities.map((cap, idx) => (
+                      <motion.li
+                        key={idx}
+                        initial={{ opacity: 0, x: -12 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.35, delay: 0.25 + idx * 0.08, ease: "easeOut" }}
+                        className="flex items-start gap-2.5 text-[#8ab8c8] text-sm"
+                      >
+                        <span className="shrink-0 mt-1.5">
+                          <svg width="6" height="6" viewBox="0 0 24 24" fill="#38c5e0">
+                            <path d="M12 2l10 10-10 10L2 12z" />
+                          </svg>
+                        </span>
+                        <span>{cap}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
+/* ═══════════════════════════════════════════════
    MAIN COMPONENT
 ═══════════════════════════════════════════════ */
 export default function Brands() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
   const headingRef = useRef(null);
   const headingInView = useInView(headingRef, { once: true });
 
+  const handleToggle = (index: number) => {
+    setOpenIndex((prev) => (prev === index ? null : index));
+  };
+
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-32 min-h-screen z-10">
+    <section className="relative overflow-hidden pt-6 pb-24 md:pt-8 h-fit z-10">
       {/* ── Ambient background ── */}
       <FloatingParticles />
       <div className="pointer-events-none absolute -top-40 left-1/4 w-[600px] h-[600px] rounded-full bg-[#38c5e0]/[0.05] blur-[150px]" />
       <div className="pointer-events-none absolute bottom-1/4 right-0 w-[500px] h-[500px] rounded-full bg-[#0ea5c9]/[0.04] blur-[120px]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 max-w-4xl mx-auto px-6">
         {/* ═══════════ HEADER ═══════════ */}
         <motion.div
           ref={headingRef}
           initial={{ opacity: 0, y: -30 }}
           animate={headingInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-24 max-w-4xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-14 border border-white/5 shadow-2xl"
+          className="text-center mb-16 max-w-4xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-14 border border-white/5 shadow-2xl"
         >
           <motion.p
             initial={{ opacity: 0, letterSpacing: "0.2em" }}
@@ -266,78 +496,16 @@ export default function Brands() {
           />
         </motion.div>
 
-        {/* ═══════════ BRANDS GRID ═══════════ */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {/* ═══════════ ACCORDION LIST (row-wise) ═══════════ */}
+        <div className="flex flex-col gap-3">
           {companies.map((company, i) => (
-            <motion.div
+            <AccordionItem
               key={company.name}
-              initial={{ opacity: 0, y: 30, scale: 0.97 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className="group p-8 rounded-2xl backdrop-blur-sm cursor-default relative overflow-hidden flex flex-col h-full"
-              style={{
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                transition: "border-color 0.4s, background 0.4s",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget;
-                el.style.borderColor = "rgba(56,197,224,0.35)";
-                el.style.background = "rgba(56,197,224,0.05)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget;
-                el.style.borderColor = "rgba(255,255,255,0.08)";
-                el.style.background = "rgba(255,255,255,0.03)";
-              }}
-            >
-              {/* Hover glow line */}
-              <div
-                className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ backgroundImage: "linear-gradient(90deg, transparent, #38c5e0, transparent)" }}
-              />
-
-              {/* Badge & Icon */}
-              <div className="flex justify-between items-start mb-6">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(56,197,224,0.1)", border: "1px solid rgba(56,197,224,0.2)" }}>
-                  {company.icon}
-                </div>
-                <div className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase text-[#38c5e0] border border-[#38c5e0]/25 bg-[#38c5e0]/10">
-                  {company.category}
-                </div>
-              </div>
-
-              {/* Company Info */}
-              <div className="flex-1">
-                <p className="text-[#78d4e8]/60 text-xs font-semibold tracking-widest uppercase mb-2">
-                  {company.role}
-                </p>
-                <h3 className="text-white font-bold text-xl mb-3 group-hover:text-[#9ff6ff] transition-colors duration-300">
-                  {company.name}
-                </h3>
-                <p className="text-[#8ab8c8]/80 text-[13px] leading-relaxed font-light mb-6">
-                  {company.desc}
-                </p>
-              </div>
-
-              {/* Core Capabilities List */}
-              <div className="pt-5 mt-auto border-t border-white/10">
-                <p className="text-white text-xs font-semibold mb-3">Core Capabilities:</p>
-                <ul className="space-y-2">
-                  {company.capabilities.map((cap, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-[#8ab8c8] text-xs">
-                      <span className="w-1 h-3 flex items-center justify-center shrink-0 pt-0.5">
-                        <svg width="6" height="6" viewBox="0 0 24 24" fill="#38c5e0"><path d="M12 2l10 10-10 10L2 12z" /></svg>
-                      </span>
-                      <span>{cap}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-            </motion.div>
+              company={company}
+              index={i}
+              isOpen={openIndex === i}
+              onToggle={() => handleToggle(i)}
+            />
           ))}
         </div>
       </div>

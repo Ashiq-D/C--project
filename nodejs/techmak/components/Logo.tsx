@@ -12,17 +12,16 @@ const Logo = ({ className }: { className?: string }) => {
       )}
     >
       {/* Render the provided vertical logo. Using advanced CSS mix-blend physics to strip the white background on the fly! */}
-      <div className="relative w-[130px] h-[55px] md:w-[150px] md:h-[65px] transition-transform duration-500 group-hover:scale-[1.03]">
+      <div className="relative w-[150px] h-[65px] md:w-[180px] md:h-[78px] transition-all duration-500 group-hover:drop-shadow-[0_0_20px_rgba(56,197,224,0.8)]">
         <Image
           src="/images/techmak-logo-vertical.png"
           alt="Techmak Technology Logo"
           fill
           priority
-          sizes="(max-width: 768px) 130px, 150px"
+          sizes="(max-width: 768px) 150px, 180px"
           className="object-contain"
           style={{
-            // CSS Magic: Invert white to black (transparent in screen mode). Invert blue to yellow, then hue-shift yellow to cyberpunk cyan.
-            filter: "invert(1) hue-rotate(180deg) brightness(1.5)",
+            filter: "invert(1) hue-rotate(180deg) brightness(1.2)",
             mixBlendMode: "screen",
           }}
         />

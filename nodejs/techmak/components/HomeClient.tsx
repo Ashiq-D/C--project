@@ -33,10 +33,10 @@ export default function HomeClient() {
   }, []);
 
   return (
-    <main className="text-white overflow-x-hidden pt-20">
+    <main className="text-white overflow-x-hidden">
 
       {/* 3D HERO SECTION */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+      <section className="relative min-h-[85vh] flex items-center justify-center px-6 overflow-hidden">
 
         {/* Foreground Content */}
         <div ref={textRef} className="relative z-10 text-center max-w-5xl mx-auto flex flex-col items-center gap-5 select-none">

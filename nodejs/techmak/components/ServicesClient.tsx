@@ -26,7 +26,7 @@ const cardVariant: Variants = {
 
 export default function ServicesClient() {
   return (
-    <main className="relative min-h-screen text-white pt-32 pb-24 overflow-hidden">
+    <main className="relative min-h-screen text-white pt-8 md:pt-16 pb-24 overflow-hidden">
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
 
