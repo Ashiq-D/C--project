@@ -169,7 +169,7 @@ export default function LocationMap() {
                 Find Us <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Here.</span>
               </h2>
               <p className="text-cyan-50/80 text-lg md:text-xl font-medium max-w-md drop-shadow-md">
-                Visit our innovation hub in the heart of Bashundhara for a personalized consultation on intelligent automation.
+                Visit our innovation hub in the heart of Mohakhali Dohs for a personalized consultation on intelligent automation.
               </p>
             </div>
 
@@ -186,8 +186,8 @@ export default function LocationMap() {
                 </div>
                 <h3 className="text-[10px] font-bold tracking-[0.3em] uppercase mb-4 text-cyan-400">Headquarters</h3>
                 <p className="text-white/90 text-sm md:text-base leading-relaxed font-medium">
-                  4th Floor, 36/E, Road-2, Block-D<br />
-                  Bashundhara R/A, Dhaka 1229<br />
+                  Flat-5A, Lift-5,House# 207, Road# 10,<br />
+                  Mohakhali Dohs, Dhaka 1206<br />
                   Bangladesh
                 </p>
               </div>
@@ -202,11 +202,11 @@ export default function LocationMap() {
                 </div>
                 <h3 className="text-[10px] font-bold tracking-[0.3em] uppercase mb-4 text-emerald-400">Reach Out</h3>
                 <div className="flex flex-col gap-3">
-                  <a href="tel:+8801611224433" className="text-xl font-semibold text-white tracking-widest hover:text-emerald-400 transition-colors">
-                    +880 1611-224433
+                  <a href="tel:+8809678221005" className="text-xl font-semibold text-white tracking-widest hover:text-emerald-400 transition-colors">
+                    +8809678221005
                   </a>
-                  <a href="mailto:info@techmakbd.com" className="text-white/60 hover:text-white transition-colors text-sm">
-                    info@techmakbd.com
+                  <a href="mailto:techmakbd@gmail.com" className="text-white/60 hover:text-white transition-colors text-sm">
+                    techmakbd@gmail.com
                   </a>
                 </div>
               </div>
@@ -240,7 +240,7 @@ export default function LocationMap() {
                   </div>
                   <div>
                     <h3 className="text-[10px] font-bold tracking-[0.3em] uppercase mb-1 text-white/50">Business Hours</h3>
-                    <p className="text-white font-medium text-sm md:text-base">Sun – Thu: 10AM – 7PM</p>
+                    <p className="text-white font-medium text-sm md:text-base">Sun – Thu: 10AM – 8PM</p>
                     <p className="text-white/40 text-xs mt-1">Fri & Sat: Closed</p>
                   </div>
                 </div>

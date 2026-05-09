@@ -83,7 +83,7 @@ export default function CinematicScroll() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-40 overflow-hidden z-10"
+      className="relative pt-0 pb-20 overflow-hidden z-10"
       style={{
         perspective: "2000px",
         transformStyle: "preserve-3d",

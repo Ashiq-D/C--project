@@ -68,15 +68,24 @@ export default function CustomCursor() {
       dot.style.top = `${e.clientY}px`;
 
       if (hoveredRef.current) {
-        const rect = hoveredRef.current.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const mx = e.clientX + (cx - e.clientX) * MAGNETIC_PULL;
-        const my = e.clientY + (cy - e.clientY) * MAGNETIC_PULL;
-        ringPosRef.current.x = mx;
-        ringPosRef.current.y = my;
-        ring.style.left = `${mx}px`;
-        ring.style.top = `${my}px`;
+        const isMagnetic = hoveredRef.current.getAttribute("data-cursor-magnetic") !== "false";
+        
+        if (isMagnetic) {
+          const rect = hoveredRef.current.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const mx = e.clientX + (cx - e.clientX) * MAGNETIC_PULL;
+          const my = e.clientY + (cy - e.clientY) * MAGNETIC_PULL;
+          ringPosRef.current.x = mx;
+          ringPosRef.current.y = my;
+          ring.style.left = `${mx}px`;
+          ring.style.top = `${my}px`;
+        } else {
+          ringPosRef.current.x = e.clientX;
+          ringPosRef.current.y = e.clientY;
+          ring.style.left = `${e.clientX}px`;
+          ring.style.top = `${e.clientY}px`;
+        }
       }
     };
 
