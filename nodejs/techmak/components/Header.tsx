@@ -3,6 +3,7 @@ import Logo from "@/components/Logo";
 import HeaderMenu from "@/components/HeaderMenu";
 import MobileMenu from "@/components/MobileMenu";
 import Link from "next/link";
+import { Facebook, Linkedin, Youtube, Instagram, ArrowRight } from "lucide-react";
 
 const Header = () => {
   return (
@@ -14,7 +15,7 @@ const Header = () => {
         WebkitBackdropFilter: "blur(20px) saturate(180%)",
       }}
     >
-      <Container className="flex items-center justify-between py-4">
+      <Container className="flex items-center justify-between py-2">
 
         {/* Left - Logo */}
         <Logo />
@@ -26,25 +27,18 @@ const Header = () => {
 
         {/* Right - CTA (desktop) + Mobile Menu */}
         <div className="flex items-center gap-3">
-          <Link
-            href="/connect"
-            className="
-              hidden sm:inline-block
-              px-7 py-2.5 rounded-full text-sm
-              bg-gradient-to-r from-brand-accent to-emerald-400
-              hover:from-emerald-400 hover:to-brand-accent
-              font-semibold
-              border border-[rgba(31,168,154,0.4)]
-              backdrop-blur-md
-              shadow-[0_0_20px_rgba(31,168,154,0.3)]
-              hover:shadow-[0_0_35px_rgba(31,168,154,0.5)]
-              transition-all duration-500
-              hover:-translate-y-0.5
-            "
-            style={{ color: "#050B0B" }}
-          >
-            Let&apos;s Connect
-          </Link>
+          {/* Social Icons */}
+          <div className="hidden lg:flex items-center gap-4 mr-2">
+            <Link href="https://facebook.com" target="_blank" className="text-[#38c5e0] hover:text-white transition-colors">
+              <Facebook size={18} strokeWidth={2} />
+            </Link>
+            <Link href="https://linkedin.com" target="_blank" className="text-[#38c5e0] hover:text-white transition-colors">
+              <Linkedin size={18} strokeWidth={2} />
+            </Link>
+            <Link href="https://youtube.com" target="_blank" className="text-[#38c5e0] hover:text-white transition-colors">
+              <Youtube size={18} strokeWidth={2} />
+            </Link> 
+          </div>
 
           {/* Mobile Hamburger Menu */}
           <MobileMenu />

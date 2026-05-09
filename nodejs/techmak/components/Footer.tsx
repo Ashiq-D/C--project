@@ -16,7 +16,7 @@ const Footer = () => {
       <Container>
 
         {/* ================= TOP CONTACT STRIP ================= */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 border-b border-white/10 py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 border-b border-white/10 py-10 justify-items-center md:justify-items-start lg:justify-items-center">
 
           {/* Item */}
           <div className="flex items-center gap-4 group cursor-pointer">
@@ -26,7 +26,7 @@ const Footer = () => {
                 Visit Us
               </h3>
               <p className="text-xs text-white/70">
-                4th floor, 36/E, Road-2, Block-D, Bashundhara R/A
+                Flat-5A, Lift-5, House# 207, Road# 10, Mohakhali Dohs, Dhaka-1206
               </p>
             </div>
           </div>
@@ -38,19 +38,7 @@ const Footer = () => {
                 Call Us
               </h3>
               <p className="text-xs text-white/70">
-                +880 1611-224433
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 group cursor-pointer">
-            <Clock className="w-6 h-6 text-brand-accent group-hover:text-brand-hover transition-colors duration-300" />
-            <div>
-              <h3 className="text-sm font-semibold group-hover:text-brand-hover transition-colors duration-300">
-                Working Hours
-              </h3>
-              <p className="text-xs text-white/70">
-                24 Hours Service
+                +880 9678221005
               </p>
             </div>
           </div>
@@ -62,7 +50,7 @@ const Footer = () => {
                 Email Us
               </h3>
               <p className="text-xs text-white/70">
-                info@techmakai.com
+                techmakbd@gmail.com
               </p>
             </div>
           </div>

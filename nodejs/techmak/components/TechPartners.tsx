@@ -222,11 +222,11 @@ export default function TechPartners() {
               backgroundClip: "text",
             }}
           >
-            Technology Partners
+            Global Partners
           </h2>
           <p className="text-[#8ab8c8] max-w-2xl mx-auto text-base font-light">
             We are authorized dealers and integration partners with the world's leading
-            security and automation brands — bringing global-grade solutions to Bangladesh.
+            brands, bringing global-grade solutions to Bangladesh.
           </p>
           <div
             className="mx-auto mt-6 rounded-full"

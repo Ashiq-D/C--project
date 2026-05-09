@@ -9,9 +9,9 @@ import { Landmark, Clock, PackageCheck, Building2, Cctv, Cpu, Tag, Waypoints, Ne
 /* ── Data from Techmak Technology LTD profile ── */
 const stats = [
   { value: "2009", label: "Founded", icon: Landmark },
-  { value: "15+", label: "Years Experience", icon: Clock },
+  { value: "17+", label: "Years Experience", icon: Clock },
   { value: "500+", label: "Projects Delivered", icon: PackageCheck },
-  { value: "2400", label: "Sq.ft. HQ", icon: Building2 },
+  { value: "3500", label: "Sq.ft. HQ", icon: Building2 },
 ];
 
 const coreServices = [
