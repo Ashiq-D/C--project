@@ -118,7 +118,7 @@ export default function CompanySnapshot() {
   const headingInView = useInView(headingRef, { once: true });
 
   return (
-    <section className="relative py-32 overflow-hidden z-10">
+    <section className="relative pt-0 pb-0 overflow-hidden z-10">
       {/* Ambient glow blobs */}
       <div className="pointer-events-none absolute -top-40 left-1/4 w-[500px] h-[500px] rounded-full bg-[#38c5e0]/5 blur-[120px]" />
       <div className="pointer-events-none absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-[#0ea5c9]/5 blur-[100px]" />

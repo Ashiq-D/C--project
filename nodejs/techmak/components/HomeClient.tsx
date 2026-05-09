@@ -92,9 +92,7 @@ export default function HomeClient() {
       <div className="relative z-20">
         <CinematicScroll />
       </div>
-
-      {/* COMPANY SNAPSHOT — Techmak Technology LTD details */}
-      <div className="relative z-20">
+      <div className="relative z-20 mt-16">
         <CompanySnapshot />
       </div>
 
