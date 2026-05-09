@@ -42,32 +42,32 @@ export default function CinematicScroll() {
           },
         });
 
-        // LEFT CARD — flies left with rotation
+        // LEFT CARD — flies left with subtle rotation
         tl.to(
           cardLeft,
           {
-            x: -600 - index * 100,
-            y: -150 - index * 60,
-            rotateZ: -6 - index * 2,
-            rotateY: -15,
-            z: -200,
-            scale: 0.85,
-            opacity: 0,
+            x: -120 - index * 30,
+            y: -40 - index * 15,
+            rotateZ: -3 - index * 1,
+            rotateY: -8,
+            z: -80,
+            scale: 0.92,
+            opacity: 0.15,
             ease: "power2.inOut",
           },
           0
         )
-          // RIGHT CARD — flies right with rotation
+          // RIGHT CARD — flies right with subtle rotation
           .to(
             cardRight,
             {
-              x: 600 + index * 100,
-              y: -150 - index * 60,
-              rotateZ: 6 + index * 2,
-              rotateY: 15,
-              z: -200,
-              scale: 0.85,
-              opacity: 0,
+              x: 120 + index * 30,
+              y: -40 - index * 15,
+              rotateZ: 3 + index * 1,
+              rotateY: 8,
+              z: -80,
+              scale: 0.92,
+              opacity: 0.15,
               ease: "power2.inOut",
             },
             0
@@ -83,7 +83,7 @@ export default function CinematicScroll() {
   return (
     <section
       ref={sectionRef}
-      className="relative pt-0 pb-20 overflow-hidden z-10"
+      className="relative pt-0 pb-4 overflow-hidden z-10"
       style={{
         perspective: "2000px",
         transformStyle: "preserve-3d",

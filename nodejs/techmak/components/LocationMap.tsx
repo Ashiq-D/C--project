@@ -112,15 +112,13 @@ export default function LocationMap() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-40 z-10 overflow-hidden bg-transparent"
+      className="relative py-12 md:py-20 z-10 overflow-hidden bg-transparent"
     >
       <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Massive Full Bleed Container */}
         <div
           className="map-container relative w-full min-h-[750px] lg:min-h-[85vh] rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] overflow-hidden border-[1px] border-white/10 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] group"
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
           style={{ transformStyle: "preserve-3d" }}
         >
           {/* 3D Glassmorphism Overlay Frame */}
