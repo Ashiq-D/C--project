@@ -107,25 +107,23 @@ export default function CinematicScroll() {
           const tlCap = gsap.timeline({
             scrollTrigger: {
               trigger: capGrid,
-              start: "top 75%", // Start unfolding as soon as it enters the lower part of the screen
-              end: "top 20%", // Finish unfolding when it reaches the reading position
-              scrub: 1,
+              start: "top 85%", // Start unfolding when it enters the screen
+              end: "bottom 15%", // Finish folding back in when it leaves the screen
+              scrub: true, // Lock directly to scroll speed (no lag)
             },
           });
 
-          // Left card starts behind center and slides out to the left (x: 0)
-          tlCap.fromTo(foldLeft, 
-            { x: leftSlideDistance },
-            { x: 0, ease: "none" }, 
-            0
-          );
+          // Phase 1: Unfold (Takes up first 40% of scroll distance for super smooth reveal)
+          tlCap.fromTo(foldLeft, { x: leftSlideDistance }, { x: 0, ease: "none", duration: 2 }, 0);
+          tlCap.fromTo(foldRight, { x: rightSlideDistance }, { x: 0, ease: "none", duration: 2 }, 0);
 
-          // Right card starts behind center and slides out to the right (x: 0)
-          tlCap.fromTo(foldRight, 
-            { x: rightSlideDistance },
-            { x: 0, ease: "none" }, 
-            0
-          );
+          // Phase 2: Stay fully separated to be read (Takes up middle 20% of scroll distance)
+          tlCap.to(foldLeft, { x: 0, duration: 1 }, 2);
+          tlCap.to(foldRight, { x: 0, duration: 1 }, 2);
+
+          // Phase 3: Fold back in (Takes up final 40% of scroll distance for super smooth exit)
+          tlCap.to(foldLeft, { x: leftSlideDistance, ease: "none", duration: 2 }, 3);
+          tlCap.to(foldRight, { x: rightSlideDistance, ease: "none", duration: 2 }, 3);
         }
 
         // ── Services Rows Animation ──
