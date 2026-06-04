@@ -47,7 +47,7 @@ export default function SmoothScroll({
       ctx.add(() => {
         // Select heading and text elements, excluding ones that already have custom GSAP/Observer animations
         const textElements = gsap.utils.toArray<HTMLElement>(
-          "h1:not(.hero-text):not(.au-reveal):not(nav *), h2:not(.hero-text):not(.au-reveal):not(nav *), h3:not(.hero-text):not(.au-reveal):not(nav *), p:not(.hero-text):not(.au-reveal):not(nav *):not(header *)"
+          "h1:not(.hero-text):not(.au-reveal):not(nav *), h2:not(.hero-text):not(.au-reveal):not(nav *):not(.cap-grid-container *), h3:not(.hero-text):not(.au-reveal):not(nav *):not(.cap-card *), p:not(.hero-text):not(.au-reveal):not(nav *):not(header *):not(.cap-card *)"
         );
 
         textElements.forEach((el) => {
@@ -69,7 +69,7 @@ export default function SmoothScroll({
         });
 
         // Also add a subtle scale-up reveal for standard images
-        const imageElements = gsap.utils.toArray<HTMLElement>("img:not(.card img):not(.au-stat-box img)");
+        const imageElements = gsap.utils.toArray<HTMLElement>("img:not(.card img):not(.au-stat-box img):not(.cap-card img)");
         imageElements.forEach((el) => {
           gsap.fromTo(
             el,

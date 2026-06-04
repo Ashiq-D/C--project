@@ -3,13 +3,37 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "lenis";
 import Link from "next/link";
 import TiltCard from "./TiltCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
 import { services } from "@/lib/servicesData";
+import { Shield, ShoppingCart, Cpu } from "lucide-react";
+
+const coreCapabilities = [
+  {
+    title: "Advanced AI-Powered Surveillance Solutions",
+    description:
+      "Intelligent, next-generation surveillance systems leveraging artificial intelligence for enhanced security, real-time monitoring, and proactive threat detection.",
+    icon: Shield,
+    bgImage: "/images/user_surveillance.png",
+  },
+  {
+    title: "Electronic Article Surveillance (EAS) Systems",
+    description:
+      "Comprehensive retail loss-prevention solutions designed to safeguard merchandise, reduce shrinkage, and improve operational control across retail environments.",
+    icon: ShoppingCart,
+    bgImage: "/images/user_eas.png",
+  },
+  {
+    title: "Custom System Integration (Hardware & Software Solutions)",
+    description:
+      "End-to-end tailored integration services combining hardware and software to deliver seamless, scalable, and mission-specific technology ecosystems.",
+    icon: Cpu,
+    bgImage: "/images/user_integration.png",
+  },
+];
 
 export default function CinematicScroll() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -19,59 +43,141 @@ export default function CinematicScroll() {
 
     // 🔥 GSAP CONTEXT
     const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
       const rows = gsap.utils.toArray<HTMLElement>(".row");
+      const capCards = gsap.utils.toArray<HTMLElement>(".cap-card");
 
-      rows.forEach((row, index) => {
-        const cardLeft = row.querySelector<HTMLElement>(".card-left");
-        const cardRight = row.querySelector<HTMLElement>(".card-right");
-
-        if (!cardLeft || !cardRight) return;
-
-        // Initial state
-        gsap.set([cardLeft, cardRight], {
-          transformPerspective: 2000,
-          transformStyle: "preserve-3d",
-        });
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: row,
-            start: "top 85%",
-            end: "bottom top",
-            scrub: 0.8,
-          },
-        });
-
-        // LEFT CARD — flies left with subtle rotation
-        tl.to(
-          cardLeft,
-          {
-            x: -120 - index * 30,
-            y: -40 - index * 15,
-            rotateZ: -3 - index * 1,
-            rotateY: -8,
-            z: -80,
-            scale: 0.92,
-            opacity: 0.15,
-            ease: "power2.inOut",
-          },
-          0
-        )
-          // RIGHT CARD — flies right with subtle rotation
-          .to(
-            cardRight,
+      // Core Capabilities Intro Animation
+      if (capCards.length > 0) {
+        capCards.forEach((card, i) => {
+          gsap.fromTo(
+            card,
+            { opacity: 0, y: 40 },
             {
-              x: 120 + index * 30,
-              y: -40 - index * 15,
-              rotateZ: 3 + index * 1,
-              rotateY: 8,
-              z: -80,
-              scale: 0.92,
-              opacity: 0.15,
-              ease: "power2.inOut",
+              scrollTrigger: {
+                trigger: ".cap-grid-container",
+                start: "top 85%",
+              },
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              delay: i * 0.15,
+              ease: "power2.out",
+            }
+          );
+
+          const elements = card.querySelectorAll(".cap-title, .cap-desc");
+          gsap.fromTo(
+            elements,
+            { opacity: 0, x: -15 },
+            {
+              scrollTrigger: {
+                trigger: ".cap-grid-container",
+                start: "top 85%",
+              },
+              opacity: 1,
+              x: 0,
+              duration: 0.7,
+              stagger: 0.1,
+              delay: i * 0.15 + 0.2,
+              ease: "power2.out",
+            }
+          );
+        });
+      }
+
+      // Desktop
+      mm.add("(min-width: 768px)", () => {
+
+        // ── Core Capabilities Folding Animation ──
+        const foldLeft = sectionRef.current?.querySelector(".fold-card-left");
+        const foldRight = sectionRef.current?.querySelector(".fold-card-right");
+        const capGrid = sectionRef.current?.querySelector(".cap-grid-container");
+
+        if (foldLeft && foldRight && capGrid) {
+          // Compute the actual pixel distance each card needs to slide
+          const leftRect = (foldLeft as HTMLElement).getBoundingClientRect();
+          const rightRect = (foldRight as HTMLElement).getBoundingClientRect();
+          const centerCard = capGrid.children[1] as HTMLElement;
+          const centerRect = centerCard.getBoundingClientRect();
+
+          const leftSlideDistance = centerRect.left - leftRect.left;   // positive → slides right
+          const rightSlideDistance = centerRect.left - rightRect.left;  // negative → slides left
+
+          const tlCap = gsap.timeline({
+            scrollTrigger: {
+              trigger: capGrid,
+              start: "top 75%", // Start unfolding as soon as it enters the lower part of the screen
+              end: "top 20%", // Finish unfolding when it reaches the reading position
+              scrub: 1,
             },
+          });
+
+          // Left card starts behind center and slides out to the left (x: 0)
+          tlCap.fromTo(foldLeft, 
+            { x: leftSlideDistance },
+            { x: 0, ease: "none" }, 
             0
           );
+
+          // Right card starts behind center and slides out to the right (x: 0)
+          tlCap.fromTo(foldRight, 
+            { x: rightSlideDistance },
+            { x: 0, ease: "none" }, 
+            0
+          );
+        }
+
+        // ── Services Rows Animation ──
+        rows.forEach((row, index) => {
+          const cardLeft = row.querySelector<HTMLElement>(".card-left");
+          const cardRight = row.querySelector<HTMLElement>(".card-right");
+          if (!cardLeft || !cardRight) return;
+
+          gsap.set([cardLeft, cardRight], { transformPerspective: 2000, transformStyle: "preserve-3d" });
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: row,
+              start: "top 50%",
+              end: "bottom top",
+              scrub: 1,
+            },
+          });
+
+          tl.to(cardLeft, {
+            x: -60 - index * 20, y: -20 - index * 10, rotateZ: -2 - index * 1, rotateY: -5, z: -40, scale: 0.95, opacity: 0.3, ease: "power2.inOut",
+          }, 0)
+            .to(cardRight, {
+              x: 60 + index * 20, y: -20 - index * 10, rotateZ: 2 + index * 1, rotateY: 5, z: -40, scale: 0.95, opacity: 0.3, ease: "power2.inOut",
+            }, 0);
+        });
+      });
+
+      // Mobile
+      mm.add("(max-width: 767px)", () => {
+        const cards = gsap.utils.toArray<HTMLElement>(".card, .cap-card");
+
+        cards.forEach((card, i) => {
+          gsap.set(card, { transformPerspective: 2000, transformStyle: "preserve-3d" });
+          gsap.fromTo(card, 
+            { y: 0, z: 0, scale: 1, opacity: 1 },
+            {
+              scrollTrigger: {
+                trigger: card,
+                start: "top top", // Only start fading when the card hits the top of the screen
+                end: "bottom top", // Finish fading exactly when the card completely leaves the screen
+                scrub: 1.2,
+                invalidateOnRefresh: true,
+              },
+              y: -20, // Gentle push up
+              z: -40, // Push backward into screen
+              scale: 0.9,
+              opacity: 0.4,
+              ease: "power2.out", // Smooth deceleration
+            }
+          );
+        });
       });
     }, sectionRef);
 
@@ -90,7 +196,7 @@ export default function CinematicScroll() {
       }}
     >
       <div className="max-w-7xl mx-auto px-10">
-        <div className="text-center mb-32 max-w-3xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-12 border border-white/5 shadow-2xl">
+        <div className="text-center mb-16 max-w-3xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-12 border border-white/5 shadow-2xl">
           <h2
             className="text-4xl md:text-5xl font-bold mb-6 select-none"
             style={{
@@ -102,6 +208,92 @@ export default function CinematicScroll() {
             }}
           >
             Our Core Capabilities
+          </h2>
+          <div
+            className="mx-auto rounded-full"
+            style={{
+              width: "120px",
+              height: "3px",
+              backgroundImage: "linear-gradient(90deg, #ffffff, #0ea5c9)",
+              animation: "fadeInUp 1s ease-out 0.4s both",
+            }}
+          />
+        </div>
+
+        {/* ── Core Capabilities Grid ── */}
+        <div className="cap-grid-wrapper w-full relative">
+          <div className="cap-grid-container grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-32 max-w-6xl mx-auto relative z-20">
+            {coreCapabilities.map((cap, i) => {
+              const Icon = cap.icon;
+              return (
+                <div
+                  key={i}
+                  className={`cap-card group relative p-[1px] overflow-hidden rounded-[2rem] isolation-auto flex flex-col h-full ${i === 1 ? "z-30" : "z-10"} ${i === 0 ? "fold-card-left" : ""} ${i === 2 ? "fold-card-right" : ""}`}
+                >
+                  {/* Border gradient that appears on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-[#38c5e0]/10 to-[#38c5e0]/50 opacity-80 group-hover:opacity-100 transition-opacity duration-700"></div>
+
+                  <div className={`relative h-full ${i === 1 ? "bg-[#040f1a]" : "bg-[#040f1a]/50 backdrop-blur-xl"} rounded-[calc(2rem-1px)] border border-[#38c5e0]/10 flex flex-col items-start text-left z-10 shadow-lg overflow-hidden group-hover:shadow-[0_0_30px_rgba(56,197,224,0.2)] group-hover:bg-[#040f1a]/70 transition-all duration-500`}>
+
+                    {/* Main Content Section */}
+                    <div className="px-8 pt-10 pb-2 flex flex-col relative z-20 w-full">
+                      <h3
+                        className="cap-title text-xl md:text-[23px] font-bold mb-6 leading-[1.4] tracking-wide pr-4"
+                        style={{
+                          backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                          backgroundClip: "text",
+                        }}
+                      >
+                        {cap.title}
+                      </h3>
+
+                      <div
+                        className="w-12 h-[2px] mb-6 rounded-full"
+                        style={{
+                          backgroundImage: "linear-gradient(90deg, #ffffff, #0ea5c9)"
+                        }}
+                      ></div>
+
+                      <p className="cap-desc text-[#a1c4d4] text-[15px] leading-loose font-normal pr-2">
+                        {cap.description}
+                      </p>
+                    </div>
+
+                    {/* Bottom Image Graphic Section */}
+                    <div
+                      className="relative w-full h-[280px] shrink-0 mt-auto"
+                      style={{
+                        WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 20%, black 100%)",
+                        maskImage: "linear-gradient(to bottom, transparent 0%, black 20%, black 100%)"
+                      }}
+                    >
+                      <img
+                        src={cap.bgImage}
+                        alt={cap.title}
+                        className="w-full h-full object-cover object-center opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 mix-blend-screen"
+                      />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="text-center mb-16 max-w-3xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-12 border border-white/5 shadow-2xl">
+          <h2
+            className="text-4xl md:text-5xl font-bold mb-6 select-none"
+            style={{
+              backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              animation: "fadeInUp 1s ease-out 0.2s both",
+            }}
+          >
+            Our Products & Solutions
           </h2>
           <div
             className="mx-auto rounded-full"
@@ -133,7 +325,7 @@ export default function CinematicScroll() {
                     w-[90vw] md:w-[45vw] h-[60vw] md:h-[28vw] max-w-[700px] max-h-[520px]
                     rounded-3xl flex items-center justify-center
                     text-white text-xl md:text-[1.2vw] font-semibold text-center
-                    shadow-2xl will-change-transform"
+                    shadow-2xl"
                     style={{ transformStyle: "preserve-3d" }}
                   >
                     <TiltCard className="w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-[#0F3D3E] via-[#145959] to-[#1E7A7A]">
@@ -145,10 +337,6 @@ export default function CinematicScroll() {
                       <div className="absolute inset-0 bg-gradient-to-t from-[#071A1A]/90 via-[#071A1A]/20 to-transparent"></div>
 
                       <div className="absolute inset-0 flex flex-col justify-end p-8" style={{ transform: "translateZ(40px)" }}>
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#1FA89A]/30 bg-[#1FA89A]/10 text-[#78d4e8] text-[0.6rem] font-bold tracking-widest uppercase mb-3 backdrop-blur-md w-max">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#38c5e0] animate-pulse" />
-                          Core System
-                        </div>
                         <h3 className="text-white text-2xl font-bold leading-snug drop-shadow-lg tracking-wide">
                           {leftService.title}
                         </h3>
@@ -164,7 +352,7 @@ export default function CinematicScroll() {
                     w-[90vw] md:w-[45vw] h-[60vw] md:h-[28vw] max-w-[700px] max-h-[520px]
                     rounded-3xl flex items-center justify-center
                     text-white text-xl md:text-[1.2vw] font-semibold text-center
-                    shadow-2xl will-change-transform"
+                    shadow-2xl"
                     style={{ transformStyle: "preserve-3d" }}
                   >
                     <TiltCard className="w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-[#0F3D3E] via-[#145959] to-[#1E7A7A]">
@@ -176,10 +364,6 @@ export default function CinematicScroll() {
                       <div className="absolute inset-0 bg-gradient-to-t from-[#071A1A]/90 via-[#071A1A]/20 to-transparent"></div>
 
                       <div className="absolute inset-0 flex flex-col justify-end p-8" style={{ transform: "translateZ(40px)" }}>
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#1FA89A]/30 bg-[#1FA89A]/10 text-[#78d4e8] text-[0.6rem] font-bold tracking-widest uppercase mb-3 backdrop-blur-md w-max">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#38c5e0] animate-pulse" />
-                          Core System
-                        </div>
                         <h3 className="text-white text-2xl font-bold leading-snug drop-shadow-lg tracking-wide">
                           {rightService.title}
                         </h3>

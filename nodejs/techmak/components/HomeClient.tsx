@@ -71,7 +71,7 @@ export default function HomeClient() {
           {/* Subtitle */}
           <p className="hero-text text-[#8ab8c8]/60 max-w-[46rem] mx-auto text-sm md:text-base font-light leading-relaxed"
             style={{ animation: "fadeInUp 1s ease-out 0.3s both" }}>
-            TTL is the flagship company of the Alliance and a leading provider of advanced technological systems and integrated solutions. The company specializes in modern surveillance, security, automation, and networking infrastructure tailored for high-security and mission-critical environments.
+            TTL is the flagship company of the Alliance and a leading provider of advanced technological systems & integrated solutions.The company specializes in modern surveillance & security solutions, automation, and networking infrastructure tailored for high-security and mission-critical environments
           </p>
 
           {/* CTAs */}

@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView, type Variants } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { motion, useInView, type Variants, animate, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
 import { Landmark, Clock, PackageCheck, Building2, Cctv, Cpu, Tag, Waypoints, Network, Flame } from "lucide-react";
@@ -83,9 +83,61 @@ const cardVariants: Variants = {
   }),
 };
 
+function WordReveal({ text }: { text: string }) {
+  const words = text.split(" ");
+  return (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      className="flex flex-wrap justify-center gap-x-[0.3em] gap-y-1"
+    >
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          variants={{
+            hidden: { opacity: 0, y: 15, filter: "blur(4px)" },
+            visible: {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              transition: {
+                delay: i * 0.015,
+                duration: 0.4,
+                ease: "easeOut",
+              },
+            },
+          }}
+          className="inline-block"
+        >
+          {word}
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+}
+
 function CounterStat({ value, label, icon: Icon }: { value: string; label: string; icon: any }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
+  
+  const numericValue = parseInt(value.replace(/[^0-9]/g, ""), 10);
+  const suffix = value.replace(/[0-9]/g, "");
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (inView) {
+      const controls = animate(0, numericValue, {
+        duration: 2.5,
+        ease: "easeOut",
+        onUpdate: (val) => {
+          setDisplayValue(Math.floor(val));
+        },
+      });
+      return controls.stop;
+    }
+  }, [inView, numericValue]);
+
   return (
     <motion.div
       ref={ref}
@@ -106,7 +158,7 @@ function CounterStat({ value, label, icon: Icon }: { value: string; label: strin
           backgroundClip: "text",
         }}
       >
-        {value}
+        {displayValue}{suffix}
       </span>
       <span className="text-[#8ab8c8] text-sm font-medium tracking-wide uppercase">{label}</span>
     </motion.div>
@@ -114,14 +166,24 @@ function CounterStat({ value, label, icon: Icon }: { value: string; label: strin
 }
 
 export default function CompanySnapshot() {
+  const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const headingInView = useInView(headingRef, { once: true });
 
+  // Scroll animations for cinematic feel
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  
+  const yParallaxFast = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const yParallaxSlow = useTransform(scrollYProgress, [0, 1], [30, -30]);
+
   return (
-    <section className="relative pt-0 pb-0 overflow-hidden z-10">
+    <section ref={sectionRef} className="relative pt-0 pb-0 overflow-hidden z-10">
       {/* Ambient glow blobs */}
-      <div className="pointer-events-none absolute -top-40 left-1/4 w-[500px] h-[500px] rounded-full bg-[#38c5e0]/5 blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-[#0ea5c9]/5 blur-[100px]" />
+      <motion.div style={{ y: yParallaxFast }} className="pointer-events-none absolute -top-40 left-1/4 w-[500px] h-[500px] rounded-full bg-[#38c5e0]/5 blur-[120px]" />
+      <motion.div style={{ y: yParallaxSlow }} className="pointer-events-none absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-[#0ea5c9]/5 blur-[100px]" />
 
       <div className="max-w-7xl mx-auto px-6">
 
@@ -131,15 +193,16 @@ export default function CompanySnapshot() {
           initial={{ opacity: 0, y: -30 }}
           animate={headingInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
+          style={{ y: yParallaxSlow }}
           className="text-center mb-20 max-w-4xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-14 border border-white/5 shadow-2xl"
         >
           <p className="text-xs md:text-sm font-semibold tracking-[0.35em] uppercase text-[#78d4e8]/70 mb-4">
             Established 2009 · Dhaka, Bangladesh
           </p>
           <h2
-            className="font-bold leading-tight mb-6"
+            className="font-bold leading-tight mb-6 whitespace-nowrap"
             style={{
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              fontSize: "clamp(1.6rem, 3.5vw, 2.6rem)",
               backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -148,12 +211,9 @@ export default function CompanySnapshot() {
           >
             About Techmak Technology Ltd.
           </h2>
-          <p className="text-[#8ab8c8] max-w-3xl mx-auto text-base md:text-lg font-light leading-relaxed">
-            A premier technology company in Bangladesh specializing in industrial security systems,
-            automation, and high-tech safety solutions. From a power system manufacturer in 2009,
-            we evolved into the nation's trusted leader in RFID, AI surveillance, and intelligent automation —
-            delivering end-to-end design, deployment, and lifetime support.
-          </p>
+          <div className="text-[#8ab8c8] max-w-3xl mx-auto text-base md:text-lg font-light leading-relaxed">
+            <WordReveal text="Techmak Technology Ltd. is a leading technology solutions provider in Bangladesh, specializing in industrial automation, intelligent security systems, and mission-critical technology solutions. Founded in 2009 as a power systems solutions provider, the company has evolved into a trusted industry leader in RFID technologies, AI-powered surveillance, access control, and intelligent automation. We deliver comprehensive end-to-end solutions, encompassing system design, engineering, integration, deployment, training, and lifecycle support. With a strong commitment to innovation, quality, and customer success, Techmak Technology serves government agencies, defense organizations, critical infrastructure operators, and private-sector enterprises, helping them enhance security, efficiency, and operational resilience through advanced technology solutions." />
+          </div>
           <div
             className="mx-auto mt-8 rounded-full"
             style={{

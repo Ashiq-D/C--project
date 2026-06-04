@@ -4,4 +4,4 @@ Allow: /
 Disallow: /api/
 Disallow: /_next/
 
-Sitemap: https://techmakbd.com/sitemap.xml
+Sitemap: https://techmakai.com/sitemap.xml

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: "Techmak Technology Ltd.",
   },
   description: "Techmak Technology Ltd. — A leading provider of surveillance, security, automation, and networking solutions.",
-  metadataBase: new URL("https://techmakbd.com"),
+  metadataBase: new URL("https://techmakai.com"),
   openGraph: {
     siteName: "Techmak Technology Ltd.",
     locale: "en_BD",
@@ -36,24 +36,29 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Techmak Technology Ltd.",
-  url: "https://techmakbd.com",
-  logo: "https://techmakbd.com/logo.png",
+  url: "https://techmakai.com",
+  logo: "https://techmakai.com/logo.png",
   description:
     "Bangladesh's most trusted partner for intelligent security infrastructure — CCTV surveillance, access control, networking, and automation solutions.",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "4th floor, 36/E, Road-2, Block-D, Bashundhara R/A",
+    streetAddress: "Flat-5A, Lift-5, House# 207, Road# 10, Mohakhali Dohs",
     addressLocality: "Dhaka",
+    postalCode: "1206",
     addressCountry: "BD",
   },
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+880-1611-224433",
-    email: "info@techmakai.com",
+    telephone: "+880-9678221005",
+    email: "techmakbd@gmail.com",
     contactType: "customer service",
     availableLanguage: ["English", "Bengali"],
   },
-  sameAs: [],
+  sameAs: [
+    "https://www.facebook.com/techmakbd",
+    "https://www.linkedin.com/company/techmak",
+    "https://www.youtube.com/@techmak"
+  ],
 };
 
 export default function RootLayout({
@@ -63,13 +68,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
+      <body className="flex flex-col min-h-screen font-poppins antialiased bg-gradient-to-br from-[#071A1A] via-[#0A2E2E] to-[#052626] text-white select-none" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className="flex flex-col min-h-screen font-poppins antialiased bg-gradient-to-br from-[#071A1A] via-[#0A2E2E] to-[#052626] text-white" suppressHydrationWarning>
         {/* Global 3D Background */}
         <div className="fixed inset-0 pointer-events-none z-0 opacity-80">
           <Hero3D />
