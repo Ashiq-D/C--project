@@ -65,10 +65,6 @@ export default async function ServiceDetailsPage({
           <div className="absolute inset-0 bg-gradient-to-r from-[#071A1A]/90 via-transparent to-transparent" />
           
           <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 md:w-[85%]">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#1FA89A]/30 bg-[#1FA89A]/10 text-[#78d4e8] text-xs font-semibold tracking-widest uppercase mb-6 backdrop-blur-md">
-              <span className="w-2 h-2 rounded-full bg-[#78d4e8] animate-pulse" />
-              Advanced Architecture
-            </div>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white drop-shadow-2xl selection:bg-cyan-500/30 mb-4"
               style={{
                 textShadow: "0 10px 40px rgba(0,0,0,0.8)",

@@ -421,9 +421,9 @@ export default function AboutUs() {
           </motion.p>
 
           <h2
-            className="font-bold leading-tight mb-6"
+            className="font-bold leading-tight mb-6 whitespace-nowrap"
             style={{
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              fontSize: "clamp(1.6rem, 3.5vw, 2.6rem)",
               backgroundImage: gradient,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
