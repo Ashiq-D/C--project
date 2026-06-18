@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 
 export default function BrandsPage() {
   return (
-    <main className="text-white overflow-x-hidden">
+    <div className="overflow-x-hidden">
       <Brands />
-    </main>
+    </div>
   );
 }

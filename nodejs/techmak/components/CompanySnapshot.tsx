@@ -54,21 +54,23 @@ const clientCategories = [
       { name: "Bangladesh Navy", logo: "/images/bdNavy.jpg" },
       { name: "Bangladesh Army", logo: "/images/Army.jpg" },
       { name: "Bangladesh Air Force", logo: "/images/Biman.jpg" },
-      { name: "Border Guard Bangladesh (BGB)", logo: "/images/BGB.jpg" },
-      { name: "Bangladesh Ansar & Village Defence Party (Ansar VDP)", logo: "/images/anser.jpg" },
-      { name: "Bangladesh Police", logo: "/images/police.jpg" },
-      { name: "Bangladesh Fire Service & Civil Defence", logo: "/images/fireservice.jpg" },
-      { name: "Dhaka South City Corporation", logo: "/images/SouthCity.jpg" },
-      { name: "Bangladesh Railway", logo: "/images/Railway.jpg" },
+      { name: "Bangladesh Coast Guard", logo: "/images/coastGuard.png", scale: "scale-[1.4]" },
+      { name: "Police & Law Enforcement Agencies", logo: "/images/police.jpg" },
+      { name: "Bangladesh Jail", logo: "/images/bdj.png" },
     ],
   },
   {
     category: "Private Companies / Media / Brands",
     items: [
-      { name: "Cats Eye", logo: "/images/catsEye.jpg" },
-      { name: "Boishakhi Television (Boishakhi TV)", logo: "/images/BoishakTv.jpg" },
-      { name: "ARTISAN", logo: "/images/Artisan.jpg" },
-      { name: "Bashundhara City", logo: "/images/BasundharaCity.jpg" },
+      { name: "BRAC Aarong", logo: "/images/aarong.png" },
+      { name: "SUNDORA", subtitle: "BIB Sundora Pvt Ltd", logo: "/images/sundora.png", scale: "scale-[1.3]" },
+      { name: "United Group", logo: "/images/united.png" },
+      { name: "Bashundhara Group", logo: "/images/BasundharaCity.png" },
+      { name: "Lavender Garments", logo: "/images/Lavender.png" },
+      { name: "Global Fit BD Ltd.", logo: "/images/Global.png" },
+      { name: "Corporate Field Ltd.", logo: "/images/Corporate.png"},
+      { name: "Assure Group", logo: "/images/assure.png" },
+      { name: "BTi", subtitle: "Building Technology & Ideas Ltd.", logo: "/images/Bti.png" },
     ],
   },
 ];
@@ -120,7 +122,7 @@ function WordReveal({ text }: { text: string }) {
 function CounterStat({ value, label, icon: Icon }: { value: string; label: string; icon: any }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
-  
+
   const numericValue = parseInt(value.replace(/[^0-9]/g, ""), 10);
   const suffix = value.replace(/[0-9]/g, "");
   const [displayValue, setDisplayValue] = useState(0);
@@ -175,7 +177,7 @@ export default function CompanySnapshot() {
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-  
+
   const yParallaxFast = useTransform(scrollYProgress, [0, 1], [80, -80]);
   const yParallaxSlow = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
@@ -196,7 +198,7 @@ export default function CompanySnapshot() {
           style={{ y: yParallaxSlow }}
           className="text-center mb-20 max-w-4xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-14 border border-white/5 shadow-2xl"
         >
-          <p className="text-xs md:text-sm font-semibold tracking-[0.35em] uppercase text-[#78d4e8]/70 mb-4">
+          <p className="text-[9px] md:text-sm font-semibold tracking-[0.15em] md:tracking-[0.35em] uppercase text-[#78d4e8]/70 mb-4">
             Established 2009 · Dhaka, Bangladesh
           </p>
           <h2
@@ -232,48 +234,50 @@ export default function CompanySnapshot() {
         </div>
 
         {/* ── Core Services grid ── */}
-        <div className="mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12 max-w-xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl md:rounded-full p-6 md:p-8 border border-white/5 shadow-2xl"
-          >
-            <h3 className="text-2xl md:text-3xl font-bold"
-              style={{
-                backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>
-              What We Do
-            </h3>
-          </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {coreServices.map((service, i) => (
-              <motion.div
-                key={service.title}
-                custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.03, y: -4 }}
-                className="group p-7 rounded-2xl bg-[#052626]/40 border border-white/5 backdrop-blur-md shadow-2xl
-                           hover:border-[#38c5e0]/40 hover:bg-[#38c5e0]/[0.06] transition-all duration-500 cursor-default"
-              >
-                <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-[#38c5e0] mb-5 group-hover:bg-[#38c5e0]/10 group-hover:border-[#38c5e0]/30 transition-colors duration-500 shadow-inner overflow-hidden">
-                  <service.icon size={26} strokeWidth={1.5} />
-                </div>
-                <h4 className="text-white font-semibold text-base mb-2 group-hover:text-[#9ff6ff] transition-colors">
-                  {service.title}
-                </h4>
-                <p className="text-[#8ab8c8]/80 text-sm leading-relaxed">{service.desc}</p>
-              </motion.div>
-            ))}
+        {false && (
+          <div className="mb-24">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12 max-w-xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl md:rounded-full p-6 md:p-8 border border-white/5 shadow-2xl"
+            >
+              <h3 className="text-2xl md:text-3xl font-bold"
+                style={{
+                  backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}>
+                What We Do
+              </h3>
+            </motion.div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {coreServices.map((service, i) => (
+                <motion.div
+                  key={service.title}
+                  custom={i}
+                  variants={cardVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.03, y: -4 }}
+                  className="group p-7 rounded-2xl bg-[#052626]/40 border border-white/5 backdrop-blur-md shadow-2xl
+                             hover:border-[#38c5e0]/40 hover:bg-[#38c5e0]/[0.06] transition-all duration-500 cursor-default"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-[#38c5e0] mb-5 group-hover:bg-[#38c5e0]/10 group-hover:border-[#38c5e0]/30 transition-colors duration-500 shadow-inner overflow-hidden">
+                    <service.icon size={26} strokeWidth={1.5} />
+                  </div>
+                  <h4 className="text-white font-semibold text-base mb-2 group-hover:text-[#9ff6ff] transition-colors">
+                    {service.title}
+                  </h4>
+                  <p className="text-[#8ab8c8]/80 text-sm leading-relaxed">{service.desc}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* ── Notable Clients ── */}
         <motion.div
@@ -284,21 +288,35 @@ export default function CompanySnapshot() {
           className="rounded-3xl bg-[#052626]/40 border border-white/5 backdrop-blur-md shadow-2xl p-10"
         >
           <div className="text-center mb-10 max-w-2xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl md:rounded-full p-6 md:p-8 border border-white/5 shadow-2xl">
-            <h3 className="text-xl md:text-2xl font-bold"
+            <h3 className="text-xl md:text-2xl font-bold mb-6"
               style={{
                 backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}>
-              Trusted by Bangladesh's Top Institutions
+              Organizations We Proudly Serve
             </h3>
+            <div
+              className="mx-auto rounded-full"
+              style={{
+                width: "120px",
+                height: "3px",
+                backgroundImage: "linear-gradient(90deg, #ffffff, #0ea5c9)",
+              }}
+            />
           </div>
           <div className="flex flex-col gap-12">
             {clientCategories.map((group, groupIndex) => (
               <div key={group.category}>
                 <div className="mb-8 flex flex-col items-center">
-                  <h4 className="text-xl font-bold tracking-widest uppercase mb-3" style={{ color: "#9ff6ff" }}>
+                  <h4 className="text-xl font-bold tracking-widest uppercase mb-3"
+                    style={{
+                      backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    }}>
                     {group.category.split(' / ')[0]}
                   </h4>
                   <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#38c5e0] to-transparent rounded-full" />
@@ -307,7 +325,7 @@ export default function CompanySnapshot() {
                   {/* Smooth edge fade out */}
                   <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#071A1A] to-transparent z-10 pointer-events-none" />
                   <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#071A1A] to-transparent z-10 pointer-events-none" />
-                  
+
                   <motion.div
                     className="flex gap-4 sm:gap-6 w-max"
                     animate={{
@@ -322,35 +340,41 @@ export default function CompanySnapshot() {
                     {[...group.items, ...group.items, ...group.items].map((client, i) => (
                       <div
                         key={`${client.name}-${i}`}
-                        className="group relative flex-shrink-0 w-[280px] sm:w-[320px] rounded-[2rem] bg-[#052626]/40 border border-white/5 backdrop-blur-xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5 overflow-hidden transition-all duration-500 hover:bg-[#052626]/80 hover:border-[#38c5e0]/30 hover:shadow-[0_8px_30px_rgba(56,197,224,0.15)] cursor-default"
+                        className="group relative flex-shrink-0 w-[300px] sm:w-[360px] min-h-[280px] rounded-[2.5rem] bg-[#052626]/40 border border-white/5 backdrop-blur-xl p-6 sm:p-8 flex flex-col items-center justify-center gap-5 text-center overflow-hidden transition-all duration-500 hover:bg-[#052626]/80 hover:border-[#38c5e0]/30 hover:shadow-[0_8px_30px_rgba(56,197,224,0.15)] cursor-default"
                       >
-                            
-                            {/* Cinematic Radial Hover Glow */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[#38c5e0]/0 group-hover:bg-[#38c5e0]/15 blur-[60px] rounded-full transition-all duration-700 pointer-events-none" />
 
-                            {/* Floating Platform Logo */}
-                            <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rounded-2xl bg-gradient-to-tr from-white/5 to-white/10 flex items-center justify-center p-2.5 shadow-2xl border border-white/5 group-hover:border-[#38c5e0]/40 transition-all duration-500 z-10 group-hover:scale-110 group-hover:-rotate-3">
-                              <div className="absolute inset-0 bg-black/20 rounded-2xl" /> {/* Darken layer */}
-                              <div className="relative w-full h-full bg-white/10 rounded-xl flex items-center justify-center p-2 shadow-inner">
-                                {client.logo ? (
-                                  <Image src={client.logo} alt={client.name} fill sizes="80px" className="object-contain p-1.5 drop-shadow-md" />
-                                ) : (
-                                  <span className="text-[#38c5e0] font-black text-3xl tracking-tighter drop-shadow-md">{client.name.charAt(0)}</span>
-                                )}
-                              </div>
-                            </div>
+                        {/* Cinematic Radial Hover Glow */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[#38c5e0]/0 group-hover:bg-[#38c5e0]/15 blur-[60px] rounded-full transition-all duration-700 pointer-events-none" />
 
-                            {/* Crisp Typography Section */}
-                            <div className="flex-1 z-10">
-                              <div className="overflow-hidden mb-1">
-                                <p className="text-[#38c5e0]/80 text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase transform group-hover:translate-x-1 transition-transform duration-500 ease-out">
-                                  {group.category.split(' / ')[0]}
-                                </p>
-                              </div>
-                              <h3 className="font-extrabold text-white/90 text-[15px] sm:text-[17px] leading-tight group-hover:text-white transition-colors duration-300 drop-shadow-sm">
-                                {client.name}
-                              </h3>
-                            </div>
+                        {/* Floating Platform Logo */}
+                        <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 rounded-2xl bg-gradient-to-tr from-white/5 to-white/10 flex items-center justify-center p-2.5 shadow-2xl border border-white/5 group-hover:border-[#38c5e0]/40 transition-all duration-500 z-10 group-hover:scale-110 group-hover:-rotate-3">
+                          <div className="absolute inset-0 bg-black/20 rounded-2xl" /> {/* Darken layer */}
+                          <div className="relative w-full h-full bg-white rounded-xl flex items-center justify-center shadow-inner overflow-hidden">
+                            {client.logo ? (
+                              <Image 
+                                src={client.logo} 
+                                alt={client.name} 
+                                fill 
+                                sizes="100px" 
+                                className={`object-contain drop-shadow-md transition-transform duration-300 ${(client as any).scale ? `${(client as any).scale} p-0` : 'scale-[1.05] p-1.5'}`} 
+                              />
+                            ) : (
+                              <span className="text-[#38c5e0] font-black text-4xl tracking-tighter drop-shadow-md">{client.name.charAt(0)}</span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Crisp Typography Section */}
+                        <div className="z-10 flex flex-col items-center">
+                          <h3 className="font-extrabold text-white/90 text-[17px] sm:text-[19px] leading-snug text-center group-hover:text-white transition-colors duration-300 drop-shadow-sm">
+                            {client.name}
+                          </h3>
+                          {(client as any).subtitle && (
+                            <p className="text-white/70 text-[11px] sm:text-xs mt-1.5 font-semibold text-center tracking-wide uppercase">
+                              {(client as any).subtitle}
+                            </p>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </motion.div>
@@ -359,23 +383,33 @@ export default function CompanySnapshot() {
             ))}
           </div>
 
-          {/* Mission + Vision */}
-          <div className="mt-10 grid md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-2xl bg-[#38c5e0]/[0.06] border border-[#38c5e0]/20">
-              <p className="text-[#78d4e8] text-xs font-semibold uppercase tracking-widest mb-2">Our Mission</p>
-              <p className="text-white/80 text-sm leading-relaxed">
-                To provide industry-leading design, technology, and customer support for long-term, reliable
-                perimeter detection and industrial safety solutions across Bangladesh.
-              </p>
+          {/* ── Many More ── */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-6 mb-2 bg-[#38c5e0]/[0.06] border border-[#38c5e0]/20 rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center backdrop-blur-sm"
+          >
+            <motion.p 
+              className="drop-shadow-sm text-sm sm:text-lg font-extrabold tracking-[0.6em] uppercase mb-6"
+              style={{
+                backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Many More
+            </motion.p>
+            <div className="flex flex-wrap justify-center items-center gap-x-4 sm:gap-x-10 gap-y-3 text-white/80 text-sm sm:text-base font-semibold tracking-wide">
+              <span className="hover:text-white transition-colors cursor-default">Industries</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38c5e0]/50"></span>
+              <span className="hover:text-white transition-colors cursor-default">Corporate Offices</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38c5e0]/50"></span>
+              <span className="hover:text-white transition-colors cursor-default">Retail Chains</span>
             </div>
-            <div className="p-6 rounded-2xl bg-[#0ea5c9]/[0.06] border border-[#0ea5c9]/20">
-              <p className="text-[#78d4e8] text-xs font-semibold uppercase tracking-widest mb-2">Our Vision</p>
-              <p className="text-white/80 text-sm leading-relaxed">
-                To be the leading Industrial Security and Automation Solution Company in Bangladesh,
-                driven by quality, innovation, and unmatched service excellence.
-              </p>
-            </div>
-          </div>
+          </motion.div>
         </motion.div>
 
       </div>

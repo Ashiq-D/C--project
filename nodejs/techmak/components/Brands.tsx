@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import TechPartners from "./TechPartners";
 
 /* ═══════════════════════════════════════════════
    DESIGN TOKENS — matching project palette
@@ -204,7 +205,7 @@ function FloatingParticles() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" style={{ opacity: 0.5 }} />;
+  return <canvas ref={canvasRef} className="fixed top-0 left-0 w-screen h-screen pointer-events-none -z-10" style={{ opacity: 0.5 }} />;
 }
 
 /* ═══════════════════════════════════════════════
@@ -437,78 +438,15 @@ function AccordionItem({
    MAIN COMPONENT
 ═══════════════════════════════════════════════ */
 export default function Brands() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const headingRef = useRef(null);
-  const headingInView = useInView(headingRef, { once: true });
-
-  const handleToggle = (index: number) => {
-    setOpenIndex((prev) => (prev === index ? null : index));
-  };
-
   return (
-    <section className="relative overflow-hidden pt-6 pb-24 md:pt-8 h-fit z-10">
+    <section className="relative pt-6 pb-24 md:pt-8 min-h-screen z-10 flex flex-col justify-center">
       {/* ── Ambient background ── */}
       <FloatingParticles />
-      <div className="pointer-events-none absolute -top-40 left-1/4 w-[600px] h-[600px] rounded-full bg-[#38c5e0]/[0.05] blur-[150px]" />
-      <div className="pointer-events-none absolute bottom-1/4 right-0 w-[500px] h-[500px] rounded-full bg-[#0ea5c9]/[0.04] blur-[120px]" />
+      <div className="pointer-events-none fixed -top-40 left-1/4 w-[600px] h-[600px] rounded-full bg-[#38c5e0]/[0.05] blur-[150px] -z-10" />
+      <div className="pointer-events-none fixed bottom-1/4 right-0 w-[500px] h-[500px] rounded-full bg-[#0ea5c9]/[0.04] blur-[120px] -z-10" />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6">
-        {/* ═══════════ HEADER ═══════════ */}
-        <motion.div
-          ref={headingRef}
-          initial={{ opacity: 0, y: -30 }}
-          animate={headingInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-16 max-w-4xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-14 border border-white/5 shadow-2xl"
-        >
-          <motion.p
-            initial={{ opacity: 0, letterSpacing: "0.2em" }}
-            animate={headingInView ? { opacity: 1, letterSpacing: "0.35em" } : {}}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="text-xs md:text-sm font-semibold uppercase text-[#78d4e8]/70 mb-5"
-          >
-            Our Subsidiaries
-          </motion.p>
-
-          <h2
-            className="font-bold leading-tight mb-6"
-            style={{
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              backgroundImage: gradient,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            Techmak Group
-          </h2>
-
-          <p className="text-[#8ab8c8] max-w-3xl mx-auto text-base md:text-lg font-light leading-relaxed">
-            A diversified Bangladeshi conglomerate delivering reliable, future-ready solutions across technology, security, power, fabrication, defense supply, media, and global sourcing.
-          </p>
-
-          <div
-            className="mx-auto mt-8 rounded-full"
-            style={{
-              width: "100px",
-              height: "3px",
-              backgroundImage: "linear-gradient(90deg, #ffffff, #0ea5c9)",
-            }}
-          />
-        </motion.div>
-
-        {/* ═══════════ ACCORDION LIST (row-wise) ═══════════ */}
-        <div className="flex flex-col gap-3">
-          {companies.map((company, i) => (
-            <AccordionItem
-              key={company.name}
-              company={company}
-              index={i}
-              isOpen={openIndex === i}
-              onToggle={() => handleToggle(i)}
-            />
-          ))}
-        </div>
+      <div className="relative z-20 mt-8 w-full">
+        <TechPartners />
       </div>
     </section>
   );

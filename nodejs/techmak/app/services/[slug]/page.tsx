@@ -21,6 +21,19 @@ export async function generateMetadata({
   return {
     title: service.title,
     description: service.description,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      title: `${service.title} - Techmak Technology Ltd.`,
+      description: service.description,
+      type: "website",
+      images: [{ url: "https://techmakai.com/og-image.png", width: 1200, height: 630 }],
+    },
+    alternates: {
+      canonical: `https://techmakai.com/services/${slug}`,
+    },
   };
 }
 
@@ -96,7 +109,7 @@ export default async function ServiceDetailsPage({
             
             {/* Key Features Grid */}
             <section>
-              <h3 className="text-sm font-semibold tracking-widest uppercase text-[#78d4e8] mb-8">Technical Capabilities</h3>
+              <h3 className="text-sm font-semibold tracking-widest uppercase text-[#78d4e8] mb-8">Our Expertise</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 {service.keyFeatures?.map((feature: any, i: number) => (
                   <div key={i} className="p-6 rounded-2xl bg-[#0F3D3E]/20 border border-[#1FA89A]/10 hover:border-[#1FA89A]/40 transition-colors duration-300">

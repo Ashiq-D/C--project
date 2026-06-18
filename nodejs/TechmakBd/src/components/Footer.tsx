@@ -1,127 +1,84 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, MapPin, Phone, ArrowRight } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-techmak-gold/15 pt-20 pb-10 mt-20 z-10 overflow-hidden backdrop-blur-md" style={{ background: "linear-gradient(180deg, rgba(10,12,30,0.4) 0%, rgba(8,10,24,0.6) 100%)" }}>
+    <footer className="relative pt-6 sm:pt-8 pb-4 mt-4 sm:mt-6 z-10 overflow-hidden section-glow" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(26,15,20,0.5) 30%, rgba(26,15,20,0.8) 100%)" }}>
       {/* Background ambient glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-techmak-gold/40 to-transparent" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-techmak-red/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-techmak-champagne/20 to-transparent" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-techmak-bronze/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Brand Column */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="space-y-6"
-          >
-            <div className="relative w-32 h-10 md:w-40 md:h-12">
-              <Image
-                src="/Techmak Logo.png"
-                alt="Techmak Technology Logo"
-                fill
-                className="object-contain object-left"
-              />
+        {/* Contact Banner */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-6 border-b border-techmak-champagne/10">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex items-start gap-4">
+            <MapPin className="w-6 h-6 text-techmak-bronze mt-1 shrink-0" />
+            <div>
+              <h4 className="font-semibold text-techmak-champagne mb-1">Visit Us</h4>
+              <p className="text-sm text-white/40">Flat-5A, Lift-5, House: 207, Road: 10,</p>
+              <p className="text-sm text-white/40">Mohakhali Dohs, Dhaka-1206</p>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Pioneering the future of technology with advanced solutions, proven performance, and an unwavering commitment to excellence.
-            </p>
           </motion.div>
 
-          {/* Contact Column */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h4 className="text-techmak-gold font-semibold mb-6">Contact Us</h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-400">
-                <MapPin className="w-5 h-5 text-techmak-red shrink-0 mt-0.5" />
-                <span className="text-sm">123 Innovation Drive, Tech District, City 10001</span>
-              </li>
-              <li className="flex items-center gap-3 text-gray-400">
-                <Phone className="w-5 h-5 text-techmak-red shrink-0" />
-                <span className="text-sm">+1 (555) 123-4567</span>
-              </li>
-              <li className="flex items-center gap-3 text-gray-400">
-                <Mail className="w-5 h-5 text-techmak-red shrink-0" />
-                <span className="text-sm">info@techmak.com</span>
-              </li>
-            </ul>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="flex items-start gap-4">
+            <Phone className="w-6 h-6 text-techmak-bronze mt-1 shrink-0" />
+            <div>
+              <h4 className="font-semibold text-techmak-champagne mb-1">Call Us</h4>
+              <p className="text-sm text-white/40">+880 9678221005</p>
+              <p className="text-sm text-white/40">+880 1711776464</p>
+            </div>
           </motion.div>
 
-          {/* Quick Links */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex items-start gap-4">
+            <Mail className="w-6 h-6 text-techmak-bronze mt-1 shrink-0" />
+            <div>
+              <h4 className="font-semibold text-techmak-champagne mb-1">Email Us</h4>
+              <p className="text-sm text-white/40">techmakbd@gmail.com</p>
+              <p className="text-sm text-white/40">info@techmakbd.com</p>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="mb-6">
+          {/* Brand Column */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
+            className="space-y-2 max-w-lg"
           >
-            <h4 className="text-techmak-gold font-semibold mb-6">Quick Links</h4>
-            <ul className="space-y-3">
-              <li>
-                <Link href="#about" className="text-sm text-gray-400 hover:text-techmak-gold transition-colors">About Us</Link>
-              </li>
-              <li>
-                <Link href="#brands" className="text-sm text-gray-400 hover:text-techmak-gold transition-colors">Our Brands</Link>
-              </li>
-              <li>
-                <Link href="#solutions" className="text-sm text-gray-400 hover:text-techmak-gold transition-colors">Solutions</Link>
-              </li>
-              <li>
-                <Link href="#careers" className="text-sm text-gray-400 hover:text-techmak-gold transition-colors">Careers</Link>
-              </li>
-            </ul>
-          </motion.div>
-
-          {/* Newsletter */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <h4 className="text-techmak-gold font-semibold mb-6">Stay Updated</h4>
-            <p className="text-sm text-gray-400 mb-4">Subscribe to our newsletter for the latest tech insights.</p>
-            <form className="relative group" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full bg-white/5 border border-techmak-gold/20 rounded-full px-6 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-techmak-gold/50 transition-colors"
+            <div className="relative w-28 h-8 sm:w-32 sm:h-10 md:w-40 md:h-12">
+              <Image
+                src="/Techmak Logo.png"
+                alt="Techmak Alliance Logo"
+                fill
+                className="object-contain object-left"
               />
-              <button
-                type="submit"
-                className="absolute right-2 top-2 bottom-2 p-2 bg-techmak-red text-white rounded-full hover:bg-techmak-gold transition-colors"
-                aria-label="Subscribe"
-              >
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </form>
+            </div>
+            <p className="text-white/40 text-xs sm:text-sm leading-relaxed">
+              A diversified Bangladeshi business alliance delivering integrated solutions across technology, security, power & energy, and global sourcing.
+            </p>
           </motion.div>
         </div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="pt-8 border-t border-techmak-gold/10 flex flex-col md:flex-row items-center justify-between gap-4"
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="pt-4 border-t border-techmak-champagne/10 flex flex-col md:flex-row items-center justify-between gap-4"
         >
-          <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} Techmak Technology Ltd. All rights reserved.
+          <p className="text-sm text-white/30">
+            &copy; {new Date().getFullYear()} Techmak Alliance. All rights reserved.
           </p>
-          <div className="flex gap-6 text-sm text-gray-500">
-            <Link href="#" className="hover:text-techmak-gold transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-techmak-gold transition-colors">Terms of Service</Link>
+          <div className="flex gap-6 text-sm text-white/30">
+            <Link href="#" className="hover:text-techmak-champagne transition-colors">Privacy Policy</Link>
+            <Link href="#" className="hover:text-techmak-champagne transition-colors">Terms of Service</Link>
           </div>
         </motion.div>
       </div>

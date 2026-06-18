@@ -59,18 +59,7 @@ export default function LocationMap() {
         }
       );
 
-      // Subtle floating ambient animation
-      gsap.to(".ambient-glow", {
-        y: "random(-20, 20)",
-        x: "random(-20, 20)",
-        scale: "random(0.9, 1.1)",
-        rotation: "random(-15, 15)",
-        duration: "random(3, 5)",
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        stagger: { amount: 2, from: "random" }
-      });
+
 
     }, sectionRef);
 
@@ -125,7 +114,7 @@ export default function LocationMap() {
           <div className="absolute inset-0 z-30 pointer-events-none border-[1px] border-white/5 rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] mix-blend-overlay transition-all duration-700 group-hover:border-cyan-400/20 shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]"></div>
 
           {/* Map Layer (Absolute Background) */}
-          <div className="absolute inset-0 z-0 pointer-events-auto" style={{ transform: "translateZ(-20px) scale(1.05)" }}>
+          <div className="absolute inset-0 z-0" style={{ transform: "translateZ(-20px) scale(1.05)", willChange: "transform", contentVisibility: "auto" as any, pointerEvents: "none" }}>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.9829577201112!2d90.3965951!3d23.7836212!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7000107ac61%3A0xfe30487facf253a7!2sTechmak%20technology!5e0!3m2!1sbn!2sbd!4v1776461214232!5m2!1sbn!2sbd"
               width="100%"
@@ -133,12 +122,16 @@ export default function LocationMap() {
               style={{
                 border: 0,
                 filter: "invert(100%) hue-rotate(185deg) brightness(0.9) contrast(0.9) sepia(0.3)",
+                willChange: "transform",
+                transform: "translateZ(0)",
               }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Techmak Technology Ltd. Location Map"
             />
+            {/* Transparent overlay to prevent iframe from stealing scroll events */}
+            <div className="absolute inset-0 z-10" style={{ pointerEvents: "auto" }}></div>
           </div>
 
           {/* Atmospheric Gradients for Readability */}
@@ -182,7 +175,7 @@ export default function LocationMap() {
                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                   <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></svg>
                 </div>
-                <h3 className="text-[10px] font-bold tracking-[0.3em] uppercase mb-4 text-cyan-400">Headquarters</h3>
+                <h3 className="text-[10px] font-bold tracking-[0.3em] uppercase mb-4 text-cyan-400">Office</h3>
                 <p className="text-white/90 text-sm md:text-base leading-relaxed font-medium">
                   Flat-5A, Lift-5,House# 207, Road# 10,<br />
                   Mohakhali Dohs, Dhaka 1206<br />
@@ -200,12 +193,22 @@ export default function LocationMap() {
                 </div>
                 <h3 className="text-[10px] font-bold tracking-[0.3em] uppercase mb-4 text-emerald-400">Reach Out</h3>
                 <div className="flex flex-col gap-3">
-                  <a href="tel:+8809678221005" className="text-xl font-semibold text-white tracking-widest hover:text-emerald-400 transition-colors">
-                    +8809678221005
-                  </a>
-                  <a href="mailto:techmakbd@gmail.com" className="text-white/60 hover:text-white transition-colors text-sm">
-                    techmakbd@gmail.com
-                  </a>
+                  <div className="flex flex-col gap-1">
+                    <a href="tel:+8809678221005" className="text-xl font-semibold text-white tracking-widest hover:text-emerald-400 transition-colors">
+                      +8809678221005
+                    </a>
+                    <a href="tel:+8801711776464" className="text-xl font-semibold text-white tracking-widest hover:text-emerald-400 transition-colors">
+                      +8801711776464
+                    </a>
+                  </div>
+                  <div className="flex flex-col gap-1 mt-1">
+                    <a href="mailto:techmakbd@gmail.com" className="text-white/60 hover:text-white transition-colors text-sm">
+                      techmakbd@gmail.com
+                    </a>
+                    <a href="mailto:info@techmakbd.com" className="text-white/60 hover:text-white transition-colors text-sm">
+                      info@techmakbd.com
+                    </a>
+                  </div>
                 </div>
               </div>
 

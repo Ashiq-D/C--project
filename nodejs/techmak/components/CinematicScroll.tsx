@@ -9,7 +9,7 @@ import TiltCard from "./TiltCard";
 gsap.registerPlugin(ScrollTrigger);
 
 import { services } from "@/lib/servicesData";
-import { Shield, ShoppingCart, Cpu } from "lucide-react";
+import { Shield, ShoppingCart, Cpu, Zap } from "lucide-react";
 
 const coreCapabilities = [
   {
@@ -17,21 +17,28 @@ const coreCapabilities = [
     description:
       "Intelligent, next-generation surveillance systems leveraging artificial intelligence for enhanced security, real-time monitoring, and proactive threat detection.",
     icon: Shield,
-    bgImage: "/images/user_surveillance.png",
+    bgImage: "/images/security.png",
+  },
+  {
+    title: "Renewable Energy & Energy Storage Solutions",
+    description:
+      "Leveraging over 17 years of expertise, Techmak Technology delivers advanced solar power generation and industrial Energy Storage Systems (ESS) for energy independence and sustainable growth.",
+    icon: Zap,
+    bgImage: "/images/solar.png",
   },
   {
     title: "Electronic Article Surveillance (EAS) Systems",
     description:
       "Comprehensive retail loss-prevention solutions designed to safeguard merchandise, reduce shrinkage, and improve operational control across retail environments.",
     icon: ShoppingCart,
-    bgImage: "/images/user_eas.png",
+    bgImage: "/images/gate.png",
   },
   {
     title: "Custom System Integration (Hardware & Software Solutions)",
     description:
       "End-to-end tailored integration services combining hardware and software to deliver seamless, scalable, and mission-specific technology ecosystems.",
     icon: Cpu,
-    bgImage: "/images/user_integration.png",
+    bgImage: "/images/custom.png",
   },
 ];
 
@@ -98,18 +105,21 @@ export default function CinematicScroll() {
           // Compute the actual pixel distance each card needs to slide
           const leftRect = (foldLeft as HTMLElement).getBoundingClientRect();
           const rightRect = (foldRight as HTMLElement).getBoundingClientRect();
-          const centerCard = capGrid.children[1] as HTMLElement;
-          const centerRect = centerCard.getBoundingClientRect();
+          const innerCard1 = capGrid.children[1] as HTMLElement;
+          const innerCard2 = capGrid.children[2] as HTMLElement;
+          const innerRect1 = innerCard1.getBoundingClientRect();
+          const innerRect2 = innerCard2.getBoundingClientRect();
+          const centerX = (innerRect1.left + innerRect2.left) / 2;
 
-          const leftSlideDistance = centerRect.left - leftRect.left;   // positive → slides right
-          const rightSlideDistance = centerRect.left - rightRect.left;  // negative → slides left
+          const leftSlideDistance = centerX - leftRect.left;   // positive → slides right
+          const rightSlideDistance = centerX - rightRect.left;  // negative → slides left
 
           const tlCap = gsap.timeline({
             scrollTrigger: {
               trigger: capGrid,
-              start: "top 85%", // Start unfolding when it enters the screen
-              end: "bottom 15%", // Finish folding back in when it leaves the screen
-              scrub: true, // Lock directly to scroll speed (no lag)
+              start: "top 85%",
+              end: "bottom 15%",
+              scrub: 1.5, // Smooth interpolation instead of direct lock
             },
           });
 
@@ -139,7 +149,7 @@ export default function CinematicScroll() {
               trigger: row,
               start: "top 50%",
               end: "bottom top",
-              scrub: 1,
+              scrub: 1.5,
             },
           });
 
@@ -168,11 +178,10 @@ export default function CinematicScroll() {
                 scrub: 1.2,
                 invalidateOnRefresh: true,
               },
-              y: -20, // Gentle push up
-              z: -40, // Push backward into screen
-              scale: 0.9,
-              opacity: 0.4,
-              ease: "power2.out", // Smooth deceleration
+              z: -20, // Push backward into screen
+              scale: 0.95,
+              opacity: 0.5,
+              ease: "power1.out", // Smooth deceleration
             }
           );
         });
@@ -188,16 +197,19 @@ export default function CinematicScroll() {
     <section
       ref={sectionRef}
       className="relative pt-0 pb-4 overflow-hidden z-10"
-      style={{
-        perspective: "2000px",
-        transformStyle: "preserve-3d",
-      }}
     >
-      <div className="max-w-7xl mx-auto px-10">
+      <div
+        className="max-w-7xl mx-auto px-10"
+        style={{
+          perspective: "2000px",
+          transformStyle: "preserve-3d",
+        }}
+      >
         <div className="text-center mb-16 max-w-3xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-12 border border-white/5 shadow-2xl">
           <h2
-            className="text-4xl md:text-5xl font-bold mb-6 select-none"
+            className="font-bold mb-6 select-none whitespace-nowrap tracking-tight"
             style={{
+              fontSize: "clamp(1.2rem, 4.5vw, 3rem)",
               backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -220,23 +232,24 @@ export default function CinematicScroll() {
 
         {/* ── Core Capabilities Grid ── */}
         <div className="cap-grid-wrapper w-full relative">
-          <div className="cap-grid-container grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-32 max-w-6xl mx-auto relative z-20">
+          <div className="cap-grid-container grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-6 mb-32 max-w-7xl mx-auto relative z-20">
             {coreCapabilities.map((cap, i) => {
               const Icon = cap.icon;
+              const isInner = i === 1 || i === 2;
               return (
                 <div
                   key={i}
-                  className={`cap-card group relative p-[1px] overflow-hidden rounded-[2rem] isolation-auto flex flex-col h-full ${i === 1 ? "z-30" : "z-10"} ${i === 0 ? "fold-card-left" : ""} ${i === 2 ? "fold-card-right" : ""}`}
+                  className={`cap-card group relative p-[1px] overflow-hidden rounded-[2rem] isolation-auto flex flex-col h-full ${i === 1 ? "order-first md:order-none" : ""} z-20 ${isInner ? "md:z-30" : "md:z-10"} ${i === 0 ? "fold-card-left" : ""} ${i === 3 ? "fold-card-right" : ""}`}
                 >
                   {/* Border gradient that appears on hover */}
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-[#38c5e0]/10 to-[#38c5e0]/50 opacity-80 group-hover:opacity-100 transition-opacity duration-700"></div>
 
-                  <div className={`relative h-full ${i === 1 ? "bg-[#040f1a]" : "bg-[#040f1a]/50 backdrop-blur-xl"} rounded-[calc(2rem-1px)] border border-[#38c5e0]/10 flex flex-col items-start text-left z-10 shadow-lg overflow-hidden group-hover:shadow-[0_0_30px_rgba(56,197,224,0.2)] group-hover:bg-[#040f1a]/70 transition-all duration-500`}>
+                  <div className={`relative h-full bg-[#040f1a]/50 backdrop-blur-xl ${isInner ? "md:bg-[#040f1a]" : ""} rounded-[calc(2rem-1px)] border border-[#38c5e0]/10 flex flex-col items-start text-left z-10 shadow-lg overflow-hidden group-hover:shadow-[0_0_30px_rgba(56,197,224,0.2)] group-hover:bg-[#040f1a]/70 transition-all duration-500`}>
 
                     {/* Main Content Section */}
-                    <div className="px-8 pt-10 pb-2 flex flex-col relative z-20 w-full">
+                    <div className="px-6 pt-8 pb-2 flex flex-col relative z-20 w-full">
                       <h3
-                        className="cap-title text-xl md:text-[23px] font-bold mb-6 leading-[1.4] tracking-wide pr-4"
+                        className="cap-title text-lg md:text-[20px] font-bold mb-5 leading-[1.4] tracking-wide pr-2"
                         style={{
                           backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
                           WebkitBackgroundClip: "text",
@@ -248,20 +261,20 @@ export default function CinematicScroll() {
                       </h3>
 
                       <div
-                        className="w-12 h-[2px] mb-6 rounded-full"
+                        className="w-10 h-[2px] mb-5 rounded-full"
                         style={{
                           backgroundImage: "linear-gradient(90deg, #ffffff, #0ea5c9)"
                         }}
                       ></div>
 
-                      <p className="cap-desc text-[#a1c4d4] text-[15px] leading-loose font-normal pr-2">
+                      <p className="cap-desc text-[#a1c4d4] text-[13.5px] leading-relaxed font-normal pr-1">
                         {cap.description}
                       </p>
                     </div>
 
                     {/* Bottom Image Graphic Section */}
                     <div
-                      className="relative w-full h-[280px] shrink-0 mt-auto"
+                      className="relative w-full h-[240px] shrink-0 mt-auto"
                       style={{
                         WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 20%, black 100%)",
                         maskImage: "linear-gradient(to bottom, transparent 0%, black 20%, black 100%)"
@@ -282,8 +295,9 @@ export default function CinematicScroll() {
 
         <div className="text-center mb-16 max-w-3xl mx-auto backdrop-blur-md bg-[#052626]/40 rounded-3xl p-8 md:p-12 border border-white/5 shadow-2xl">
           <h2
-            className="text-4xl md:text-5xl font-bold mb-6 select-none"
+            className="font-bold mb-6 select-none whitespace-nowrap tracking-tight"
             style={{
+              fontSize: "clamp(1.1rem, 4.5vw, 3rem)",
               backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",

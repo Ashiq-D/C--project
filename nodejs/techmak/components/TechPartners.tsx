@@ -3,99 +3,89 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
-import { Shield, Lock, Building2, Flame, Cctv, Eye, KeyRound, Cpu, Briefcase, ThermometerSnowflake } from "lucide-react";
+import { Shield, Lock, Building2, Flame, Cctv, Eye, KeyRound, Cpu } from "lucide-react";
 
 /* ── Technology Partners data ── */
 const partners = [
   {
     name: "Sensormatic",
-    category: "EAS & Loss Prevention",
+    logo: "/images/sensormatic.png",
+    category: "Retail Intelligence & Loss Prevention",
     icon: Shield,
     color: "#e63946",
     bg: "rgba(230,57,70,0.12)",
     border: "rgba(230,57,70,0.35)",
-    description: "Authorized partner for retail loss prevention",
-  },
-  {
-    name: "Checkpoint Systems",
-    category: "Retail Security",
-    icon: Lock,
-    color: "#2196F3",
-    bg: "rgba(33,150,243,0.12)",
-    border: "rgba(33,150,243,0.35)",
-    description: "Advanced EAS tagging & merchandise protection",
-  },
-  {
-    name: "Johnson Controls",
-    category: "Building Automation",
-    icon: Building2,
-    color: "#ff6b35",
-    bg: "rgba(255,107,53,0.12)",
-    border: "rgba(255,107,53,0.35)",
-    description: "Smart building & HVAC automation systems",
-  },
-  {
-    name: "Honeywell",
-    category: "Industrial Safety",
-    icon: Flame,
-    color: "#e74c3c",
-    bg: "rgba(231,76,60,0.12)",
-    border: "rgba(231,76,60,0.35)",
-    description: "Fire detection & industrial safety solutions",
-  },
-  {
-    name: "Axis Communications",
-    category: "IP Surveillance",
-    icon: Cctv,
-    color: "#009688",
-    bg: "rgba(0,150,136,0.12)",
-    border: "rgba(0,150,136,0.35)",
-    description: "Network cameras & video surveillance",
+    description: "Global leader in Electronic Article Surveillance (EAS), inventory visibility, and retail loss prevention technologies.",
   },
   {
     name: "Hikvision",
-    category: "CCTV & AI",
+    logo: "/images/Hik.png",
+    category: "AI-Powered Video Surveillance",
     icon: Eye,
     color: "#c0392b",
     bg: "rgba(192,57,43,0.12)",
     border: "rgba(192,57,43,0.35)",
-    description: "AI-powered video security & analytics",
+    description: "Advanced intelligent surveillance solutions featuring AI analytics, perimeter protection, facial recognition, and smart security management.",
   },
   {
-    name: "Bosch Security",
-    category: "Integrated Solutions",
+    name: "ZKTeco",
+    logo: "/images/Zk.png",
+    category: "Access Control & Biometrics",
     icon: KeyRound,
-    color: "#e74c3c",
-    bg: "rgba(231,76,60,0.12)",
-    border: "rgba(231,76,60,0.35)",
-    description: "Access control & intrusion detection",
-  },
-  {
-    name: "Neo Technology",
-    category: "Technology Partner",
-    icon: Cpu,
-    color: "#38c5e0",
-    bg: "rgba(56,197,224,0.12)",
-    border: "rgba(56,197,224,0.35)",
-    description: "Strategic partner since 2016",
-  },
-  {
-    name: "Faith International",
-    category: "Business Partner",
-    icon: Briefcase,
-    color: "#9b59b6",
-    bg: "rgba(155,89,182,0.12)",
-    border: "rgba(155,89,182,0.35)",
-    description: "Strategic collaboration since 2018",
-  },
-  {
-    name: "Omnia",
-    category: "Smart HVAC",
-    icon: ThermometerSnowflake,
     color: "#27ae60",
     bg: "rgba(39,174,96,0.12)",
     border: "rgba(39,174,96,0.35)",
-    description: "Smart HVAC & automation board brand",
+    description: "Industry-leading biometric authentication, access control, attendance management, and identity verification technologies.",
+  },
+  {
+    name: "Honeywell",
+    logo: "/images/Honey.png",
+    category: "Building Automation & Security",
+    icon: Flame,
+    color: "#ff6b35",
+    bg: "rgba(255,107,53,0.12)",
+    border: "rgba(255,107,53,0.35)",
+    description: "Comprehensive solutions for smart buildings, fire safety, security management, and operational efficiency.",
+  },
+  {
+    name: "Bosch",
+    logo: "/images/Bosch.png",
+    category: "Enterprise Security & Public Safety",
+    icon: Lock,
+    color: "#2980b9",
+    bg: "rgba(41,128,185,0.12)",
+    border: "rgba(41,128,185,0.35)",
+    description: "Innovative security, communication, and life-safety technologies designed for mission-critical environments.",
+  },
+  {
+    name: "Johnson Controls",
+    logo: "/images/john.png",
+    category: "Smart Buildings & BMS",
+    icon: Building2,
+    color: "#3498db",
+    bg: "rgba(52,152,219,0.12)",
+    border: "rgba(52,152,219,0.35)",
+    description: "Integrated building technologies that enhance energy efficiency, sustainability, safety, and occupant comfort.",
+  },
+  {
+    name: "Motorola Solutions",
+    logo: "/images/motorola.png",
+    category: "Mission-Critical Communications",
+    icon: Cctv,
+    color: "#009688",
+    bg: "rgba(0,150,136,0.12)",
+    border: "rgba(0,150,136,0.35)",
+    description: "Reliable communication systems, digital radio networks, emergency response technologies, and operational intelligence platforms.",
+  },
+  {
+    name: "Obiz",
+    logo: "/images/Obiz.png",
+    category: "Critical Infrastructure Solutions",
+    icon: Cpu,
+    color: "#9b59b6",
+    bg: "rgba(155,89,182,0.12)",
+    border: "rgba(155,89,182,0.35)",
+    description: "Australian technology partner specializing in integrated security solutions, surveillance systems, screening technologies, and critical infrastructure protection.",
   },
 ];
 
@@ -111,39 +101,63 @@ function PartnerCard({ partner, active, onClick }: PartnerCardProps) {
       onClick={onClick}
       whileHover={{ scale: 1.04, y: -4 }}
       whileTap={{ scale: 0.97 }}
-      className="relative flex-shrink-0 w-52 cursor-pointer rounded-2xl p-5 transition-all duration-500 select-none"
+      className="relative flex-shrink-0 w-60 cursor-pointer rounded-2xl p-5 transition-all duration-500 select-none h-full flex flex-col"
       style={{
         background: active ? partner.bg : "rgba(255,255,255,0.03)",
         border: `1.5px solid ${active ? partner.border : "rgba(255,255,255,0.08)"}`,
         boxShadow: active ? `0 0 30px ${partner.color}25` : "none",
       }}
     >
-      {/* Logo badge */}
-      <div
-        className="w-12 h-12 rounded-full mb-4 flex items-center justify-center backdrop-blur-md"
-        style={{
-          background: "rgba(255, 255, 255, 0.05)",
-          border: "1px solid rgba(255, 255, 255, 0.1)",
-          color: partner.color,
-          boxShadow: `0 4px 20px ${partner.color}20`,
-        }}
-      >
-        <partner.icon size={22} strokeWidth={2} />
-      </div>
+      {partner.logo ? (
+        <div
+          className="w-16 h-16 rounded-full mb-4 flex items-center justify-center shrink-0 backdrop-blur-md p-1"
+          style={{
+            background: "rgba(14, 165, 201, 0.15)",
+            border: "1px solid rgba(14, 165, 201, 0.4)",
+          }}
+        >
+          <div 
+            className="w-full h-full rounded-full bg-white overflow-hidden flex items-center justify-center"
+            style={{ WebkitMaskImage: "-webkit-radial-gradient(white, black)", transform: "translateZ(0)" }}
+          >
+            <img 
+              src={partner.logo} 
+              alt={partner.name} 
+              className={`w-full h-full object-contain transition-all duration-300 ${
+                active 
+                  ? `opacity-100 ${["Sensormatic", "Johnson Controls"].includes(partner.name) ? "scale-90" : "scale-[1.3]"}` 
+                  : `opacity-80 grayscale ${["Sensormatic", "Johnson Controls"].includes(partner.name) ? "scale-75" : "scale-[1.1]"}`
+              }`} 
+            />
+          </div>
+        </div>
+      ) : (
+        <div
+          className="w-12 h-12 rounded-full mb-4 flex items-center justify-center backdrop-blur-md shrink-0"
+          style={{
+            background: "rgba(255, 255, 255, 0.05)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            color: partner.color,
+            boxShadow: `0 4px 20px ${partner.color}20`,
+          }}
+        >
+          <partner.icon size={22} strokeWidth={2} />
+        </div>
+      )}
 
-      <p className="font-semibold text-white text-sm mb-1 leading-tight">{partner.name}</p>
+      <p className="font-semibold text-white text-sm mb-1 leading-tight shrink-0">{partner.name}</p>
       <p
-        className="text-xs font-medium mb-2"
+        className="text-xs font-medium mb-3 shrink-0"
         style={{ color: partner.color }}
       >
         {partner.category}
       </p>
-      <p className="text-[#8ab8c8]/70 text-xs leading-relaxed">{partner.description}</p>
+      <p className="text-[#8ab8c8]/70 text-xs leading-relaxed flex-grow pb-4">{partner.description}</p>
 
       {active && (
         <motion.div
           layoutId="activePartnerIndicator"
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 rounded-full"
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 rounded-full shrink-0"
           style={{ background: partner.color }}
         />
       )}
@@ -190,7 +204,7 @@ export default function TechPartners() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-32 overflow-hidden z-10"
+      className="relative pt-0 pb-32 overflow-hidden z-10"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -213,20 +227,20 @@ export default function TechPartners() {
             Globally Trusted Brands
           </p>
           <h2
-            className="font-bold leading-tight mb-5"
+            className="font-bold leading-tight mb-5 tracking-tight"
             style={{
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              fontSize: "clamp(1.2rem, 3.5vw, 2.5rem)",
               backgroundImage: "linear-gradient(135deg, #ffffff 0%, #9ff6ff 35%, #38c5e0 65%, #0ea5c9 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
             }}
           >
-            Global Partners
+            GLOBAL TECHNOLOGY ALLIANCES
           </h2>
           <p className="text-[#8ab8c8] max-w-2xl mx-auto text-base font-light">
-            We are authorized dealers and integration partners with the world's leading
-            brands, bringing global-grade solutions to Bangladesh.
+            Techmak Technology collaborates with globally recognized manufacturers and technology innovators to deliver world-class security, surveillance, automation, and critical infrastructure solutions across Bangladesh.
+            Through our authorized partnerships and certified integration expertise, we provide clients with proven technologies backed by local engineering, deployment, and lifecycle support.
           </p>
           <div
             className="mx-auto mt-6 rounded-full"
@@ -254,17 +268,39 @@ export default function TechPartners() {
               boxShadow: `0 0 60px ${activePartner.color}20`,
             }}
           >
-            <div
-              className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center backdrop-blur-md"
-              style={{
-                background: "rgba(255, 255, 255, 0.05)",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
-                color: activePartner.color,
-                boxShadow: `0 8px 32px ${activePartner.color}20, inset 0 0 10px ${activePartner.color}10`,
-              }}
-            >
-              <activePartner.icon size={36} strokeWidth={1.5} />
-            </div>
+            {activePartner.logo ? (
+              <div
+                className="w-32 h-32 rounded-full mx-auto mb-6 flex items-center justify-center backdrop-blur-md p-1"
+                style={{
+                  background: "rgba(14, 165, 201, 0.15)",
+                  border: "1px solid rgba(14, 165, 201, 0.4)",
+                  boxShadow: `0 0 40px rgba(14, 165, 201, 0.3)`,
+                }}
+              >
+                <div 
+                  className="w-full h-full rounded-full bg-white overflow-hidden flex items-center justify-center"
+                  style={{ WebkitMaskImage: "-webkit-radial-gradient(white, black)", transform: "translateZ(0)" }}
+                >
+                  <img 
+                    src={activePartner.logo} 
+                    alt={activePartner.name} 
+                    className={`w-full h-full object-contain ${["Sensormatic", "Johnson Controls"].includes(activePartner.name) ? "scale-90" : "scale-[1.4]"}`} 
+                  />
+                </div>
+              </div>
+            ) : (
+              <div
+                className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center backdrop-blur-md"
+                style={{
+                  background: "rgba(255, 255, 255, 0.05)",
+                  border: "1px solid rgba(255, 255, 255, 0.15)",
+                  color: activePartner.color,
+                  boxShadow: `0 8px 32px ${activePartner.color}20, inset 0 0 10px ${activePartner.color}10`,
+                }}
+              >
+                <activePartner.icon size={36} strokeWidth={1.5} />
+              </div>
+            )}
             <h3 className="text-white font-bold text-2xl mb-1">{activePartner.name}</h3>
             <p className="text-sm font-semibold mb-3" style={{ color: activePartner.color }}>
               {activePartner.category}
@@ -287,7 +323,7 @@ export default function TechPartners() {
             }}
           >
             {partners.map((partner, i) => (
-              <div key={partner.name} className="partner-card">
+              <div key={partner.name} className="partner-card flex h-full">
                 <PartnerCard
                   partner={partner}
                   active={i === activeIndex}

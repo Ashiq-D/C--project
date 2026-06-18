@@ -12,11 +12,13 @@ const MobileMenu = () => {
 
   // Ensure portal mounting
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
   // Close menu on route change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsOpen(false);
   }, [pathname]);
 
@@ -126,7 +128,7 @@ const MobileMenu = () => {
           }}
         >
           {headerData.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive = pathname === item.href || pathname === `${item.href}/`;
             return (
               <Link
                 key={item.title}
