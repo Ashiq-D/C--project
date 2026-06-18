@@ -29,15 +29,20 @@ const Header = () => {
         <div className="flex items-center gap-3">
           {/* Social Icons */}
           <div className="hidden lg:flex items-center gap-4 mr-2">
-            <Link href="https://facebook.com" target="_blank" className="text-[#38c5e0] hover:text-white transition-colors">
-              <Facebook size={18} strokeWidth={2} />
+            <Link href="https://www.facebook.com/share/1JN7pB5bYm/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="p-2 border border-[#38c5e0] rounded-full text-[#38c5e0] hover:text-white hover:bg-[#38c5e0] transition-all duration-300">
+              <Facebook size={24} strokeWidth={2} />
             </Link>
+            {/*
             <Link href="https://linkedin.com" target="_blank" className="text-[#38c5e0] hover:text-white transition-colors">
               <Linkedin size={18} strokeWidth={2} />
             </Link>
             <Link href="https://youtube.com" target="_blank" className="text-[#38c5e0] hover:text-white transition-colors">
               <Youtube size={18} strokeWidth={2} />
             </Link> 
+            <Link href="https://instagram.com" target="_blank" className="text-[#38c5e0] hover:text-white transition-colors">
+              <Instagram size={18} strokeWidth={2} />
+            </Link>
+            */}
           </div>
 
           {/* Mobile Hamburger Menu */}

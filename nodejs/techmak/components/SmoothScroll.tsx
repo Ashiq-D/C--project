@@ -40,7 +40,7 @@ export default function SmoothScroll({
     gsap.ticker.lagSmoothing(0);
 
     // 2. Global GSAP Scroll Reveal (to replicate the "aesthetic")
-    let ctx = gsap.context(() => {});
+    const ctx = gsap.context(() => {});
     
     // We use a timeout to let child components render and mount to the DOM
     const timeout = setTimeout(() => {

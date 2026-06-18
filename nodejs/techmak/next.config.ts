@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
 
+  // Generates folders with index.html for reliable static hosting routing (Fixes 403 Forbidden on refresh)
+  trailingSlash: true,
+
   // Note: HTTP security headers are handled via .htaccess on Hostinger
   // The headers() config below only works in SSR mode, kept as documentation
   // async headers() { ... }

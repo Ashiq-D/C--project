@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
@@ -22,7 +22,12 @@ function FlowingArc({
     const ref = useRef<THREE.Points>(null);
     const count = 300;
 
-    const { positions, offsets } = useMemo(() => {
+    const [data, setData] = useState<{ positions: Float32Array; offsets: Float32Array }>({
+        positions: new Float32Array(count * 3),
+        offsets: new Float32Array(count),
+    });
+
+    useEffect(() => {
         const curve = new THREE.CatmullRomCurve3(points, false, "catmullrom", 0.5);
         const pos = new Float32Array(count * 3);
         const off = new Float32Array(count);
@@ -34,8 +39,10 @@ function FlowingArc({
             pos[i * 3 + 2] = pt.z + (Math.random() - 0.5) * 0.2;
             off[i] = Math.random();
         }
-        return { positions: pos, offsets: off };
+        setData({ positions: pos, offsets: off });
     }, [points, width]);
+
+    const { positions, offsets } = data;
 
     useFrame((state) => {
         if (ref.current) {

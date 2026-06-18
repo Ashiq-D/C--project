@@ -275,3 +275,13 @@ body {
     transform: translateY(0);
   }
 }
+
+/* Hide scrollbars across the website */
+::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

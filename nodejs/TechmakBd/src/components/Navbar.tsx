@@ -27,14 +27,19 @@ export default function Navbar() {
     <motion.nav 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 glass border-b-0 border-white/5 px-4 md:px-6 lg:px-12 py-3 md:py-4 flex items-center justify-between"
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 lg:px-12 py-2 md:py-3 flex items-center justify-between"
+      style={{
+        background: "linear-gradient(180deg, rgba(26,15,20,0.9) 0%, rgba(26,15,20,0.6) 60%, rgba(26,15,20,0) 100%)",
+        backdropFilter: "blur(20px) saturate(150%)",
+        WebkitBackdropFilter: "blur(20px) saturate(150%)",
+      }}
     >
       <Link href="/" className="flex items-center">
-        <div className="relative w-32 h-10 md:w-40 md:h-12">
-          {/* Using object-contain to ensure the logo isn't distorted */}
+        <div className="relative w-28 h-8 md:w-32 md:h-10">
           <Image 
             src="/Techmak Logo.png" 
-            alt="Techmak Technology Logo" 
+            alt="Techmak Alliance Logo" 
             fill 
             className="object-contain object-left" 
             priority
@@ -42,59 +47,15 @@ export default function Navbar() {
         </div>
       </Link>
 
-      {/* Navigation links hidden for now - remove 'hidden' and restore 'md:flex' to show them */}
-      <div className="hidden items-center space-x-8 text-sm font-medium">
-        <Link href="/" className="text-techmak-gold relative group transition-colors pb-1">
-          Home
-          <span 
-            className="absolute bottom-0 left-0 w-full h-[3px] rounded-full"
-            style={{
-              backgroundImage: "linear-gradient(90deg, #ff4b3e, #d4a93a, #f2c14e)",
-              boxShadow: "0 0 10px rgba(212, 169, 58, 0.4)"
-            }}
-          ></span>
-        </Link>
-        <Link href="#brands" className="text-gray-300 hover:text-techmak-gold relative group transition-colors pb-1">
-          Brands
-          <span 
-            className="absolute bottom-0 left-0 w-0 h-[3px] rounded-full transition-all duration-300 group-hover:w-full"
-            style={{
-              backgroundImage: "linear-gradient(90deg, #ff4b3e, #d4a93a, #f2c14e)",
-              boxShadow: "0 0 10px rgba(212, 169, 58, 0.4)"
-            }}
-          ></span>
-        </Link>
-        <Link href="#solutions" className="text-gray-300 hover:text-techmak-gold relative group transition-colors pb-1">
-          Solutions
-          <span 
-            className="absolute bottom-0 left-0 w-0 h-[3px] rounded-full transition-all duration-300 group-hover:w-full"
-            style={{
-              backgroundImage: "linear-gradient(90deg, #ff4b3e, #d4a93a, #f2c14e)",
-              boxShadow: "0 0 10px rgba(212, 169, 58, 0.4)"
-            }}
-          ></span>
-        </Link>
-        <Link href="#about" className="text-gray-300 hover:text-techmak-gold relative group transition-colors pb-1">
-          About Us
-          <span 
-            className="absolute bottom-0 left-0 w-0 h-[3px] rounded-full transition-all duration-300 group-hover:w-full"
-            style={{
-              backgroundImage: "linear-gradient(90deg, #ff4b3e, #d4a93a, #f2c14e)",
-              boxShadow: "0 0 10px rgba(212, 169, 58, 0.4)"
-            }}
-          ></span>
-        </Link>
-      </div>
-
       <div className="flex items-center space-x-3 md:space-x-4">
-        <Link href="#" className="text-gray-400 hover:text-techmak-red transition-colors">
-          <FacebookIcon className="w-5 h-5 md:w-5 md:h-5" />
+        <Link href="#" className="text-white/40 hover:text-techmak-champagne transition-colors duration-300">
+          <FacebookIcon className="w-5 h-5" />
         </Link>
-        <Link href="#" className="text-gray-400 hover:text-techmak-red transition-colors">
-          <LinkedinIcon className="w-5 h-5 md:w-5 md:h-5" />
+        <Link href="#" className="text-white/40 hover:text-techmak-champagne transition-colors duration-300">
+          <LinkedinIcon className="w-5 h-5" />
         </Link>
-        <Link href="#" className="text-gray-400 hover:text-techmak-red transition-colors">
-          <YoutubeIcon className="w-5 h-5 md:w-5 md:h-5" />
+        <Link href="#" className="text-white/40 hover:text-techmak-champagne transition-colors duration-300">
+          <YoutubeIcon className="w-5 h-5" />
         </Link>
       </div>
     </motion.nav>

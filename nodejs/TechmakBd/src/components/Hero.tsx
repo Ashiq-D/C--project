@@ -1,72 +1,144 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
-export default function Hero() {
-  const textRef = useRef<HTMLDivElement>(null);
+/* ─── Typing Effect for Subtitle Words ─── */
+function RotatingWords() {
+  const words = ["Technology", "Security", "Energy", "Engineering", "Innovation"];
+  const [index, setIndex] = useState(0);
+  const wordRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (!textRef.current) return;
+    const interval = setInterval(() => {
+      if (wordRef.current) {
+        gsap.to(wordRef.current, {
+          y: -20,
+          opacity: 0,
+          filter: "blur(8px)",
+          duration: 0.4,
+          ease: "power2.in",
+          onComplete: () => {
+            setIndex((prev) => (prev + 1) % words.length);
+            if (wordRef.current) {
+              gsap.fromTo(
+                wordRef.current,
+                { y: 20, opacity: 0, filter: "blur(8px)" },
+                { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out" }
+              );
+            }
+          },
+        });
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <span
+      ref={wordRef}
+      className="inline-block font-normal"
+      style={{
+        backgroundImage: "linear-gradient(135deg, #fce4d6, #a83248)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        backgroundClip: "text",
+      }}
+    >
+      {words[index]}
+    </span>
+  );
+}
+
+export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Staggered entrance
       gsap.fromTo(
-        ".hero-text",
-        { y: 50, opacity: 0, rotateX: -30 },
+        ".hero-elem",
+        { y: 60, opacity: 0, filter: "blur(14px)" },
         {
           y: 0,
           opacity: 1,
-          rotateX: 0,
+          filter: "blur(0px)",
           duration: 1.2,
-          stagger: 0.2,
+          stagger: 0.12,
           ease: "power3.out",
-          delay: 0.5
+          delay: 0.2,
         }
       );
-    }, textRef);
+
+      // Horizontal line reveal
+      gsap.fromTo(
+        ".hero-line",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 1.5, ease: "power3.inOut", delay: 0.8 }
+      );
+    }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="relative min-h-[60vh] flex items-center justify-center px-6 overflow-hidden pt-24 pb-16">
-      {/* Foreground Content */}
-      <div ref={textRef} className="relative z-10 text-center max-w-5xl mx-auto flex flex-col items-center gap-5 select-none">
-        
-        {/* Brand label */}
-        <p className="hero-text text-lg md:text-2xl font-semibold tracking-[0.08em] text-techmak-gold">
-          Our Subsidiaries
-        </p>
-
-        {/* Large gradient heading */}
-        <h1 className="hero-text font-bold leading-[1.1] tracking-tight whitespace-normal sm:whitespace-nowrap px-2"
-          style={{ fontSize: "clamp(2rem, 8vw, 4.0rem)", animation: "fadeInUp 1s ease-out 0.2s both" }}>
-          <span style={{
-            backgroundImage: "linear-gradient(135deg, #ff4b3e 0%, #d4a93a 50%, #f2c14e 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}>
-            Techmak Alliances
-          </span>
-        </h1>
-
-        {/* Subtitle */}
-        <p className="hero-text text-white/90 max-w-[46rem] mx-auto text-sm md:text-base font-light leading-relaxed"
-          style={{ animation: "fadeInUp 1s ease-out 0.3s both" }}>
-          A diversified Bangladeshi conglomerate delivering reliable, future-ready solutions across technology, security, power, fabrication, defense supply, media, and global sourcing.
-        </p>
-
-        {/* Divider Line */}
+    <section className="relative h-[70vh] sm:h-[80vh] md:h-screen flex items-center justify-center overflow-hidden">
+      {/* Ambient orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
-          className="hero-text mx-auto mt-8 rounded-full"
+          className="absolute w-[300px] h-[300px] md:w-[600px] md:h-[600px] rounded-full blur-[100px] md:blur-[150px] opacity-20"
           style={{
-            width: "120px",
-            height: "3px",
-            backgroundImage: "linear-gradient(90deg, transparent, #ff4b3e, #d4a93a, transparent)",
+            background: "radial-gradient(circle, rgba(168,50,72,0.5) 0%, transparent 70%)",
+            top: "15%",
+            left: "5%",
           }}
         />
+      </div>
+      {/* Dark center vignette — makes text readable over 3D */}
+      <div
+        className="absolute inset-0 pointer-events-none z-[1]"
+        style={{
+          background: "radial-gradient(ellipse 70% 60% at 50% 45%, rgba(26,15,20,0.75) 0%, rgba(26,15,20,0.4) 50%, transparent 80%)",
+        }}
+      />
+
+      <div
+        ref={containerRef}
+        className="relative z-10 w-full flex flex-col items-center justify-center px-4 sm:px-6 -mt-8 sm:-mt-16 md:-mt-48 lg:-mt-56"
+      >
+        {/* Content Container */}
+        <div
+          className="flex flex-col items-center gap-2 md:gap-3 max-w-3xl mx-auto w-full text-center"
+          style={{ textShadow: "0 2px 20px rgba(0,0,0,0.6), 0 0 40px rgba(0,0,0,0.3)" }}
+        >
+          {/* Main heading */}
+          <h1 className="hero-elem text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05]">
+            <span className="text-white/95 mr-3 md:mr-4">Techmak</span>
+            <span className="gradient-text-champagne">Alliance</span>
+          </h1>
+
+          {/* Divider line */}
+          <div
+            className="hero-line h-px w-full max-w-[140px] origin-center"
+            style={{
+              backgroundImage: "linear-gradient(90deg, transparent, #a83248, transparent)",
+            }}
+          />
+
+          {/* Rotating subtitle */}
+          <div className="hero-elem text-lg md:text-xl lg:text-2xl font-light text-white/70 leading-relaxed text-center">
+            Powering the future through <RotatingWords />
+          </div>
+
+          {/* Description */}
+          <p className="hero-elem text-xs sm:text-sm md:text-base text-white/60 max-w-5xl leading-relaxed mx-auto px-4 md:px-0">
+            A diversified Bangladeshi business group delivering innovative and reliable solutions across technology, artificial intelligence, renewable energy, fabrication, defense supply, media, and global sourcing.
+          </p>
+
+        </div>
       </div>
     </section>
   );

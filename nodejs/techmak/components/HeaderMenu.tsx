@@ -9,7 +9,8 @@ const HeaderMenu = () => {
   return (
     <nav className="flex items-center gap-8">
       {headerData.map((item) => {
-        const isActive = pathname === item.href;
+        // Handle Next.js trailingSlash routing matches
+        const isActive = pathname === item.href || pathname === `${item.href}/`;
 
         return (
           <Link
